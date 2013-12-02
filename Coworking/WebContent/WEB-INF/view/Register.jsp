@@ -9,8 +9,15 @@
 <title>Formulari de registre</title>
 </head>
 <body>
-<center>
-<br><br><br><br><br><br>
+<c:if test="${empty usuari_registrat}">
+	<table style="width: 90px;" align="right">
+		<tr>
+			<td style="width: 104px;">Logged as test</td>
+		</tr>
+</table>
+</c:if>
+	<center>
+		<br><br><br><br><br><br>
 <div style="color: teal;font-size: 30px">Formulari de registre</div>
 <br><br>
 <c:url var="userRegistration" value="saveUser.html"/>
