@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "Usuari_registrat")
+@Table(name = "centre_coworking")
 public class Centre_coworking {
 
 	public int getIdcentre() {
