@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
+
 import com.coworking.domain.Solicitud_lloc;
-
-
 
 @Repository("solicitud_llocDao")
 public class Solicitud_llocDaoImpl implements Solicitud_llocDao {
@@ -37,5 +36,9 @@ public class Solicitud_llocDaoImpl implements Solicitud_llocDao {
 				.createCriteria(Solicitud_lloc.class).list();
 		return solicitud_lloclist;
 	}
-
+	
+	public Solicitud_lloc getSolicitud_lloc(int idSolicitud){
+		Solicitud_lloc sol = (Solicitud_lloc) sessionfactory.getCurrentSession().get(Solicitud_lloc.class, idSolicitud);
+		return sol;
+	}
 }

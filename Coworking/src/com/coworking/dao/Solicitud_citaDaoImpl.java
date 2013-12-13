@@ -38,4 +38,10 @@ public class Solicitud_citaDaoImpl implements Solicitud_citaDao {
 		return solicitud_citalist;
 	}
 
+	@Override
+	public Solicitud_cita getSolicitud_cita(int idSolicitud) {
+		Solicitud_cita sol = (Solicitud_cita) sessionfactory.getCurrentSession().get(Solicitud_cita.class, idSolicitud);
+		return sol;
+	}
+
 }

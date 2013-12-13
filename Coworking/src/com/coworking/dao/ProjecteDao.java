@@ -13,5 +13,6 @@ import com.coworking.domain.Projecte;
 public interface ProjecteDao {
 public void saveProjecte ( Projecte projecte );
 public List<Projecte> getProjecte();
+public Projecte getProjecte(int idProj);
 }
 

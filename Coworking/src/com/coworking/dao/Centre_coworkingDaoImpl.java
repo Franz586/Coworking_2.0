@@ -37,4 +37,34 @@ public class Centre_coworkingDaoImpl implements Centre_coworkingDao {
 		return centrelist;
 	}
 
+	@Override
+	public Centre_coworking getCentre_coworking(int idCentre) {
+		Centre_coworking centre = (Centre_coworking) sessionfactory.getCurrentSession().get(Centre_coworking.class, idCentre);
+		
+		return centre;
+	}
+
+	@Override
+	public void SetCentre_coworking(int idCentre, String Adresa,
+			String Descripcio, String Email, String Nom, String Web, int tlf) {
+		
+		Centre_coworking centre = this.getCentre_coworking(idCentre);
+		
+		centre.setAdreca(Adresa);
+		centre.setDescripcio(Descripcio);
+		centre.setEmail(Email);
+		centre.setNom(Nom);
+		centre.setWeb(Web);
+		centre.setTelefon(tlf);
+		
+		this.deleteCentre_coworking(idCentre);
+		this.saveCentre_coworking(centre);
+	}
+
+	@Override
+	public void deleteCentre_coworking(int idCentre) {
+		Centre_coworking centre = this.getCentre_coworking(idCentre);
+		sessionfactory.getCurrentSession().delete(centre);
+	}
+
 }

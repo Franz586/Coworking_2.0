@@ -38,4 +38,10 @@ public class ProjecteDaoImpl implements ProjecteDao {
 		return projectelist;
 	}
 
+	@Override
+	public Projecte getProjecte(int idProj) {
+		Projecte proj = (Projecte) sessionfactory.getCurrentSession().get(Projecte.class, idProj);
+		return proj;
+	}
+
 }
