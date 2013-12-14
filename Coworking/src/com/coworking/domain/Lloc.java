@@ -13,6 +13,9 @@ public class Lloc {
 	@Column(name = "idlloc")
 	private int idlloc;
 	
+	@Column(name = "seient")
+	private int seient;
+	
 	@Column(name = "idcentre")
 	private int idcentre;
 	
@@ -31,6 +34,13 @@ public class Lloc {
 
 	public void setIdlloc(int idlloc) {
 		this.idlloc = idlloc;
+	}
+	public int getseient() {
+		return seient;
+	}
+
+	public void setseient(int seient) {
+		this.seient = seient;
 	}
 
 	public int getIdcentre() {

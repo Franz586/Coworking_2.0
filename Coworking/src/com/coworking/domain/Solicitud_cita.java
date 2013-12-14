@@ -1,5 +1,7 @@
 package com.coworking.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +21,9 @@ public class Solicitud_cita {
 	@Column(name = "usuari")
 	private String usuari;
 
+	@Column(name = "data_cita")
+	private Date data_cita;
+	
 	public int getIdsolicitud() {
 		return idsolicitud;
 	}
@@ -41,5 +46,12 @@ public class Solicitud_cita {
 
 	public void setUsuari(String usuari) {
 		this.usuari = usuari;
+	}
+	public Date getData_cita() {
+		return data_cita;
+	}
+
+	public void setData_cita(Date data_cita) {
+		this.data_cita = data_cita;
 	}
 }

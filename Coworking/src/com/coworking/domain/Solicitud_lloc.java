@@ -1,5 +1,7 @@
 package com.coworking.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,6 +26,9 @@ public class Solicitud_lloc {
 	
 	@Column(name = "usuari")
 	private String usuari;
+	
+	@Column(name = "data_lloc")
+	private Date data_lloc;
 
 	public int getIdsolicitud() {
 		return idsolicitud;
@@ -63,5 +68,14 @@ public class Solicitud_lloc {
 
 	public void setUsuari(String usuari) {
 		this.usuari = usuari;
+	}
+	
+	public Date getData_lloc() {
+		return data_lloc;
+	}
+
+
+	public void setData_lloc(Date data_lloc) {
+		this.data_lloc = data_lloc;
 	}
 }

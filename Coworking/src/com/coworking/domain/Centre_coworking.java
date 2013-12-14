@@ -112,5 +112,7 @@ public class Centre_coworking {
 	@Column(name = "data_caducitat")
 	private Date data_caducitat;
 
+	@Column(name = "admin_centre")
+	private String admin_centre;
 
 }

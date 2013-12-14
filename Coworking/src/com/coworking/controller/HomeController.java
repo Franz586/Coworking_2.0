@@ -56,6 +56,7 @@ public class HomeController {
 	public ModelAndView getUserList() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("usuari_registrat", usuari_registratService.getUsuari_registrat());
+		System.out.println("TEEEEEEEEST");
 		return new ModelAndView("UserDetails", model);
 
 	}
