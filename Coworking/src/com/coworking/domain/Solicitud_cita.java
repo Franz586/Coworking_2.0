@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,11 @@ public class Solicitud_cita {
 
 	@Column(name = "data_cita")
 	private Date data_cita;
+	
+	//RELATIONSHIPS
+	//cita - Solicitud_cita
+	@OneToOne(targetEntity=Cita.class, mappedBy="solicitud")
+	private Cita cita;
 	
 	public int getIdsolicitud() {
 		return idsolicitud;
@@ -53,5 +59,13 @@ public class Solicitud_cita {
 
 	public void setData_cita(Date data_cita) {
 		this.data_cita = data_cita;
+	}
+	
+	public Cita getCita() {
+		return this.cita;
+	}
+
+	public void setCita(Cita cita) {
+		this.cita = cita;
 	}
 }

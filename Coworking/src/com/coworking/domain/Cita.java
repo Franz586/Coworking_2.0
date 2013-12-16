@@ -3,6 +3,10 @@ package com.coworking.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import java.util.Date;
@@ -16,20 +20,26 @@ public class Cita {
 	@Column(name = "idcita")
 	private int idcita;
 	
-	@Column(name = "usuari")
-	private String usuari;
+	@Column(name = "data")
+	private Date data;
 	
 	@Column(name = "confirmada")
 	private boolean confirmada;
 	
-	@Column(name = "idcentre")
-	private int idcentre;
+	//FK Cita - Usuari_registrat
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "usuari", referencedColumnName="email")})
+	private Usuari_registrat usuari;
 	
-	@Column(name = "data")
-	private Date data;
+	//FK Cita - Centre_coworking
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "idcentre", referencedColumnName="idcentre")})
+	private Centre_coworking centre;
 	
-	@Column(name = "idsolicitud")
-	private int idsolicitud;
+	//FK Cita - Solicitud_cita
+	@OneToOne
+	@JoinColumns({@JoinColumn(name = "idsolicitud", referencedColumnName="idsolicitud")})
+	private Solicitud_cita solicitud;
 
 	public int getIdcita() {
 		return idcita;
@@ -39,11 +49,11 @@ public class Cita {
 		this.idcita = idcita;
 	}
 
-	public String getUsuari() {
+	public Usuari_registrat getUsuari() {
 		return usuari;
 	}
 
-	public void setUsuari(String usuari) {
+	public void setUsuari(Usuari_registrat usuari) {
 		this.usuari = usuari;
 	}
 
@@ -55,12 +65,12 @@ public class Cita {
 		this.confirmada = confirmada;
 	}
 
-	public int getIdcentre() {
-		return idcentre;
+	public Centre_coworking getCentre() {
+		return this.centre;
 	}
 
-	public void setIdcentre(int idcentre) {
-		this.idcentre = idcentre;
+	public void setCentre(Centre_coworking centre) {
+		this.centre = centre;
 	}
 
 	public Date getData() {
@@ -71,12 +81,12 @@ public class Cita {
 		this.data = data;
 	}
 
-	public int getIdsolicitud() {
-		return idsolicitud;
+	public Solicitud_cita getSolicitud() {
+		return this.solicitud;
 	}
 
-	public void setIdsolicitud(int idsolicitud) {
-		this.idsolicitud = idsolicitud;
+	public void setSolicitud(Solicitud_cita solicitud) {
+		this.solicitud = solicitud;
 	}
 	
 }

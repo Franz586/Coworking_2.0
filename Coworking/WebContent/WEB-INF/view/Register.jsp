@@ -9,13 +9,6 @@
 <title>Formulari de registre</title>
 </head>
 <body>
-<c:if test="${empty usuari_registrat}">
-	<table style="width: 90px;" align="right">
-		<tr>
-			<td style="width: 104px;">Logged as test</td>
-		</tr>
-</table>
-</c:if>
 	<center>
 		<br><br><br><br><br><br>
 <div style="color: teal;font-size: 30px">Formulari de registre</div>
@@ -58,6 +51,8 @@
 </form:form>
 <br>
 <a href="userList.html" >Clic aqui per consultar la BD d'usuaris</a>
+<br>
+<a href="home.html" >Clic aqui per tornar a la pagina principal</a>
 </center>
 </body>
 </html>

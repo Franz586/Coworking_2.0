@@ -3,6 +3,9 @@ package com.coworking.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,11 +16,16 @@ public class Emprenedor_centre {
 	@Column(name = "idemprenedor")
 	private int idemprenedor;
 	
-	@Column(name = "usuari")
-	private String usuari;
+	//RELATIONSHIPS
+	//usuari_registrat - emprenedor_centre
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "usuari", referencedColumnName="email")})
+	private Usuari_registrat usuari;
 	
-	@Column(name = "idcentre")
-	private int idcentre;
+	//Centre_coworking - emprenedor_centre
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "idcentre", referencedColumnName="idcentre")})
+	private Centre_coworking centre;
 
 	public int getIdemprenedor() {
 		return idemprenedor;
@@ -27,20 +35,20 @@ public class Emprenedor_centre {
 		this.idemprenedor = idemprenedor;
 	}
 
-	public String getUsuari() {
-		return usuari;
+	public Usuari_registrat getUsuari() {
+		return this.usuari;
 	}
 
-	public void setUsuari(String usuari) {
+	public void setUsuari(Usuari_registrat usuari) {
 		this.usuari = usuari;
 	}
 
-	public int getIdcentre() {
-		return idcentre;
+	public Centre_coworking getCentre() {
+		return this.centre;
 	}
 
-	public void setIdcentre(int idcentre) {
-		this.idcentre = idcentre;
+	public void setCentre(Centre_coworking centre) {
+		this.centre = centre;
 	}
 	
 }

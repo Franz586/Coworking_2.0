@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +36,19 @@ public class Usuari_registratDaoImpl implements Usuari_registratDao {
 				.createCriteria(Usuari_registrat.class).list();
 		return userlist;
 	}
+	
+	@Override
+	public Usuari_registrat getUsuari_registrat(String email, String contrasenya) {
+		@SuppressWarnings("unchecked")
+		List<Usuari_registrat> res = sessionfactory.getCurrentSession()
+				.createCriteria(Usuari_registrat.class).add(Restrictions.eq("email", email)).add(Restrictions.eq("contrasenya",contrasenya)).list();
+		if(!res.isEmpty()){
+			Usuari_registrat usuari = res.get(0);
+			return usuari;
+		}else{
+			return null;
+		}
+	}
+	
 
 }

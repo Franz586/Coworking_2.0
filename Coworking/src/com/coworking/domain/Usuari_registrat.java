@@ -2,10 +2,18 @@ package com.coworking.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
+
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -61,7 +69,23 @@ public class Usuari_registrat {
 	@Column(name = "admin_centre")
 	private Boolean admin_centre;
 	
-
+	// Relationships
+	//centre coworking - usuari_registrat
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=Centre_coworking.class, mappedBy="admin_centre")
+	private List<Centre_coworking> centres_administrats = new ArrayList<Centre_coworking>();
+	
+	//cita - usuari_registrat
+	@OneToMany(targetEntity=Cita.class, mappedBy="usuari")
+	private List<Cita> cites;
+	
+	//emprenedor_centre - usuari_registrat
+	@OneToMany(targetEntity=Emprenedor_centre.class, mappedBy="usuari")
+	private List<Emprenedor_centre> centres;
+	
+	public Usuari_registrat () {
+		this.centres_administrats = new ArrayList<Centre_coworking>();
+	}
+	
 	public String getemail() {
 		return email;
 	}
@@ -188,6 +212,41 @@ public class Usuari_registrat {
 	
 	public void setadmin_centre(Boolean admin_centre) {
 		this.admin_centre = admin_centre;
+	}
+	
+	public List<Centre_coworking> getcentres_administrats() {
+		return this.centres_administrats;
+	}
+	
+	public void setcentres_administrats(List<Centre_coworking> centres_administrats) {
+		this.centres_administrats = centres_administrats;
+	}
+	public void addcentre_administrat(Centre_coworking centre_administrat){
+		this.centres_administrats.add(centre_administrat);
+		
+	}
+	
+	public List<Cita> getcites() {
+		return this.cites;
+	}
+	
+	public void setcites(List<Cita> cites) {
+		this.cites = cites;
+	}
+	public void addcita(Cita cita){
+		this.cites.add(cita);
+		
+	}
+	public List<Emprenedor_centre> getcentres() {
+		return this.centres;
+	}
+	
+	public void setcentres(List<Emprenedor_centre> centres) {
+		this.centres = centres;
+	}
+	public void addcentre(Emprenedor_centre centre){
+		this.centres.add(centre);
+		
 	}
 
 

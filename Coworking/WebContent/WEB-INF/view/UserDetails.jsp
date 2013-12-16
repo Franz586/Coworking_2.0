@@ -34,6 +34,8 @@
 </c:if>
 <br>
 <a href="register.html" >Clic aqui per afegir un nou usuari</a>
+<br>
+<a href="home.html" >Clic aqui per tornar a la pagina principal</a>
 </center>
 </body>
 </html>

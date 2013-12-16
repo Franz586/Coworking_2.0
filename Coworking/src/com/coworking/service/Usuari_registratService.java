@@ -8,4 +8,5 @@ public interface Usuari_registratService {
 	public void addUsuari_registrat(Usuari_registrat Usuari_registrat);
 
 	public List<Usuari_registrat> getUsuari_registrat();
+	public Usuari_registrat getUsuari_registrat(String email, String contrasenya);
 }

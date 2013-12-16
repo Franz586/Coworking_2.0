@@ -27,5 +27,9 @@ public class Usuari_registratServiceImpl implements Usuari_registratService {
 	public List<Usuari_registrat> getUsuari_registrat() {
 		return usuari_registratDao.getUsuari_registrat();
 	}
+	@Override
+	public Usuari_registrat getUsuari_registrat(String email, String contrasenya) {
+		return usuari_registratDao.getUsuari_registrat(email, contrasenya);
+	}
 
 }

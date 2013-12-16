@@ -3,6 +3,9 @@ package com.coworking.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +22,11 @@ public class Projecte {
 	@Column(name = "nom")
 	private String nom;
 	
-	@Column(name = "empresa")
-	private String empresa;
+	//Relationships
+	//projecte - empresa
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "empresa", referencedColumnName="email")})
+	private Empresa empresa;
 
 	public int getIdprojecte() {
 		return idprojecte;
@@ -46,11 +52,11 @@ public class Projecte {
 		this.nom = nom;
 	}
 
-	public String getEmpresa() {
-		return empresa;
+	public Empresa getEmpresa() {
+		return this.empresa;
 	}
 
-	public void setEmpresa(String empresa) {
+	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
 

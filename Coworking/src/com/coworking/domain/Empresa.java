@@ -1,8 +1,11 @@
 package com.coworking.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,12 @@ public class Empresa {
 	
 	@Column(name = "contrasenya")
 	private String contrasenya;
+	
+	//RELATIONSHIPS
+	//empresa - projecte
+	//cita - centre_coworking
+	@OneToMany(targetEntity=Projecte.class, mappedBy="empresa")
+	private List<Projecte> projectes;
 
 	public String getEmail() {
 		return email;
@@ -52,6 +61,16 @@ public class Empresa {
 
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
+	}
+	public List<Projecte> getProjectes() {
+		return this.projectes;
+	}
+	
+	public void setProjectes(List<Projecte> projectes) {
+		this.projectes = projectes;
+	}
+	public void addProjecte(Projecte projecte){
+		this.projectes.add(projecte);
 	}
 	
 }

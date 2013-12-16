@@ -3,6 +3,9 @@ package com.coworking.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,17 +19,21 @@ public class Lloc {
 	@Column(name = "seient")
 	private int seient;
 	
-	@Column(name = "idcentre")
-	private int idcentre;
-	
 	@Column(name = "ocupat")
 	private boolean ocupat;
 	
 	@Column(name = "tipus")
 	private String tipus;
+	//RELATIONSHIPS
+	//lloc - centre_coworking
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "idcentre", referencedColumnName="idcentre")})
+	private Centre_coworking centre;
 	
-	@Column(name = "idemprenedor")
-	private int idemprenedor;
+	//lloc - emprenedor_centre
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name = "idemprenedor", referencedColumnName="idemprenedor")})
+	private Emprenedor_centre emprenedor;
 
 	public int getIdlloc() {
 		return idlloc;
@@ -43,12 +50,12 @@ public class Lloc {
 		this.seient = seient;
 	}
 
-	public int getIdcentre() {
-		return idcentre;
+	public Centre_coworking getcentre() {
+		return this.centre;
 	}
 
-	public void setIdcentre(int idcentre) {
-		this.idcentre = idcentre;
+	public void setcentre(Centre_coworking centre) {
+		this.centre = centre;
 	}
 
 	public boolean isOcupat() {
@@ -67,12 +74,12 @@ public class Lloc {
 		this.tipus = tipus;
 	}
 
-	public int getIdemprenedor() {
-		return idemprenedor;
+	public Emprenedor_centre getemprenedor() {
+		return this.emprenedor;
 	}
 
-	public void setIdemprenedor(int idemprenedor) {
-		this.idemprenedor = idemprenedor;
+	public void setemprenedor(Emprenedor_centre emprenedor) {
+		this.emprenedor = emprenedor;
 	}
 		
 }
