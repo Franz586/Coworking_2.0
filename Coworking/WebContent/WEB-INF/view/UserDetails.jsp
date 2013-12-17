@@ -12,7 +12,7 @@
 <br><br><br><br><br><br>
 <div style="color: teal;font-size: 30px">Usuaris registrats</div>
 <br><br>
-<c:if test="${!empty usuari_registrat}">
+<c:if test="${!empty model.llistat_usuaris}">
 <table border="1" bgcolor="black" width="600px">
 <tr style="background-color: teal;color: white;text-align: center;" height="40px">
 <td>Email</td>
@@ -21,13 +21,13 @@
 <td>Cognom</td>
 <td>Ambit Professional</td>
 </tr>
-<c:forEach items="${usuari_registrat}" var="usuari_registrat">
+<c:forEach items="${model.llistat_usuaris}" var="usuari">
 <tr style="background-color:white;color: black;text-align: center;" height="30px" >
-<td><c:out value="${usuari_registrat.email}"/></td>
-<td><c:out value="${usuari_registrat.contrasenya}"/></td>
-<td><c:out value="${usuari_registrat.nom}"/></td>
-<td><c:out value="${usuari_registrat.cognom}"/></td>
-<td><c:out value="${usuari_registrat.amb_prof}"/></td>
+<td><c:out value="${usuari.email}"/></td>
+<td><c:out value="${usuari.contrasenya}"/></td>
+<td><c:out value="${usuari.nom}"/></td>
+<td><c:out value="${usuari.cognom}"/></td>
+<td><c:out value="${usuari.amb_prof}"/></td>
 </tr>
 </c:forEach>
 </table>

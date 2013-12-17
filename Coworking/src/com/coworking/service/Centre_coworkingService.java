@@ -12,5 +12,5 @@ public interface Centre_coworkingService {
 	
 	public void setCentre_coworking(int idCentre, String Adresa, String Descripcio, String Email, String Nom, String Web, int tlf);
 	
-	public List<Centre_coworking> getCentre_coworking();
+	public List<Centre_coworking> getCentres();
 }

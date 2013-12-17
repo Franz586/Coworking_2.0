@@ -143,9 +143,11 @@ public class HomeController {
 	@RequestMapping("/userList")
 	public ModelAndView getUserList() {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("usuari_registrat", usuari_registratService.getUsuari_registrat());
-		System.out.println("TEEEEEEEEST");
-		return new ModelAndView("UserDetails", model);
+		model.put("llistat_usuaris", usuari_registratService.getUsuaris());
+		model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		System.out.println("SIZE= "+usuari_registratService.getUsuaris().size());
+		return new ModelAndView("UserDetails", "model", model );
 
 	}
 	
@@ -153,7 +155,7 @@ public class HomeController {
 	public ModelAndView getCentresDetais(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("centre_coworking", centre_coworkingService.getCentre_coworking());
+		model.put("centre_coworking", centre_coworkingService.getCentres());
 		model.put("loguejat", loguejat);
 		model.put("loginname", loginname);
 		System.out.println("TEEEEEEEEST2");

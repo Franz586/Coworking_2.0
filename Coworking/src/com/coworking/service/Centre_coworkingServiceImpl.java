@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.coworking.dao.Centre_coworkingDao;
 import com.coworking.domain.Centre_coworking;
-import com.coworking.domain.Usuari_registrat;
+
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -36,8 +36,8 @@ public class Centre_coworkingServiceImpl implements Centre_coworkingService{
 	}
 	
 	@Override
-	public List<Centre_coworking> getCentre_coworking() {
-		return centre_coworkingDao.getCentre_coworking();
+	public List<Centre_coworking> getCentres() {
+		return centre_coworkingDao.getCentres();
 	}
 
 }

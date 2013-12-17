@@ -2,6 +2,7 @@ package com.coworking.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.coworking.domain.Centre_coworking;
+import com.coworking.domain.Usuari_registrat;
 
 
 
@@ -30,10 +32,13 @@ public class Centre_coworkingDaoImpl implements Centre_coworkingDao {
 	}
 
 	@Override
-	public List<Centre_coworking> getCentre_coworking() {
-		@SuppressWarnings("unchecked")
-		List<Centre_coworking> centrelist = sessionfactory.getCurrentSession()
-				.createCriteria(Centre_coworking.class).list();
+	public List<Centre_coworking> getCentres() {
+		Session session = sessionfactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		String hql = "From Centre_coworking c";
+		Query query = session.createQuery(hql);
+		List<Centre_coworking> centrelist = query.list();
+		tx.commit();
 		return centrelist;
 	}
 
