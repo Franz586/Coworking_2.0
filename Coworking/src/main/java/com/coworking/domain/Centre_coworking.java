@@ -51,7 +51,17 @@ public class Centre_coworking {
 	private boolean premium;
 	@Column(name = "data_caducitat")
 	private Date data_caducitat;
-
+	
+	//serveis
+	@Column(name = "banys")
+	private Boolean banys;
+	@Column(name = "cafeteria")
+	private Boolean cafeteria;
+	@Column(name = "internet")
+	private Boolean internet;
+	@Column(name = "sala_reunions")
+	private Boolean sala_reunions;
+	
 	//RELATIONSHIPS
 	//usuari_registrat - centre_coworking
 	@ManyToOne
@@ -151,6 +161,34 @@ public class Centre_coworking {
 	}
 	public void addLloc(Lloc lloc){
 		this.llocs.add(lloc);
+	}
+	public Boolean getBanys(){
+		
+		return this.banys;
+	}
+	public void setBanys( Boolean banys){
+		this.banys=banys;
+	}
+	public Boolean getCafeteria( ){
+		
+		return this.cafeteria;
+	}
+	public void setCafeteria( Boolean cafeteria){
+		this.cafeteria=cafeteria;
+	}
+	public Boolean getInternet( ){
+		
+		return this.internet;
+	}
+	public void setInternet( Boolean internet){
+		this.internet=internet;
+	}
+	public Boolean getSala_reunions( ){
+		
+		return this.sala_reunions;
+	}
+	public void setSala_reunions( Boolean sala_reunions){
+		this.sala_reunions=sala_reunions;
 	}
 
 }

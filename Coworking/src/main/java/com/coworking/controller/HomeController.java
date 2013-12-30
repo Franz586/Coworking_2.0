@@ -139,10 +139,14 @@ public class HomeController {
 	public ModelAndView saveCentreData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking, 
 			BindingResult result) {
+		
 		centre_coworking.setAdmin_centre(userlogged);
 		centre_coworking.setAdreca("lala");
 		centre_coworking.setPremium(false);
 		centre_coworking.setTelefon(0);
+		System.out.println("EMAIL = "+centre_coworking.getEmail());
+		System.out.println("BANYS = "+centre_coworking.getBanys());
+		System.out.println("CAFETERIA = "+centre_coworking.getCafeteria());
 		userlogged.addcentre_administrat(centre_coworking);
 		try {
 			Icentre_coworking.saveCentre_coworking(centre_coworking);

@@ -66,8 +66,18 @@
 <td><form:label path="web">Web</form:label></td>
 <td><form:input  path="web"/></td>
 </tr>
-
-
+<tr>
+<td>Serveis</td>
+<td>
+	<form:checkbox path="banys" label="Banys" value="MARCADO"/>
+	<br>
+  	<form:checkbox path="cafeteria" label="Cafeteria" value="1"/>
+	<br>
+	<form:checkbox path="internet" label="Internet" value="true"/>
+	<br>
+	<form:checkbox path="sala_reunions" label="Sala de reunions" value="true"/>
+</td>
+</tr>
 <tr><td></td><td>
 <input type="submit" value="Registrar centre" />
 </td></tr>
