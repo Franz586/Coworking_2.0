@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.coworking.domain.Centre_coworking;
 import com.coworking.domain.Usuari_registrat;
 import com.coworking.interfaces.IUsuari_registratDAO;
 
@@ -62,6 +64,10 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 		}else{
 			return null;
 		}
+	}
+	public List<Centre_coworking> getAdmin_centres(Usuari_registrat usuari){
+		
+		return usuari.getcentres_administrats();
 	}
 	
 

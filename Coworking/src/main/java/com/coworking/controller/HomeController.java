@@ -178,8 +178,24 @@ public class HomeController {
 		model.put("centre_coworking", Icentre_coworking.getCentres());
 		model.put("loguejat", loguejat);
 		model.put("loginname", loginname);
-		System.out.println("TEEEEEEEEST2");
+		
 		return new ModelAndView("CentresDetails", "model", model);
+
+	}
+	@RequestMapping("/mycentres")
+	public ModelAndView getmycentres(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("centre_coworking", Icentre_coworking.getCentres());
+		model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		usuari_registrat = userlogged;
+		if(!usuari_registrat.getcentres_administrats().isEmpty()){
+			model.put("centres_admin", usuari_registrat.getcentres_administrats());	
+		}else{
+			System.out.println("este usuario no administra ningun centro");
+		}
+		return new ModelAndView("mycentres", "model", model);
 
 	}
 }
