@@ -29,7 +29,7 @@ import com.coworking.interfaces.IUsuari_registratDAO;
  */
 @Controller
 public class HomeController {
-	
+	//Testeando que se pueden hacer COMMITS
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
