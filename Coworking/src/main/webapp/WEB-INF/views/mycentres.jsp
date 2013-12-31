@@ -6,7 +6,7 @@
 <html>
 
 <head>
-<meta charset="utf-8">
+
 <title>Home - Coworking 2.0</title>
 <meta name="description" content="Página de Inicio en Coworking 2.0">
 
@@ -47,7 +47,7 @@ body {
 			  <!-- Collect the nav links, forms, and other content for toggling -->
 			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			    <ul class="nav navbar-nav">
-			      <li class="active"><a href="myprofile.html">Perfil</a></li>
+			      <li class="active"><a href="#">Perfil</a></li>
 			      <li><a href="mycentres.html">Els meus Centres</a></li>
 			    </ul>
 				
@@ -103,8 +103,14 @@ body {
 	<center>
 		<br> <br> <br> <br> <br> <br>
 
-		<div style="color: teal; font-size: 30px">Pàgina principal</div>
+		<div style="color: teal; font-size: 30px">Els meus centres</div>
 		<br> <br>
+		<c:forEach items="${model.centres_admin}" var="centre">
+			
+			<a href="#">${centre.nom}</a>
+			<br>
+
+		</c:forEach>
 		<c:choose>
 			<c:when test="${model.loguejat}">
 				<div style="color: teal; font-size: 20px">
@@ -117,17 +123,11 @@ body {
 							<td
 								style="width: 200px; border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid"><a
 								href="registerCentre.html">Registrar centre coworking</a></td>
-						<tr>
-						
-								
 					</table>
 				</form:form>
 			</c:when>
 		</c:choose>
-		<br> <br> <a href="register.html">Clic aqui per
-			registrar-te</a> <br> <a href="userList.html">Clic aqui per
-			consultar la BD d'usuaris</a> <br> <a href="centresList.html">Clic
-			aqui per consultar la BD de centres</a>
+		<br> 
 	</center>
 	
 	

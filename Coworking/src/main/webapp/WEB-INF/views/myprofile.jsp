@@ -7,8 +7,8 @@
 
 <head>
 <meta charset="utf-8">
-<title>Home - Coworking 2.0</title>
-<meta name="description" content="Página de Inicio en Coworking 2.0">
+<title>Perfil - Coworking 2.0</title>
+<meta name="description" content="Página de Perfil en Coworking 2.0">
 
 <style>
 body {
@@ -98,48 +98,35 @@ body {
 		</c:otherwise>
 		
 	</c:choose>
- 
- 
-	<center>
-		<br> <br> <br> <br> <br> <br>
 
-		<div style="color: teal; font-size: 30px">Pàgina principal</div>
-		<br> <br>
-		<c:choose>
-			<c:when test="${model.loguejat}">
-				<div style="color: teal; font-size: 20px">
-					<p align="left">Menu usuari</p>
-				</div>
-				<form:form id="menuForm">
-					<table style="width: 200px;" align="left">
+		<br>
+		<div style="margin-left:60px">
+		<div style="color: teal; font-size: 30px">El meu perfil</div>
+<img src="http://www.fashionally.com/images/default_profile_pic.jpg" height="80" width="80">
+<br>
+<b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
+<br>
+<b>DNI:</b> ${model.dni}
+<br>
+<b>Ambit professional:</b> ${model.ambit}
+<br>
+<b>Email de contacte:</b> ${model.email}
+<br>
+<b>Data de naixament:</b> ${model.data_naix}
+<br>
+<b>Telefon:</b> ${model.telefon}
+<br>
+<b>Informació sobre mi:</b> ${model.sobre_mi}
+<hr>
 
-						<tr>
-							<td
-								style="width: 200px; border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid"><a
-								href="registerCentre.html">Registrar centre coworking</a></td>
-						<tr>
-						
-								
-					</table>
-				</form:form>
-			</c:when>
-		</c:choose>
-		<br> <br> <a href="register.html">Clic aqui per
-			registrar-te</a> <br> <a href="userList.html">Clic aqui per
-			consultar la BD d'usuaris</a> <br> <a href="centresList.html">Clic
-			aqui per consultar la BD de centres</a>
-	</center>
-	
-	
-
-	<!-- Scripts siempre al final para que se cargue primero el contenido -->
-
-	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
-	<script src="<c:url value="resources/js/bootstrap.min.js"/>"></script>
-	<script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
-	<script src="resources/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-
+<b>Web:</b> ${model.web}
+<br>
+<b>Perfil privat?:</b> ${model.privacitat}
+<br>
+<b>Premium?:</b> ${model.premium}
+<form action="editprofile.html" method="get">
+		<input type="submit" value="Editar perfil">
+	</form>
+</div>
 </body>
 </html>

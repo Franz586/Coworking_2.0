@@ -10,7 +10,7 @@
 </head>
 <body>
 	<center>
-		<br><br><br><br><br><br>
+		<br><br>
 <div style="color: teal;font-size: 30px">Formulari de registre</div>
 <br><br>
 <c:url var="userRegistration" value="saveUser.html"/>
@@ -37,13 +37,35 @@
 <td><form:input  path="cognom"/></td>
 </tr>
 <tr>
+<td><form:label path="data_naix">Data de naixement</form:label></td>
+<td><form:input  path="data_naix"/></td>
+</tr>
+<tr>
 <td><form:label path="adreca">Adreça</form:label></td>
 <td><form:input  path="adreca"/></td>
 </tr>
 <tr>
-<td><form:label path="amb_prof">Ambit Professional</form:label></td>
+<td><form:label path="telefon">Teléfon</form:label></td>
+<td><form:input  path="telefon"/></td>
+</tr>
+<tr>
+<td><form:label path="privacitat">Perfil privat?</form:label></td>
+<td><form:select  path="privacitat" items="${model.privacitat}"></form:select></td>
+</tr>
+<tr>
+<td><form:label path="premium">Premium?</form:label></td>
+<td><form:select  path="premium" items="${model.privacitat}"></form:select></td>
+</tr>
+<tr>
+<td><form:label path="amb_prof">Àmbit professional</form:label></td>
 <td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
 </tr>
+<tr>
+<td><form:label path="web">Lloc web</form:label></td>
+<td><form:input  path="web"/></td>
+</tr>
+<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
+<td><form:input  path="sobre_mi"/></td>
 <tr><td></td><td>
 <input type="submit" value="Registrar-se" />
 </td></tr>

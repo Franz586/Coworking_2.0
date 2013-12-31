@@ -91,10 +91,15 @@ public class HomeController {
 		ArrayList<String> ambit = new ArrayList<String>();
 		ambit.add("Arquitecte");
 		ambit.add("Enginyer de software");
-		ambit.add("Matematic");
+		ambit.add("Matemàtic");
 		ambit.add("Enginyer electronic");
+		ArrayList<String> privacitat = new ArrayList<String>();
+		privacitat.add("SI");
+		privacitat.add("NO");
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("ambit", ambit);
+		model.put("privacitat", privacitat);
+		
 		System.out.println("Register Form");
 		return new ModelAndView("Register", "model", model);
 	}
@@ -102,15 +107,11 @@ public class HomeController {
 	@RequestMapping("/saveUser")
 	public ModelAndView saveUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			BindingResult result) {
-		usuari_registrat.setadmin_centre(true);
-		usuari_registrat.setpremium(false);
+		usuari_registrat.setadmin_centre(false);
 		usuari_registrat.setactiu(true);
-		usuari_registrat.setprivacitat(false);
-		usuari_registrat.setweb(null);
-		usuari_registrat.setdata_naix(null);
-		usuari_registrat.setsobre_mi(null);
-		usuari_registrat.settelefon(null);
 		usuari_registrat.setdata_caducitat(null);
+		/*Date data_naix = Date.
+		usuari_registrat.setdata_naix(data_naix);*/
 	
 		try {
 			Iusuari_registrat.saveUsuari_registrat(usuari_registrat);
@@ -139,7 +140,6 @@ public class HomeController {
 	public ModelAndView saveCentreData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking, 
 			BindingResult result) {
-		
 		centre_coworking.setAdmin_centre(userlogged);
 		centre_coworking.setAdreca("lala");
 		centre_coworking.setPremium(false);
@@ -196,6 +196,58 @@ public class HomeController {
 			System.out.println("este usuario no administra ningun centro");
 		}
 		return new ModelAndView("mycentres", "model", model);
+
+	}
+	@RequestMapping("/myprofile")
+	public ModelAndView getmyprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			BindingResult result) {
+		usuari_registrat = userlogged;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		model.put("email", usuari_registrat.getemail());
+		model.put("nom", usuari_registrat.getnom());
+		model.put("cognom", usuari_registrat.getcognom());
+		model.put("ambit", usuari_registrat.getamb_prof());
+		model.put("dni", usuari_registrat.getdni());
+		model.put("data_naix", usuari_registrat.getdata_naix()+"");
+		model.put("telefon", usuari_registrat.gettelefon());
+		model.put("privacitat", usuari_registrat.getprivacitat());
+		model.put("sobre_mi", usuari_registrat.getsobre_mi());
+		model.put("web", usuari_registrat.getweb());
+		model.put("premium", usuari_registrat.getpremium());
+	
+						
+		return new ModelAndView("myprofile", "model", model);
+
+	}
+	@RequestMapping("/editprofile")
+	public ModelAndView editprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			BindingResult result) {
+		usuari_registrat = userlogged;
+		Map<String, Object> model = new HashMap<String, Object>();
+		ArrayList<String> ambit = new ArrayList<String>();
+		ambit.add("Arquitecte");
+		ambit.add("Enginyer de software");
+		ambit.add("Matematic");
+		ambit.add("Enginyer electronic");
+		model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		model.put("email", usuari_registrat.getemail());
+		model.put("nom", usuari_registrat.getnom());
+		model.put("cognom", usuari_registrat.getcognom());
+		model.put("ambit", ambit);
+		model.put("dni", usuari_registrat.getdni());
+		model.put("data_naix", usuari_registrat.getdata_naix()+"");
+		model.put("telefon", usuari_registrat.gettelefon());
+		model.put("contrasenya", usuari_registrat.getcontrasenya());
+		model.put("adreca", usuari_registrat.getadreca());
+		model.put("privacitat", usuari_registrat.getprivacitat());
+		model.put("sobre_mi", usuari_registrat.getsobre_mi());
+		model.put("web", usuari_registrat.getweb());
+		model.put("premium", usuari_registrat.getpremium());
+						
+		return new ModelAndView("editprofile", "model", model);
 
 	}
 }

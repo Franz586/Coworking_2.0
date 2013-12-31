@@ -38,7 +38,7 @@ public class Usuari_registrat {
 	private String cognom;
 	
 	@Column(name = "privacitat")
-	private Boolean privacitat;
+	private String privacitat;
 	
 	@Column(name = "web")
 	private String web;
@@ -53,7 +53,7 @@ public class Usuari_registrat {
 	private Integer telefon;
 	
 	@Column(name = "premium")
-	private Boolean premium;
+	private String premium;
 	
 	@Column(name = "data_caducitat")
 	private Date data_caducitat;
@@ -129,11 +129,11 @@ public class Usuari_registrat {
 		this.cognom = cognom;
 	}
 	
-	public Boolean getprivacitat() {
+	public String getprivacitat() {
 		return privacitat;
 	}
 	
-	public void setprivacitat(Boolean privacitat) {
+	public void setprivacitat(String privacitat) {
 		this.privacitat = privacitat;
 	}
 	
@@ -169,11 +169,11 @@ public class Usuari_registrat {
 		this.telefon = telefon;
 	}
 	
-	public Boolean getpremium() {
+	public String getpremium() {
 		return premium;
 	}
 	
-	public void setpremium(Boolean premium) {
+	public void setpremium(String premium) {
 		this.premium = premium;
 	}
 	

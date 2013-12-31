@@ -99,37 +99,47 @@ body {
 		
 	</c:choose>
  
- 
-	<center>
-		<br> <br> <br> <br> <br> <br>
+ 	<center>
+	<div style="color: teal;font-size: 30px">Editar perfil</div>
+<br><br>
 
-		<div style="color: teal; font-size: 30px">Pàgina principal</div>
-		<br> <br>
-		<c:choose>
-			<c:when test="${model.loguejat}">
-				<div style="color: teal; font-size: 20px">
-					<p align="left">Menu usuari</p>
-				</div>
-				<form:form id="menuForm">
-					<table style="width: 200px;" align="left">
-
-						<tr>
-							<td
-								style="width: 200px; border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid"><a
-								href="registerCentre.html">Registrar centre coworking</a></td>
-						<tr>
-						
-								
-					</table>
-				</form:form>
-			</c:when>
-		</c:choose>
-		<br> <br> <a href="register.html">Clic aqui per
-			registrar-te</a> <br> <a href="userList.html">Clic aqui per
-			consultar la BD d'usuaris</a> <br> <a href="centresList.html">Clic
-			aqui per consultar la BD de centres</a>
-	</center>
-	
+<c:url var="userUpdate" value="updateUser.html"/>
+<form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
+<table width="400px" height="150px">
+<tr>
+<td><form:label path="email">Email</form:label></td>
+<td><form:input  path="email" value="${model.email}"/></td>
+</tr>
+<tr>
+<td><form:label path="contrasenya">Contrasenya</form:label></td>
+<td><form:input  path="contrasenya" value="${model.contrasenya}"/></td>
+</tr>
+<tr>
+<td><form:label path="dni">DNI</form:label></td>
+<td><form:input  path="dni" value="${model.dni}"/></td>
+</tr>
+<tr>
+<td><form:label path="nom">Nom</form:label></td>
+<td><form:input  path="nom" value="${model.nom}"/></td>
+</tr>
+<tr>
+<td><form:label path="cognom">Cognom</form:label></td>
+<td><form:input  path="cognom" value="${model.cognom}"/></td>
+</tr>
+<tr>
+<td><form:label path="adreca">Adreça</form:label></td>
+<td><form:input  path="adreca" value="${model.adreca}"/></td>
+</tr>
+<tr>
+<td><form:label path="amb_prof">Ambit Professional</form:label></td>
+<td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="Finalitzar edició" />
+</td></tr>
+</table>
+</form:form>
+</center>
 	
 
 	<!-- Scripts siempre al final para que se cargue primero el contenido -->
