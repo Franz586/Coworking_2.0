@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -12,10 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.coworking.domain.Centre_coworking;
@@ -48,22 +51,32 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public ModelAndView getLoginForm(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			ModelMap model,
 			BindingResult result) {
 			System.out.println("loguejat = "+loguejat);
-			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("loguejat", loguejat);
 			model.put("loginname", loginname);
+			
+			if (loguejat) {
+				model.put("centresAdministrats", userlogged.getcentres_administrats());
+			}
+			
 			return new ModelAndView("home", "model", model);
 	}
 	
 	@RequestMapping("/login")
 	public ModelAndView login(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			ModelMap model,
 			BindingResult result) {
-			System.out.println("LOGIN ="+usuari_registrat.getemail());
+		
 			String email = usuari_registrat.getemail();
 			String contrasenya = usuari_registrat.getcontrasenya();
-			System.out.println("CONTRASENYA ="+usuari_registrat.getcontrasenya());
+		
+			System.out.println("LOGIN =" + email);
+			System.out.println("CONTRASENYA =" + contrasenya);
+			
 			userlogged = Iusuari_registrat.getUsuari_registrat(email, contrasenya);
+			
 			if(userlogged == null){
 				System.out.println("Usuario erroneo");
 				loguejat = false;
@@ -73,7 +86,21 @@ public class HomeController {
 				loguejat = true;
 				loginname = userlogged.getemail();
 			}
-			return new ModelAndView("redirect:/home.html");
+		
+			model.put("loguejat", loguejat);
+			model.put("loginname", loginname);
+			model.put("centresAdministrats", userlogged.getcentres_administrats());
+			
+			//return new ModelAndView("redirect:/home.html");
+			return new ModelAndView("home", model);
+	}
+	
+	/* ---------- Actualitza llista Els Meus Espais ------------- */
+	@RequestMapping(value = "/espais", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Centre_coworking> getCentresAdministrats() {
+		System.out.println("Chivato: He clickat a a Els Meus Espais, generant una URL /home/espais que hem retorna a la funció AJAX una llista de Centres");
+		return userlogged.getcentres_administrats();
 	}
 	
 	@RequestMapping("/logout")
