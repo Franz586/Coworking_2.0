@@ -258,6 +258,9 @@ public class HomeController {
 		ambit.add("Enginyer de software");
 		ambit.add("Matematic");
 		ambit.add("Enginyer electronic");
+		//select boxes para privacitat y premium
+		ArrayList<String> boxpriv = new ArrayList<String>();
+		ArrayList<String> boxprem = new ArrayList<String>();
 		model.put("loguejat", loguejat);
 		model.put("loginname", loginname);
 		model.put("email", usuari_registrat.getemail());
@@ -270,10 +273,26 @@ public class HomeController {
 		model.put("contrasenya", usuari_registrat.getcontrasenya());
 		model.put("adreca", usuari_registrat.getadreca());
 		model.put("privacitat", usuari_registrat.getprivacitat());
+		
+		if(usuari_registrat.getprivacitat().matches("SI")){
+			boxpriv.add("NO");
+			model.put("boxpriv", boxpriv);
+		}else{
+			boxpriv.add("SI");
+			model.put("boxpriv", boxpriv);
+		}
+		
 		model.put("sobre_mi", usuari_registrat.getsobre_mi());
 		model.put("web", usuari_registrat.getweb());
 		model.put("premium", usuari_registrat.getpremium());
 						
+		if(usuari_registrat.getpremium().matches("SI")){
+			boxprem.add("NO");
+			model.put("boxprem", boxprem);
+		}else{
+			boxprem.add("SI");
+			model.put("boxprem", boxprem);
+		}
 		return new ModelAndView("editprofile", "model", model);
 
 	}

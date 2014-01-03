@@ -64,8 +64,10 @@
 <td><form:label path="web">Lloc web</form:label></td>
 <td><form:input  path="web"/></td>
 </tr>
+<tr>
 <td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
 <td><form:input  path="sobre_mi"/></td>
+</tr>
 <tr><td></td><td>
 <input type="submit" value="Registrar-se" />
 </td></tr>

@@ -131,8 +131,42 @@ body {
 <td><form:input  path="adreca" value="${model.adreca}"/></td>
 </tr>
 <tr>
+<td><form:label path="data_naix">Data de naixement</form:label></td>
+<td><form:input  path="data_naix" value="${model.data_naix}"/></td>
+</tr>
+<tr>
+<td><form:label path="adreca">Data de naixement</form:label></td>
+<td><form:input  path="adreca" value="${model.adreca}"/></td>
+</tr>
+<tr>
+<td><form:label path="telefon">Teléfon</form:label></td>
+<td><form:input  path="telefon" value="${model.telefon}"/></td>
+</tr>
+<tr>
+<td><form:label path="privacitat">Perfil privat?</form:label></td>
+<td><form:select  path="privacitat">
+	<form:option value="${model.privacitat}" label="${model.privacitat}"/>
+	<form:options items="${model.boxpriv}" />
+</form:select></td>
+</tr>
+<tr>
+<td><form:label path="premium">Premium?</form:label></td>
+<td><form:select  path="premium">
+	<form:option value="${model.premium}" label="${model.premium}"/>
+	<form:options items="${model.boxprem}" />
+</form:select></td>
+</tr>
+<tr>
 <td><form:label path="amb_prof">Ambit Professional</form:label></td>
 <td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
+</tr>
+<tr>
+<td><form:label path="web">Lloc web</form:label></td>
+<td><form:input  path="web" value="${model.web}"/></td>
+</tr>
+<tr>
+<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
+<td><form:input  path="sobre_mi" value="${model.sobre_mi}"/></td>
 </tr>
 <tr><td></td><td>
 <input type="submit" value="Finalitzar edició" />
