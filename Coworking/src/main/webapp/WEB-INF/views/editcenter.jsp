@@ -100,73 +100,43 @@ body {
 	</c:choose>
  
  	<center>
-	<div style="color: teal;font-size: 30px">Editar perfil</div>
+	<div style="color: teal;font-size: 30px">Editar perfil del centre</div>
 <br><br>
 
-<c:url var="userUpdate" value="updateUser.html"/>
-<form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
+<c:url var="centreUpdate" value="updatecentre.html"/>
+<form:form id="updateForm" modelAttribute="centre_coworking" method="post" action="${centreUpdate}">
 <table width="400px" height="150px" style="border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid">
+<tr>
+<td><form:label path="nom">Nom centre</form:label></td>
+<td><form:input  path="nom" value="${model.nom}"/></td>
+</tr>
 <tr>
 <td><form:label path="email">Email</form:label></td>
 <td><form:input  path="email" value="${model.email}"/></td>
 </tr>
 <tr>
-<td><form:label path="contrasenya">Contrasenya</form:label></td>
-<td><form:input  path="contrasenya" value="${model.contrasenya}"/></td>
-</tr>
-<tr>
-<td><form:label path="dni">DNI</form:label></td>
-<td><form:input  path="dni" value="${model.dni}"/></td>
-</tr>
-<tr>
-<td><form:label path="nom">Nom</form:label></td>
-<td><form:input  path="nom" value="${model.nom}"/></td>
-</tr>
-<tr>
-<td><form:label path="cognom">Cognom</form:label></td>
-<td><form:input  path="cognom" value="${model.cognom}"/></td>
-</tr>
-<tr>
-<td><form:label path="adreca">Adreça</form:label></td>
-<td><form:input  path="adreca" value="${model.adreca}"/></td>
-</tr>
-<tr>
-<td><form:label path="data_naix">Data de naixement</form:label></td>
-<td><form:input  path="data_naix" value="${model.data_naix}"/></td>
-</tr>
-<tr>
-<td><form:label path="adreca">Data de naixement</form:label></td>
-<td><form:input  path="adreca" value="${model.adreca}"/></td>
+<td><form:label path="descripcio">Descripció</form:label></td>
+<td><form:input  path="descripcio" value="${model.descripcio}"/></td>
 </tr>
 <tr>
 <td><form:label path="telefon">Teléfon</form:label></td>
 <td><form:input  path="telefon" value="${model.telefon}"/></td>
 </tr>
 <tr>
-<td><form:label path="privacitat">Perfil privat?</form:label></td>
-<td><form:select  path="privacitat">
-	<form:option value="${model.privacitat}" label="${model.privacitat}"/>
-	<form:options items="${model.boxpriv}" />
-</form:select></td>
-</tr>
-<tr>
-<td><form:label path="premium">Premium?</form:label></td>
-<td><form:select  path="premium">
-	<form:option value="${model.premium}" label="${model.premium}"/>
-	<form:options items="${model.boxprem}" />
-</form:select></td>
-</tr>
-<tr>
-<td><form:label path="amb_prof">Ambit Professional</form:label></td>
-<td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
-</tr>
-<tr>
-<td><form:label path="web">Lloc web</form:label></td>
+<td><form:label path="web">Web</form:label></td>
 <td><form:input  path="web" value="${model.web}"/></td>
 </tr>
 <tr>
-<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
-<td><form:input  path="sobre_mi" value="${model.sobre_mi}"/></td>
+<td>Serveis</td>
+<td>
+	<form:checkbox path="banys" label="Banys" checked="${model.banys}" value="true"/>
+	<br>
+  	<form:checkbox path="cafeteria" label="Cafeteria" checked="${model.cafeteria}" value="true"/>
+	<br>
+	<form:checkbox path="internet" label="Internet" checked="${model.internet}" value="true"/>
+	<br>
+	<form:checkbox path="sala_reunions" label="Sala de reunions" checked="${model.sala}" value="true"/>
+</td>
 </tr>
 <tr><td></td><td>
 <input type="submit" value="Finalitzar edició" />

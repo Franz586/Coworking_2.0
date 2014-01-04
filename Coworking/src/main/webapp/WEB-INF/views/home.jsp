@@ -63,8 +63,10 @@
 							      					
 							      				<ul class = "dropdown-menu">						      		
 							      		<c:forEach items="${centresAdministrats}" var="centre">
-								      		
-								      			<li><a href = "#">${centre.nom}</a></li>
+						
+								      			<li>
+								      			<a href = "mycenterprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
+								      			</li>
 								      			
 								      		
 							      		</c:forEach>   	

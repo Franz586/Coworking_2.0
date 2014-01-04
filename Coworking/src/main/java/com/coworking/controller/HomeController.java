@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,6 +52,8 @@ public class HomeController {
 	public String loginname;
 	
 	public Usuari_registrat userlogged;
+	
+	public Centre_coworking mycentre;
 
 	@RequestMapping("/home")
 	public ModelAndView getLoginForm(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
@@ -108,6 +114,7 @@ public class HomeController {
 			userlogged = null;
 			loguejat = false;
 			loginname = null;
+			mycentre = null;
 			return new ModelAndView("redirect:/home.html");
 	}
 	
@@ -258,6 +265,7 @@ public class HomeController {
 		ambit.add("Enginyer de software");
 		ambit.add("Matematic");
 		ambit.add("Enginyer electronic");
+		
 		//select boxes para privacitat y premium
 		ArrayList<String> boxpriv = new ArrayList<String>();
 		ArrayList<String> boxprem = new ArrayList<String>();
@@ -294,6 +302,65 @@ public class HomeController {
 			model.put("boxprem", boxprem);
 		}
 		return new ModelAndView("editprofile", "model", model);
+
+	}
+	
+	@RequestMapping(value="mycenterprofile", method=RequestMethod.GET)
+	public ModelAndView mycenterprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
+            HttpServletResponse response) {       
+        //Find user ...  
+        //Found user...  
+        System.out.println("Got request param: " + centreId);
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+		model.put("nom", centre.getNom());
+		model.put("descripcio", centre.getDescripcio());
+		model.put("email", centre.getEmail());
+		model.put("telefon", centre.getTelefon());
+		model.put("web", centre.getWeb());
+		
+		//para saber que el centro que vas a editar es tuyo
+		//por seguridad, sino se usaria el request param como en el perfil
+		mycentre = centre;
+				
+		return new ModelAndView("mycenterprofile", "model", model);
+		
+	}
+	@RequestMapping(value="editcenter", method=RequestMethod.GET)
+	public ModelAndView editcenter(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+			BindingResult result) {       
+		
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		if (loguejat) {
+			model.put("centresAdministrats", userlogged.getcentres_administrats());
+		}
+        if(mycentre!=null){
+			model.put("nom", mycentre.getNom());
+			model.put("descripcio", mycentre.getDescripcio());
+			model.put("email", mycentre.getEmail());
+			model.put("telefon", mycentre.getTelefon());
+			model.put("web", mycentre.getWeb());
+			if(mycentre.getBanys()){
+				model.put("banys", "checked");
+			}
+			if(mycentre.getCafeteria()){
+				model.put("cafeteria", "checked");
+			}
+			if(mycentre.getSala_reunions()){
+				model.put("sala", "checked");
+			}
+			if(mycentre.getInternet()){
+				model.put("internet", "checked");
+			}
+        }
+		
+	
+						
+		return new ModelAndView("editcenter", "model", model);
 
 	}
 }

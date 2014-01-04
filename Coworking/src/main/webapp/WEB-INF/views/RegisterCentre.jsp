@@ -63,15 +63,19 @@
 <td><form:input  path="descripcio"/></td>
 </tr>
 <tr>
+<td><form:label path="telefon">Teléfon</form:label></td>
+<td><form:input  path="telefon"/></td>
+</tr>
+<tr>
 <td><form:label path="web">Web</form:label></td>
 <td><form:input  path="web"/></td>
 </tr>
 <tr>
 <td>Serveis</td>
 <td>
-	<form:checkbox path="banys" label="Banys" value="MARCADO"/>
+<form:checkbox path="banys" label="Banys" value="true"/>
 	<br>
-  	<form:checkbox path="cafeteria" label="Cafeteria" value="1"/>
+  	<form:checkbox path="cafeteria" label="Cafeteria" value="true"/>
 	<br>
 	<form:checkbox path="internet" label="Internet" value="true"/>
 	<br>
