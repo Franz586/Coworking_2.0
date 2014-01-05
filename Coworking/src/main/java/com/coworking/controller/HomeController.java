@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.coworking.domain.Centre_coworking;
 import com.coworking.domain.Usuari_registrat;
@@ -50,9 +51,9 @@ public class HomeController {
 	public Boolean loguejat = false;
 
 	public String loginname;
-	
+	//usuario actual logeado
 	public Usuari_registrat userlogged;
-	
+	//centro actual (solo se usa para edicion del centro)
 	public Centre_coworking mycentre;
 
 	@RequestMapping("/home")
@@ -155,6 +156,40 @@ public class HomeController {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			return this.getRegisterForm(usuari_registrat, result);
+		}
+		
+		
+	}
+	@RequestMapping("/updateUser")
+	public ModelAndView updateUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			BindingResult result) {
+	
+		try {
+			Iusuari_registrat.updateUsuari_registrat(usuari_registrat);
+			System.out.println("Update usuari_registrat");
+			//actualizar el userlogged para reflejar cambios
+			userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
+			return new ModelAndView("redirect:/myprofile.html");
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return this.editprofile(usuari_registrat, result);
+		}
+		
+		
+	}
+	
+	@RequestMapping("/updateCentre")
+	public ModelAndView updateCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+			BindingResult result) {
+	
+		try {
+			centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
+			Icentre_coworking.updateCentre(centre_coworking);
+			System.out.println("Update centre");
+			return new ModelAndView("redirect:/mycenterprofile.html?centreId="+centre_coworking.getIdcentre());
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return this.editcenter(userlogged, centre_coworking, result);
 		}
 		
 		
@@ -281,7 +316,9 @@ public class HomeController {
 		model.put("contrasenya", usuari_registrat.getcontrasenya());
 		model.put("adreca", usuari_registrat.getadreca());
 		model.put("privacitat", usuari_registrat.getprivacitat());
-		
+		model.put("actiu", usuari_registrat.getactiu());
+		model.put("admin", usuari_registrat.getadmin_centre());
+		model.put("data_cad", usuari_registrat.getdata_caducitat());
 		if(usuari_registrat.getprivacitat().matches("SI")){
 			boxpriv.add("NO");
 			model.put("boxpriv", boxpriv);
@@ -308,8 +345,7 @@ public class HomeController {
 	@RequestMapping(value="mycenterprofile", method=RequestMethod.GET)
 	public ModelAndView mycenterprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
             HttpServletResponse response) {       
-        //Find user ...  
-        //Found user...  
+        
         System.out.println("Got request param: " + centreId);
 
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -319,6 +355,7 @@ public class HomeController {
 		model.put("email", centre.getEmail());
 		model.put("telefon", centre.getTelefon());
 		model.put("web", centre.getWeb());
+		model.put("adreca", centre.getAdreca());
 		
 		//para saber que el centro que vas a editar es tuyo
 		//por seguridad, sino se usaria el request param como en el perfil
@@ -344,6 +381,9 @@ public class HomeController {
 			model.put("email", mycentre.getEmail());
 			model.put("telefon", mycentre.getTelefon());
 			model.put("web", mycentre.getWeb());
+			model.put("idcentre", mycentre.getIdcentre());
+			model.put("admin_centre", mycentre.getAdmin_centre());
+			model.put("adreca", mycentre.getAdreca());
 			if(mycentre.getBanys()){
 				model.put("banys", "checked");
 			}

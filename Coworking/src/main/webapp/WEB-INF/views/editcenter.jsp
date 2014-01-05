@@ -103,13 +103,15 @@ body {
 	<div style="color: teal;font-size: 30px">Editar perfil del centre</div>
 <br><br>
 
-<c:url var="centreUpdate" value="updatecentre.html"/>
+<c:url var="centreUpdate" value="updateCentre.html"/>
 <form:form id="updateForm" modelAttribute="centre_coworking" method="post" action="${centreUpdate}">
 <table width="400px" height="150px" style="border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid">
 <tr>
 <td><form:label path="nom">Nom centre</form:label></td>
 <td><form:input  path="nom" value="${model.nom}"/></td>
 </tr>
+<form:hidden path="idcentre" value="${model.idcentre}" />
+<form:hidden path="admin_centre" value="${model.admin_centre}" />
 <tr>
 <td><form:label path="email">Email</form:label></td>
 <td><form:input  path="email" value="${model.email}"/></td>
@@ -121,6 +123,10 @@ body {
 <tr>
 <td><form:label path="telefon">Teléfon</form:label></td>
 <td><form:input  path="telefon" value="${model.telefon}"/></td>
+</tr>
+<tr>
+<td><form:label path="adreca">Adreça</form:label></td>
+<td><form:input  path="adreca" value="${model.adreca}"/></td>
 </tr>
 <tr>
 <td><form:label path="web">Web</form:label></td>

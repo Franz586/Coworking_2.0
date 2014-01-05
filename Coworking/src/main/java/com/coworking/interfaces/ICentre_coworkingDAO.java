@@ -14,5 +14,8 @@ public interface ICentre_coworkingDAO {
 	public void setCentre_coworking(int idCentre, String Adresa, String Descripcio, String Email, String Nom, String Web, int tlf);
 	
 	public List<Centre_coworking> getCentres();
+
+
+	public void updateCentre(Centre_coworking centre_coworking);
 	
 }

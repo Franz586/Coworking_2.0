@@ -1,7 +1,7 @@
 package com.coworking.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 
 
@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coworking.domain.Centre_coworking;
 import com.coworking.domain.Usuari_registrat;
@@ -54,6 +55,7 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 	}
 	
 	@Override
+	@Transactional
 	public Usuari_registrat getUsuari_registrat(String email, String contrasenya) {
 		@SuppressWarnings("unchecked")
 		List<Usuari_registrat> res = sessionfactory.getCurrentSession()
@@ -68,6 +70,15 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 	public List<Centre_coworking> getAdmin_centres(Usuari_registrat usuari){
 		
 		return usuari.getcentres_administrats();
+	}
+
+	@Override
+	@Transactional
+	public void updateUsuari_registrat(Usuari_registrat usuari_registrat) {
+	
+			Session session = sessionfactory.getCurrentSession();
+			session.update(usuari_registrat);	
+		
 	}
 	
 

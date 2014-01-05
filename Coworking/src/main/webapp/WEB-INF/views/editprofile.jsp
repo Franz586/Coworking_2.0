@@ -107,18 +107,6 @@ body {
 <form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
 <table width="400px" height="150px" style="border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid">
 <tr>
-<td><form:label path="email">Email</form:label></td>
-<td><form:input  path="email" value="${model.email}"/></td>
-</tr>
-<tr>
-<td><form:label path="contrasenya">Contrasenya</form:label></td>
-<td><form:input  path="contrasenya" value="${model.contrasenya}"/></td>
-</tr>
-<tr>
-<td><form:label path="dni">DNI</form:label></td>
-<td><form:input  path="dni" value="${model.dni}"/></td>
-</tr>
-<tr>
 <td><form:label path="nom">Nom</form:label></td>
 <td><form:input  path="nom" value="${model.nom}"/></td>
 </tr>
@@ -127,16 +115,27 @@ body {
 <td><form:input  path="cognom" value="${model.cognom}"/></td>
 </tr>
 <tr>
+<td><form:label path="dni">DNI</form:label></td>
+<td><form:input  path="dni" value="${model.dni}"/></td>
+</tr>
+<tr>
+<!-- campos hidden necesarios para el update -->
+<form:hidden path="email" value="${model.email}" />
+<form:hidden path="actiu" value="${model.actiu}" />
+<form:hidden path="admin_centre" value="${model.admin}" />
+<form:hidden path="data_caducitat" value="${model.data_cad}" />
+</tr>
+<tr>
+<td><form:label path="contrasenya">Contrasenya</form:label></td>
+<td><form:input  path="contrasenya" value="${model.contrasenya}"/></td>
+</tr>
+<tr>
 <td><form:label path="adreca">Adreça</form:label></td>
 <td><form:input  path="adreca" value="${model.adreca}"/></td>
 </tr>
 <tr>
 <td><form:label path="data_naix">Data de naixement</form:label></td>
 <td><form:input  path="data_naix" value="${model.data_naix}"/></td>
-</tr>
-<tr>
-<td><form:label path="adreca">Data de naixement</form:label></td>
-<td><form:input  path="adreca" value="${model.adreca}"/></td>
 </tr>
 <tr>
 <td><form:label path="telefon">Teléfon</form:label></td>

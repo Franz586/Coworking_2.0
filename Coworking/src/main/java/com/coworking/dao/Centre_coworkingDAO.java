@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coworking.domain.Centre_coworking;
 import com.coworking.interfaces.ICentre_coworkingDAO;
@@ -55,6 +56,19 @@ public class Centre_coworkingDAO implements ICentre_coworkingDAO {
 	public void setCentre_coworking(int idCentre, String Adresa,
 			String Descripcio, String Email, String Nom, String Web, int tlf) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	@Transactional
+	public void updateCentre(Centre_coworking centre_coworking) {
+		Session session = sessionfactory.getCurrentSession();
+		if(centre_coworking.getAdmin_centre()== null){
+			System.out.println("NUUUUUUUUUUUUUULLLLLLLL");
+		}
+		session.update(centre_coworking);
+		session.flush();
+		
 		
 	}
 

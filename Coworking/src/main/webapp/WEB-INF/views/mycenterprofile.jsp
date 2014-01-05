@@ -40,6 +40,8 @@ Falta barra de login que me da error al copypastear el codigo html de la barra d
 <b>Email de contacte:</b> ${model.email}
 <br>
 <b>Telefon:</b> ${model.telefon}
+<br>
+<b>Adreça:</b> ${model.adreca}
 <hr>
 <b>Web:</b> ${model.web}
 <br>
