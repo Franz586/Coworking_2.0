@@ -113,20 +113,36 @@ body {
 <form:hidden path="idcentre" value="${model.idcentre}" />
 <form:hidden path="admin_centre" value="${model.admin_centre}" />
 <tr>
-<td><form:label path="email">Email</form:label></td>
-<td><form:input  path="email" value="${model.email}"/></td>
+<td><form:label path="poblacio">Població</form:label></td>
+<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
 </tr>
 <tr>
 <td><form:label path="descripcio">Descripció</form:label></td>
 <td><form:input  path="descripcio" value="${model.descripcio}"/></td>
 </tr>
 <tr>
+<td><form:label path="email">Email</form:label></td>
+<td><form:input  path="email" value="${model.email}"/></td>
+</tr>
+<tr>
 <td><form:label path="telefon">Teléfon</form:label></td>
 <td><form:input  path="telefon" value="${model.telefon}"/></td>
 </tr>
 <tr>
-<td><form:label path="adreca">Adreça</form:label></td>
-<td><form:input  path="adreca" value="${model.adreca}"/></td>
+<td><form:label path="capacitat">Nº de localitats</form:label></td>
+<td><form:input  path="capacitat" value="${model.capacitat}"/></td>
+</tr>
+<tr>
+<td><form:label path="carrer">Carrer</form:label></td>
+<td><form:input  path="carrer" value="${model.carrer}"/></td>
+</tr>
+<tr>
+<td><form:label path="num_edifici">Nº d'edifici</form:label></td>
+<td><form:input  path="num_edifici" value="${model.num_edifici}"/></td>
+</tr>
+<tr>
+<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
+<td><form:input  path="link_foto" value="${model.link}"/></td>
 </tr>
 <tr>
 <td><form:label path="web">Web</form:label></td>

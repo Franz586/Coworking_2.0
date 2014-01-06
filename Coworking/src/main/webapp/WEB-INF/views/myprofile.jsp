@@ -102,7 +102,7 @@ body {
 		<br>
 		<div style="margin-left:60px">
 		<div style="color: teal; font-size: 30px">El meu perfil</div>
-<img src="http://www.fashionally.com/images/default_profile_pic.jpg" height="80" width="80">
+<img src="${model.link}" height="80" width="80">
 <br>
 <b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
 <br>
@@ -115,6 +115,8 @@ body {
 <b>Data de naixament:</b> ${model.data_naix}
 <br>
 <b>Telefon:</b> ${model.telefon}
+<br>
+<b>Adreça:</b> ${model.adreca}
 <br>
 <b>Informació sobre mi:</b> ${model.sobre_mi}
 <hr>

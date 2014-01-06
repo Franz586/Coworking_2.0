@@ -134,6 +134,10 @@ body {
 <td><form:input  path="adreca" value="${model.adreca}"/></td>
 </tr>
 <tr>
+<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
+<td><form:input  path="link_foto" value="${model.link}"/></td>
+</tr>
+<tr>
 <td><form:label path="data_naix">Data de naixement</form:label></td>
 <td><form:input  path="data_naix" value="${model.data_naix}"/></td>
 </tr>

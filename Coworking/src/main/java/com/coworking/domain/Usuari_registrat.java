@@ -6,6 +6,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +32,9 @@ public class Usuari_registrat {
 	@Column(name = "amb_prof")
 	private String amb_prof;
 
+	@Column(name = "link_foto")
+	private String link_foto;
+	
 	@Column(name = "dni")
 	private String dni;
 	
@@ -66,8 +73,13 @@ public class Usuari_registrat {
 	
 	// Relationships
 	//centre coworking - usuari_registrat
-	@OneToMany(fetch = FetchType.EAGER,targetEntity=Centre_coworking.class, mappedBy="admin_centre")
-	private List<Centre_coworking> centres_administrats = new ArrayList<Centre_coworking>();	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(targetEntity=Centre_coworking.class, mappedBy="admin_centre")
+	private List<Centre_coworking> centres_administrats = new ArrayList<Centre_coworking>();
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(targetEntity=Valoracions.class, mappedBy="usuari")
+	private List<Valoracions> valoracions = new ArrayList<Valoracions>();
 
 	public Usuari_registrat () {
 		this.centres_administrats = new ArrayList<Centre_coworking>();
@@ -212,7 +224,13 @@ public class Usuari_registrat {
 		this.centres_administrats.add(centre_administrat);
 		
 	}
+	public String getlink_foto() {
+		return this.link_foto;
+	}
 	
+	public void setlink_foto(String link_foto) {
+		this.link_foto = link_foto;
+	}
 
 
 }

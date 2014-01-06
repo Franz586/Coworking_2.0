@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 
 
+
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +32,17 @@ public class Centre_coworking {
 	@Column(name = "idcentre")
 	private int idcentre;
 	
-	@Column(name = "adreca")
-	private String adreca;
+	@Column(name = "nom")
+	private String nom;
+	
+	@Column(name = "poblacio")
+	private String poblacio;
+	
+	@Column(name = "carrer")
+	private String carrer;
+	
+	@Column(name = "num_edifici")
+	private String num_edifici;
 	
 	@Column(name = "descripcio")
 	private String descripcio;
@@ -38,17 +50,21 @@ public class Centre_coworking {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "nom")
-	private String nom;
+	@Column(name = "link_foto")
+	private String link_foto;
 	
 	@Column(name = "web")
 	private String web;
 	
 	@Column(name = "telefon")
-	private int telefon;
+	private String telefon;
+	
+	@Column(name = "valoracio_mitja")
+	private double valoracio_mitja;
 	
 	@Column(name = "premium")
 	private boolean premium;
+	
 	@Column(name = "data_caducitat")
 	private Date data_caducitat;
 	
@@ -62,6 +78,9 @@ public class Centre_coworking {
 	@Column(name = "sala_reunions")
 	private Boolean sala_reunions;
 	
+	
+	@Column(name = "capacitat")
+	private int capacitat;
 	//RELATIONSHIPS
 	//usuari_registrat - centre_coworking
 	@ManyToOne
@@ -73,6 +92,9 @@ public class Centre_coworking {
 	@OneToMany(targetEntity=Lloc.class, mappedBy="centre")
 	private List<Lloc> llocs;
 	
+	@OneToMany(targetEntity=Valoracions.class, mappedBy="centre")
+	private List<Valoracions> valoracions = new ArrayList<Valoracions>();
+	
 	public int getIdcentre() {
 		return idcentre;
 	}
@@ -81,12 +103,12 @@ public class Centre_coworking {
 		this.idcentre = idcentre;
 	}
 
-	public String getAdreca() {
-		return adreca;
+	public String getCarrer() {
+		return carrer;
 	}
 
-	public void setAdreca(String adreca) {
-		this.adreca = adreca;
+	public void setCarrer(String carrer) {
+		this.carrer = carrer;
 	}
 
 	public String getDescripcio() {
@@ -121,14 +143,38 @@ public class Centre_coworking {
 		this.web = web;
 	}
 
-	public int getTelefon() {
+	public String getTelefon() {
 		return telefon;
 	}
 
-	public void setTelefon(int telefon) {
+	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
 
+	public String getpoblacio() {
+		return poblacio;
+	}
+
+	public void setpoblacio(String poblacio) {
+		this.poblacio = poblacio;
+	}
+	
+	public String getnum_edifici() {
+		return num_edifici;
+	}
+
+	public void setnum_edifici(String num_edifici) {
+		this.num_edifici = num_edifici;
+	}
+	
+	public String getlink_foto() {
+		return this.link_foto;
+	}
+
+	public void setlink_foto(String link_foto) {
+		this.link_foto = link_foto;
+	}
+	
 	public boolean isPremium() {
 		return premium;
 	}
@@ -191,4 +237,11 @@ public class Centre_coworking {
 		this.sala_reunions=sala_reunions;
 	}
 
+	public int getcapacitat() {
+		return capacitat;
+	}
+
+	public void setcapacitat(int capacitat) {
+		this.capacitat = capacitat;
+	}
 }

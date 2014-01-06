@@ -45,6 +45,10 @@
 <td><form:input  path="adreca"/></td>
 </tr>
 <tr>
+<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
+<td><form:input  path="link_foto" value=""/></td>
+</tr>
+<tr>
 <td><form:label path="telefon">Teléfon</form:label></td>
 <td><form:input  path="telefon"/></td>
 </tr>

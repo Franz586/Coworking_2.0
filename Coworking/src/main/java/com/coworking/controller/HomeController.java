@@ -65,6 +65,8 @@ public class HomeController {
 			model.put("loginname", loginname);
 			
 			if (loguejat) {
+				//actualizamos userlogged porque se ve que si haces un registro de un centro va a null pointer
+				userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
 				model.put("centresAdministrats", userlogged.getcentres_administrats());
 			}
 			
@@ -196,12 +198,17 @@ public class HomeController {
 	}
 
 	@RequestMapping("/registerCentre")
-	public ModelAndView getRegisterCentre(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+	public ModelAndView getRegisterCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
 			BindingResult result) {
+		ArrayList<String> poblacions = new ArrayList<String>();
+		poblacions.add("Barcelona");
+		poblacions.add("Madrid");
+		poblacions.add("Sevilla");
+		poblacions.add("Galicia");
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("loguejat", loguejat);
 		model.put("loginname", loginname);
+		model.put("poblacio", poblacions);
 		return new ModelAndView("RegisterCentre", "model", model);
 	}
 
@@ -210,12 +217,7 @@ public class HomeController {
 			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking, 
 			BindingResult result) {
 		centre_coworking.setAdmin_centre(userlogged);
-		centre_coworking.setAdreca("lala");
-		centre_coworking.setPremium(false);
-		centre_coworking.setTelefon(0);
-		System.out.println("EMAIL = "+centre_coworking.getEmail());
-		System.out.println("BANYS = "+centre_coworking.getBanys());
-		System.out.println("CAFETERIA = "+centre_coworking.getCafeteria());
+		System.out.println("LIIIIIIIIIINK= "+centre_coworking.getlink_foto());
 		userlogged.addcentre_administrat(centre_coworking);
 		try {
 			Icentre_coworking.saveCentre_coworking(centre_coworking);
@@ -223,7 +225,7 @@ public class HomeController {
 			return new ModelAndView("redirect:/centresList.html");
 		}catch(Exception e){
 			System.out.println(e.getMessage());
-			return this.getRegisterCentre(usuari_registrat, centre_coworking, result);
+			return this.getRegisterCentre(centre_coworking, result);
 		}
 		
 		
@@ -278,6 +280,18 @@ public class HomeController {
 		model.put("nom", usuari_registrat.getnom());
 		model.put("cognom", usuari_registrat.getcognom());
 		model.put("ambit", usuari_registrat.getamb_prof());
+		model.put("adreca", usuari_registrat.getadreca());
+		if(usuari_registrat.getlink_foto()==null){
+			model.put("link", "http://www.freelancer.com.es/img/unknown.png");
+		}else{
+			if(usuari_registrat.getlink_foto().isEmpty()){
+				
+				model.put("link", "http://www.freelancer.com.es/img/unknown.png");
+			}else{
+				model.put("link", usuari_registrat.getlink_foto());
+			}
+		}
+	
 		model.put("dni", usuari_registrat.getdni());
 		model.put("data_naix", usuari_registrat.getdata_naix()+"");
 		model.put("telefon", usuari_registrat.gettelefon());
@@ -319,6 +333,7 @@ public class HomeController {
 		model.put("actiu", usuari_registrat.getactiu());
 		model.put("admin", usuari_registrat.getadmin_centre());
 		model.put("data_cad", usuari_registrat.getdata_caducitat());
+		model.put("link", usuari_registrat.getlink_foto());
 		if(usuari_registrat.getprivacitat().matches("SI")){
 			boxpriv.add("NO");
 			model.put("boxpriv", boxpriv);
@@ -355,7 +370,20 @@ public class HomeController {
 		model.put("email", centre.getEmail());
 		model.put("telefon", centre.getTelefon());
 		model.put("web", centre.getWeb());
-		model.put("adreca", centre.getAdreca());
+		model.put("carrer", centre.getCarrer());
+		model.put("poblacio", centre.getpoblacio());
+		model.put("num_edifici", centre.getnum_edifici());
+		model.put("capacitat", centre.getcapacitat());
+		if(centre.getlink_foto()==null){
+			model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+		}else{
+			if(centre.getlink_foto().isEmpty()){
+				model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+			}else{
+				model.put("link", centre.getlink_foto());
+			}
+		}
+		model.put("num_edifici", centre.getnum_edifici());
 		
 		//para saber que el centro que vas a editar es tuyo
 		//por seguridad, sino se usaria el request param como en el perfil
@@ -376,6 +404,12 @@ public class HomeController {
 			model.put("centresAdministrats", userlogged.getcentres_administrats());
 		}
         if(mycentre!=null){
+        	ArrayList<String> poblacions = new ArrayList<String>();
+    		poblacions.add("Barcelona");
+    		poblacions.add("Madrid");
+    		poblacions.add("Sevilla");
+    		poblacions.add("Galicia");
+    		model.put("poblacio", poblacions);
 			model.put("nom", mycentre.getNom());
 			model.put("descripcio", mycentre.getDescripcio());
 			model.put("email", mycentre.getEmail());
@@ -383,7 +417,10 @@ public class HomeController {
 			model.put("web", mycentre.getWeb());
 			model.put("idcentre", mycentre.getIdcentre());
 			model.put("admin_centre", mycentre.getAdmin_centre());
-			model.put("adreca", mycentre.getAdreca());
+			model.put("carrer", mycentre.getCarrer());
+			model.put("link", mycentre.getlink_foto());
+			model.put("capacitat", mycentre.getcapacitat());
+			model.put("num_edifici", mycentre.getnum_edifici());
 			if(mycentre.getBanys()){
 				model.put("banys", "checked");
 			}
