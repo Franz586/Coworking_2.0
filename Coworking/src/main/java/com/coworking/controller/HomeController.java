@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.coworking.domain.Centre_coworking;
+import com.coworking.domain.ModelException;
 import com.coworking.domain.Usuari_registrat;
 import com.coworking.interfaces.ICentre_coworkingDAO;
 import com.coworking.interfaces.IUsuari_registratDAO;
@@ -64,19 +66,29 @@ public class HomeController {
 			model.put("loguejat", loguejat);
 			model.put("loginname", loginname);
 			
+			//Si está logueado pasamos datos para la top navbar
 			if (loguejat) {
 				//actualizamos userlogged porque se ve que si haces un registro de un centro va a null pointer
 				userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
 				model.put("centresAdministrats", userlogged.getcentres_administrats());
 			}
 			
+			//Añadimos los centros para el display del home
+			List<Centre_coworking> millorValorats = Icentre_coworking.getCentres();
+			model.put("millorValorats", millorValorats);
+			
 			return new ModelAndView("home", "model", model);
 	}
 	
-	@RequestMapping("/login")
-	public ModelAndView login(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			ModelMap model,
-			BindingResult result) {
+			BindingResult result) throws ModelException {
+		
+			if (result.hasErrors()) {
+				logger.info("Logging fails: form validation errors");
+				return "home";
+			}
 		
 			String email = usuari_registrat.getemail();
 			String contrasenya = usuari_registrat.getcontrasenya();
@@ -84,27 +96,31 @@ public class HomeController {
 			System.out.println("LOGIN =" + email);
 			System.out.println("CONTRASENYA =" + contrasenya);
 			
+			String retorn = "redirect:/";
+			
 			userlogged = Iusuari_registrat.getUsuari_registrat(email, contrasenya);
 			
 			if(userlogged == null){
 				System.out.println("Usuario erroneo");
+				result.rejectValue("", "wrongValue", "Usuari o Contrasenya Incorrecte");
 				loguejat = false;
 				loginname = null;
 			}else{
 				System.out.println("Usuario correcto");
 				loguejat = true;
 				loginname = userlogged.getemail();
+				
+				model.put("loguejat", loguejat);
+				model.put("loginname", loginname);
+				model.put("centresAdministrats", userlogged.getcentres_administrats());
 			}
-		
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
-			model.put("centresAdministrats", userlogged.getcentres_administrats());
-			
+
 			//return new ModelAndView("redirect:/home.html");
-			return new ModelAndView("home", model);
+			//return new ModelAndView("home", model);
+			return retorn;
 	}
 	
-	/* ---------- Actualitza llista Els Meus Espais ------------- */
+	/* ---------- Actualitza llista Els Meus Espais // Inutil, carrega per login/home ------------- */
 	@RequestMapping(value = "/espais", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Centre_coworking> getCentresAdministrats() {
@@ -112,13 +128,16 @@ public class HomeController {
 		return userlogged.getcentres_administrats();
 	}
 	
-	@RequestMapping("/logout")
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ModelAndView logout() {
+		
+			logger.info("Logging out user with username = "+ userlogged);
+		
 			userlogged = null;
 			loguejat = false;
 			loginname = null;
 			mycentre = null;
-			return new ModelAndView("redirect:/home.html");
+			return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping("/register")
