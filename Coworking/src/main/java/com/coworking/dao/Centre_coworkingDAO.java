@@ -51,6 +51,50 @@ public class Centre_coworkingDAO implements ICentre_coworkingDAO {
 		return centre;
 	}
 
+	@Override
+	public List<Centre_coworking> getCentresNom(String nom) {
+		Session session = sessionfactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		String hql = "Select * From Centre_coworking c Where c.nom LIKE '%"+nom+"%';";
+		Query query = session.createQuery(hql);
+		List<Centre_coworking> centrelist = query.list();
+		tx.commit();
+		return centrelist;
+	}
+	
+	
+	@Override
+	public List<Centre_coworking> getCentresCerca(String nom, boolean banys, boolean cafe, boolean internet, boolean salaReunions, int capacitat) {
+		Session session = sessionfactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		String queryExe = "Select * From Centre_coworking c";
+		if(nom != null){
+			queryExe = queryExe + "Where c.nom LIKE '%"+nom+"%'";
+			if(banys)queryExe = queryExe + "AND c.banys = 1";
+			if(cafe)queryExe = queryExe + "AND c.cafeteria = 1";
+			if(internet)queryExe = queryExe + "AND c.internet = 1";
+			if(salaReunions)queryExe = queryExe + "AND c.sala_reunions = 1";
+			
+			if(capacitat != 0) queryExe = queryExe + "AND c.capacitat >= "+Integer.toString(capacitat);
+			
+			queryExe = queryExe + ";";
+		}
+		else{
+			queryExe = queryExe + "Where c.nom LIKE '%'";
+			if(banys)queryExe = queryExe + "AND c.banys = 1";
+			if(cafe)queryExe = queryExe + "AND c.cafeteria = 1";
+			if(internet)queryExe = queryExe + "AND c.internet = 1";
+			if(salaReunions)queryExe = queryExe + "AND c.sala_reunions = 1";
+			
+			if(capacitat != 0) queryExe = queryExe + "AND c.capacitat >= "+Integer.toString(capacitat);
+			
+			queryExe = queryExe + ";";
+		}
+		Query query = session.createQuery(queryExe);
+		List<Centre_coworking> centrelist = query.list();
+		tx.commit();
+		return centrelist;
+	}
 
 	@Override
 	public void setCentre_coworking(int idCentre, String Adresa,

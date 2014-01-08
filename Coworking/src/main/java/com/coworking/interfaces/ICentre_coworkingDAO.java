@@ -17,5 +17,12 @@ public interface ICentre_coworkingDAO {
 
 
 	public void updateCentre(Centre_coworking centre_coworking);
+
+
+	List<Centre_coworking> getCentresCerca(String nom, boolean banys,
+			boolean cafe, boolean internet, boolean salaReunions, int capacitat);
+
+
+	List<Centre_coworking> getCentresNom(String nom);
 	
 }
