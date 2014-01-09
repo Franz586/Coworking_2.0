@@ -166,8 +166,7 @@ public class HomeController {
 		usuari_registrat.setadmin_centre(false);
 		usuari_registrat.setactiu(true);
 		usuari_registrat.setdata_caducitat(null);
-		/*Date data_naix = Date.
-		usuari_registrat.setdata_naix(data_naix);*/
+		
 	
 		try {
 			Iusuari_registrat.saveUsuari_registrat(usuari_registrat);
@@ -323,6 +322,7 @@ public class HomeController {
 		return new ModelAndView("myprofile", "model", model);
 
 	}
+	
 	@RequestMapping("/editprofile")
 	public ModelAndView editprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			BindingResult result) {
@@ -457,6 +457,79 @@ public class HomeController {
 	
 						
 		return new ModelAndView("editcenter", "model", model);
+
+	}
+	@RequestMapping(value="centerprofile", method=RequestMethod.GET)
+	public ModelAndView centerprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
+            HttpServletResponse response) {       
+        
+        System.out.println("Got request param: " + centreId);
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+		model.put("nom", centre.getNom());
+		model.put("descripcio", centre.getDescripcio());
+		model.put("email", centre.getEmail());
+		model.put("telefon", centre.getTelefon());
+		model.put("web", centre.getWeb());
+		model.put("carrer", centre.getCarrer());
+		model.put("poblacio", centre.getpoblacio());
+		model.put("num_edifici", centre.getnum_edifici());
+		model.put("capacitat", centre.getcapacitat());
+		if(centre.getvaloracio() == 0){
+			model.put("valoracio", "No té cap valoració");
+		}else{
+			model.put("valoracio", centre.getvaloracio());
+		}
+		if(centre.getlink_foto()==null){
+			model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+		}else{
+			if(centre.getlink_foto().isEmpty()){
+				model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+			}else{
+				model.put("link", centre.getlink_foto());
+			}
+		}
+		model.put("num_edifici", centre.getnum_edifici());
+		
+				
+		return new ModelAndView("centerprofile", "model", model);
+		
+	}
+	@RequestMapping(value="userprofile", method=RequestMethod.GET)
+	public ModelAndView userprofile(@RequestParam(value="userId", required=true) Integer userId, HttpServletRequest request,  
+            HttpServletResponse response) {   
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		Usuari_registrat usuari=Iusuari_registrat.getusuari_registrat(userId);
+		model.put("loguejat", loguejat);
+		model.put("loginname", loginname);
+		model.put("email", usuari.getemail());
+		model.put("nom", usuari.getnom());
+		model.put("cognom", usuari.getcognom());
+		model.put("ambit", usuari.getamb_prof());
+		model.put("adreca", usuari.getadreca());
+		if(usuari.getlink_foto()==null){
+			model.put("link", "http://www.freelancer.com.es/img/unknown.png");
+		}else{
+			if(usuari.getlink_foto().isEmpty()){
+				
+				model.put("link", "http://www.freelancer.com.es/img/unknown.png");
+			}else{
+				model.put("link", usuari.getlink_foto());
+			}
+		}
+	
+		model.put("dni", usuari.getdni());
+		model.put("data_naix", usuari.getdata_naix()+"");
+		model.put("telefon", usuari.gettelefon());
+		model.put("privacitat", usuari.getprivacitat());
+		model.put("sobre_mi", usuari.getsobre_mi());
+		model.put("web", usuari.getweb());
+		model.put("premium", usuari.getpremium());
+	
+					
+		return new ModelAndView("userprofile", "model", model);
 
 	}
 }

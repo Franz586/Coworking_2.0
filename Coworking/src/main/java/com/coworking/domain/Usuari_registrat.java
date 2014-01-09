@@ -20,6 +20,9 @@ import java.util.List;
 public class Usuari_registrat {
 
 	@Id
+	@Column(name = "idusuari")
+	private int idusuari;
+	
 	@Column(name = "email")
 	private String email;
 
@@ -51,13 +54,13 @@ public class Usuari_registrat {
 	private String web;
 	
 	@Column(name = "data_naix")
-	private Date data_naix;
+	private String data_naix;
 	
 	@Column(name = "sobre_mi")
 	private String sobre_mi;
 	
 	@Column(name = "telefon")
-	private Integer telefon;
+	private String telefon;
 	
 	@Column(name = "premium")
 	private String premium;
@@ -83,6 +86,14 @@ public class Usuari_registrat {
 
 	public Usuari_registrat () {
 		this.centres_administrats = new ArrayList<Centre_coworking>();
+	}
+	
+	public int getidusuari() {
+		return this.idusuari;
+	}
+
+	public void setidusuari(int id) {
+		this.idusuari = id;
 	}
 	
 	public String getemail() {
@@ -157,11 +168,11 @@ public class Usuari_registrat {
 		this.web = web;
 	}
 	
-	public Date getdata_naix() {
+	public String getdata_naix() {
 		return data_naix;
 	}
 	
-	public void setdata_naix(Date data_naix) {
+	public void setdata_naix(String data_naix) {
 		this.data_naix = data_naix;
 	}
 	
@@ -173,11 +184,11 @@ public class Usuari_registrat {
 		this.sobre_mi = sobre_mi;
 	}
 	
-	public Integer gettelefon() {
+	public String gettelefon() {
 		return telefon;
 	}
 	
-	public void settelefon(Integer telefon) {
+	public void settelefon(String telefon) {
 		this.telefon = telefon;
 	}
 	

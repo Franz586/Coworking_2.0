@@ -9,6 +9,7 @@ import java.util.List;
 
 
 
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,6 +80,14 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 			Session session = sessionfactory.getCurrentSession();
 			session.update(usuari_registrat);	
 		
+	}
+
+	@Override
+	@Transactional
+	public Usuari_registrat getusuari_registrat(Integer userId) {
+		Usuari_registrat usuari = (Usuari_registrat) sessionfactory.getCurrentSession().get(Usuari_registrat.class, userId);
+		
+		return usuari;
 	}
 	
 

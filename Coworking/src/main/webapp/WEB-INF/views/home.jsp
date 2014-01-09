@@ -131,7 +131,7 @@
 				        <p>${espai.poblacio}</p>
 				        <p>${espai.email}</p>
 				        <p>${espai.telefon}</p>
-				        <p><a href="mycenterprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
+				        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
 				      </div>
 				      
 				    </div>

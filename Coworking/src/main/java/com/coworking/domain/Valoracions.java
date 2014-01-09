@@ -26,7 +26,7 @@ public class Valoracions {
 	private Centre_coworking centre;
 	
 	@ManyToOne
-	@JoinColumns({@JoinColumn(name = "usuari", referencedColumnName="email")})
+	@JoinColumns({@JoinColumn(name = "usuari", referencedColumnName="idusuari")})
 	private Usuari_registrat usuari;
 	
 

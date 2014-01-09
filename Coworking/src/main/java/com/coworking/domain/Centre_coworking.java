@@ -63,7 +63,7 @@ public class Centre_coworking {
 	private double valoracio_mitja;
 	
 	@Column(name = "premium")
-	private boolean premium;
+	private String premium;
 	
 	@Column(name = "data_caducitat")
 	private Date data_caducitat;
@@ -84,7 +84,7 @@ public class Centre_coworking {
 	//RELATIONSHIPS
 	//usuari_registrat - centre_coworking
 	@ManyToOne
-	@JoinColumns({@JoinColumn(name = "admin_centre", referencedColumnName="email")})
+	@JoinColumns({@JoinColumn(name = "admin_centre", referencedColumnName="idusuari")})
 	private Usuari_registrat admin_centre;
 	
 	
@@ -175,11 +175,11 @@ public class Centre_coworking {
 		this.link_foto = link_foto;
 	}
 	
-	public boolean isPremium() {
+	public String isPremium() {
 		return premium;
 	}
 
-	public void setPremium(boolean premium) {
+	public void setPremium(String premium) {
 		this.premium = premium;
 	}
 
@@ -243,5 +243,12 @@ public class Centre_coworking {
 
 	public void setcapacitat(int capacitat) {
 		this.capacitat = capacitat;
+	}
+	public double getvaloracio() {
+		return this.valoracio_mitja;
+	}
+
+	public void setvaloracio(double valoracio) {
+		this.valoracio_mitja = valoracio;
 	}
 }
