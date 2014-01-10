@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-	<title>Home - Coworking 2.0</title>
+	<title>Coworking 2.0 - Inici</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -48,7 +48,7 @@
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				    </button>
-				    <a class="loader navbar-brand" href="home.html">Coworking 2.0</a>
+				    <a class="navbar-brand" href="home.html">Coworking 2.0</a>
 				  </div>
 								  
 				  <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,14 +79,14 @@
 							      			<ul class = "dropdown-menu">						      		
 								      		<c:forEach items="${centresAdministrats}" var="centre">
 									      		<li>
-									      			<a class="loader" href = "mycenterprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
+									      			<a href = "mycenterprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
 									      		</li>								      			
 								      		</c:forEach>
-								      		<li><a class="loader" href = "registerCentre.html">Registrar Nou Centre</a></li>			
+								      		<li><a href = "registerCentre.html">Registrar Nou Centre</a></li>			
 							      			</ul>			      		
 							      	</li>
 							    	<li class="active">
-							    			<a class="loader" href="myprofile.html">${loginname}</a>	  
+							    			<a href="myprofile.html">${loginname}</a>	  
 							    	</li>
 									    <form:form class="navbar-form navbar-left" id="logout" method="post" action="${userLogout}">
 									      <button type="submit" value="Logout" class="btn btn-default">Tanca Sessió</button>
@@ -106,7 +106,7 @@
 								    </form:form>
 								 								  
 								    <!-- Registrarse NO ES UN LINK DEFINITIVO, POP-UP??-->
-								    <a href="register.html" class="loader navbar-btn btn btn-default navbar-left">Registrar-se</a>
+								    <a href="register.html" class="navbar-btn btn btn-default navbar-left">Registrar-se</a>
 								    
 							</c:otherwise>
 						</c:choose>
@@ -138,7 +138,7 @@
 						        <p>${espai.poblacio}</p>
 						        <p>${espai.email}</p>
 						        <p>${espai.telefon}</p>
-						        <p><a href="mycenterprofile.html?centreId=${espai.idcentre}" class="loader btn btn-primary" role="button">Veure més</a>
+						        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
 						      </div>
 				  		  	</div>
 				  		  	
@@ -155,14 +155,14 @@
 	
 	<div class = "navbar navbar-inverse navbar-fixed-bottom">
 		
-		<a href="userList.html" class="loader navbar-btn btn btn-link pull-left">Llista BD Usuaris</a>
-		<a href="centresList.html" class="loader navbar-btn btn btn-link pull-left">Llista BD Centres</a>
+		<a href="userList.html" class="navbar-btn btn btn-link pull-left">Llista BD Usuaris</a>
+		<a href="centresList.html" class="navbar-btn btn btn-link pull-left">Llista BD Centres</a>
 		
 		<div class = "container">
 		
 			<p class = "navbar-text pull-left"><b>Mapa Web:</b></p>
 			
-			<a href="home.html" class = "loader navbar-btn btn btn-link pull-left">Inici</a>
+			<a href="home.html" class = "navbar-btn btn btn-link pull-left">Inici</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Que és Coworking?</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Sobre Nosaltres</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Contacte</a>

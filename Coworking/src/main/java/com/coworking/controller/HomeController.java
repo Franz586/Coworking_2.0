@@ -59,6 +59,14 @@ public class HomeController {
 		//centro actual (solo se usa para edicion del centro)
 		public Centre_coworking mycentre;
 
+		private void afegeixDadesTopBar(ModelMap model) {
+			model.put("loguejat", loguejat);
+			if (loguejat){
+				model.put("loginname", loginname);
+				model.put("centresAdministrats", userlogged.getcentres_administrats());	
+			}
+		}
+		
 		@RequestMapping("/home")
 		public ModelAndView getLoginForm(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				ModelMap model,
@@ -69,9 +77,7 @@ public class HomeController {
 				if (loguejat) {
 					//actualizamos userlogged porque se ve que si haces un registro de un centro va a null pointer
 					userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
-					model.put("loguejat", loguejat);
-					model.put("loginname", loginname);
-					model.put("centresAdministrats", userlogged.getcentres_administrats());
+					afegeixDadesTopBar(model);
 				}
 				
 				//Añadimos los centros para el display del home
@@ -115,9 +121,7 @@ public class HomeController {
 					loguejat = true;
 					loginname = userlogged.getemail();
 					
-					model.put("loguejat", loguejat);
-					model.put("loginname", loginname);
-					model.put("centresAdministrats", userlogged.getcentres_administrats());
+					afegeixDadesTopBar(model);
 					
 					res.setStatus("CORRECTE");
 					res.setResult(model);
@@ -189,7 +193,7 @@ public class HomeController {
 		}
 		@RequestMapping("/updateUser")
 		public ModelAndView updateUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				BindingResult result) {
+				BindingResult result, ModelMap model) {
 		
 			try {
 				Iusuari_registrat.updateUsuari_registrat(usuari_registrat);
@@ -199,7 +203,7 @@ public class HomeController {
 				return new ModelAndView("redirect:/myprofile.html");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				return this.editprofile(usuari_registrat, result);
+				return this.editprofile(usuari_registrat, result, model);
 			}
 			
 			
@@ -207,7 +211,7 @@ public class HomeController {
 		
 		@RequestMapping("/updateCentre")
 		public ModelAndView updateCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-				BindingResult result) {
+				BindingResult result, ModelMap model) {
 		
 			try {
 				centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
@@ -216,52 +220,55 @@ public class HomeController {
 				return new ModelAndView("redirect:/mycenterprofile.html?centreId="+centre_coworking.getIdcentre());
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				return this.editcenter(userlogged, centre_coworking, result);
+				return this.editcenter(userlogged, centre_coworking, result, model);
 			}
 			
 			
 		}
 
 		@RequestMapping("/registerCentre")
-		public ModelAndView getRegisterCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+		public ModelAndView getRegisterCentre(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+				ModelMap model,
 				BindingResult result) {
 			ArrayList<String> poblacions = new ArrayList<String>();
 			poblacions.add("Barcelona");
 			poblacions.add("Madrid");
 			poblacions.add("Sevilla");
 			poblacions.add("Galicia");
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
+			
+			afegeixDadesTopBar(model);
 			model.put("poblacio", poblacions);
+			
 			return new ModelAndView("RegisterCentre", "model", model);
 		}
 
 		@RequestMapping("/saveCentre")
 		public ModelAndView saveCentreData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking, 
+				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+				ModelMap model,
 				BindingResult result) {
-			centre_coworking.setAdmin_centre(userlogged);
-			System.out.println("LIIIIIIIIIINK= "+centre_coworking.getlink_foto());
-			userlogged.addcentre_administrat(centre_coworking);
 			try {
+				centre_coworking.setAdmin_centre(userlogged);
+				System.out.println("LIIIIIIIIIINK= "+centre_coworking.getlink_foto());
 				Icentre_coworking.saveCentre_coworking(centre_coworking);
+				userlogged.addcentre_administrat(centre_coworking);
 				System.out.println("Save centre_coworking");
 				return new ModelAndView("redirect:/centresList.html");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				return this.getRegisterCentre(centre_coworking, result);
+				return this.getRegisterCentre(null, centre_coworking, model, result);
 			}
 			
 			
 		}
 		
 		@RequestMapping("/userList")
-		public ModelAndView getUserList() {
-			Map<String, Object> model = new HashMap<String, Object>();
+		public ModelAndView getUserList(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, ModelMap model) {
+			
+			afegeixDadesTopBar(model);
 			model.put("llistat_usuaris", Iusuari_registrat.getUsuaris());
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
+
 			System.out.println("SIZE= "+Iusuari_registrat.getUsuaris().size());
 			return new ModelAndView("UserDetails", "model", model );
 
@@ -269,12 +276,11 @@ public class HomeController {
 		
 		@RequestMapping("/centresList")
 		public ModelAndView getCentresDetais(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				BindingResult result) {
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("centre_coworking", Icentre_coworking.getCentres());
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
+				BindingResult result, ModelMap model) {
 			
+			afegeixDadesTopBar(model);
+			model.put("centre_coworking", Icentre_coworking.getCentres());
+
 			return new ModelAndView("CentresDetails", "model", model);
 
 		}
@@ -296,11 +302,11 @@ public class HomeController {
 		}
 		@RequestMapping("/myprofile")
 		public ModelAndView getmyprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				BindingResult result) {
+				BindingResult result, ModelMap model) {
 			usuari_registrat = userlogged;
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
+
+			afegeixDadesTopBar(model);
+			
 			model.put("email", usuari_registrat.getemail());
 			model.put("nom", usuari_registrat.getnom());
 			model.put("cognom", usuari_registrat.getcognom());
@@ -331,9 +337,8 @@ public class HomeController {
 		}
 		@RequestMapping("/editprofile")
 		public ModelAndView editprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				BindingResult result) {
+				BindingResult result, ModelMap model) {
 			usuari_registrat = userlogged;
-			Map<String, Object> model = new HashMap<String, Object>();
 			ArrayList<String> ambit = new ArrayList<String>();
 			ambit.add("Arquitecte");
 			ambit.add("Enginyer de software");
@@ -343,8 +348,9 @@ public class HomeController {
 			//select boxes para privacitat y premium
 			ArrayList<String> boxpriv = new ArrayList<String>();
 			ArrayList<String> boxprem = new ArrayList<String>();
-			model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
+
+			afegeixDadesTopBar(model);
+			
 			model.put("email", usuari_registrat.getemail());
 			model.put("nom", usuari_registrat.getnom());
 			model.put("cognom", usuari_registrat.getcognom());
@@ -383,13 +389,16 @@ public class HomeController {
 		}
 		
 		@RequestMapping(value="mycenterprofile", method=RequestMethod.GET)
-		public ModelAndView mycenterprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
-	            HttpServletResponse response) {       
+		public ModelAndView mycenterprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+				@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
+	            HttpServletResponse response, ModelMap model) {       
 	        
 	        System.out.println("Got request param: " + centreId);
 
-			Map<String, Object> model = new HashMap<String, Object>();
 			Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+			
+			afegeixDadesTopBar(model);
+			
 			model.put("nom", centre.getNom());
 			model.put("descripcio", centre.getDescripcio());
 			model.put("email", centre.getEmail());
@@ -417,17 +426,13 @@ public class HomeController {
 			return new ModelAndView("mycenterprofile", "model", model);
 			
 		}
-		@RequestMapping(value="editcenter", method=RequestMethod.GET)
+		@RequestMapping(value="editcenter"/*, method=RequestMethod.GET*/)
 		public ModelAndView editcenter(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-				BindingResult result) {       
+				BindingResult result, ModelMap model) {       
 			
-	        Map<String, Object> model = new HashMap<String, Object>();
-	        model.put("loguejat", loguejat);
-			model.put("loginname", loginname);
-			if (loguejat) {
-				model.put("centresAdministrats", userlogged.getcentres_administrats());
-			}
+			afegeixDadesTopBar(model);
+			
 	        if(mycentre!=null){
 	        	ArrayList<String> poblacions = new ArrayList<String>();
 	    		poblacions.add("Barcelona");
@@ -459,20 +464,21 @@ public class HomeController {
 					model.put("internet", "checked");
 				}
 	        }
-			
-		
 							
 			return new ModelAndView("editcenter", "model", model);
-
 		}
+		
 		@RequestMapping(value="centerprofile", method=RequestMethod.GET)
-		public ModelAndView centerprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
-	            HttpServletResponse response) {       
+		public ModelAndView centerprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+				@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
+	            HttpServletResponse response, ModelMap model) {       
 	        
 	        System.out.println("Got request param: " + centreId);
 
-			Map<String, Object> model = new HashMap<String, Object>();
 			Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+			
+			afegeixDadesTopBar(model);
+			
 			model.put("nom", centre.getNom());
 			model.put("descripcio", centre.getDescripcio());
 			model.put("email", centre.getEmail());
@@ -506,13 +512,14 @@ public class HomeController {
 		}
 		
 	@RequestMapping(value="userprofile", method=RequestMethod.GET)
-	public ModelAndView userprofile(@RequestParam(value="userId", required=true) Integer userId, HttpServletRequest request,  
-            HttpServletResponse response) {   
-		Map<String, Object> model = new HashMap<String, Object>();
+	public ModelAndView userprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			@RequestParam(value="userId", required=true) Integer userId, HttpServletRequest request,  
+            HttpServletResponse response, ModelMap model) {   
 		
 		Usuari_registrat usuari=Iusuari_registrat.getusuari_registrat(userId);
-		model.put("loguejat", loguejat);
-		model.put("loginname", loginname);
+
+		afegeixDadesTopBar(model);
+		
 		model.put("email", usuari.getemail());
 		model.put("nom", usuari.getnom());
 		model.put("cognom", usuari.getcognom());
