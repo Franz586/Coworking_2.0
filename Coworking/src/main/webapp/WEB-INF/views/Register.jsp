@@ -78,9 +78,6 @@
 </table>
 </form:form>
 <br>
-<a href="userList.html" >Clic aqui per consultar la BD d'usuaris</a>
-<br>
-<a href="home.html" >Clic aqui per tornar a la pagina principal</a>
 </center>
 </body>
 </html>

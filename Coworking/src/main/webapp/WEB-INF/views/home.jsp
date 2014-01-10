@@ -29,6 +29,16 @@
 <!-- Top Navbar! -->
         		
 			<div class="navbar navbar-default navbar-fixed-top">  <!-- Brand and toggle get grouped for better mobile display -->
+
+			<!-- Search Form -->
+				<form class="navbar-form navbar-right">
+  					<div class="form-group">
+						<input type="text" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-default">Cercar</button>
+				</form>
+			
+			<!-- Titulo Izquierdo -->
 				<div class = "container">
 				  <div class="navbar-header">
 				  	<!-- Botón para cuando la Barra se reduzca (RESPONSIVE DESIGN) -->
@@ -38,11 +48,11 @@
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				    </button>
-				    <a class="navbar-brand" href="home.html">Coworking 2.0</a>
+				    <a class="loader navbar-brand" href="home.html">Coworking 2.0</a>
 				  </div>
 								  
 				  <!-- Collect the nav links, forms, and other content for toggling -->
-				  <div class="collapse navbar-collapse navHeaderCollapse">
+				  <div id ="userInfo" class="collapse navbar-collapse navHeaderCollapse">
 				  <!-- Dentro de este Tag van las cosas a la izquierda (después de Coworking 2.0) -->
 					
 					<ul class="nav navbar-nav navbar-right">
@@ -50,8 +60,7 @@
 						<c:choose>
 							<c:when test="${loguejat}">
 		    				<!-- Barra en caso de SI Logeado -->
-							    	<c:url var="userLogout" value="logout.html" />
-							    	
+					    	
 							      	<li class = "dropdown">
 							      		<a href="#" class = "dropdown-toggle" data-toggle = "dropdown">Solicituds<b class = "caret"></b></a>
 							      		<ul class = "dropdown-menu">
@@ -70,25 +79,23 @@
 							      			<ul class = "dropdown-menu">						      		
 								      		<c:forEach items="${centresAdministrats}" var="centre">
 									      		<li>
-									      			<a href = "mycenterprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
+									      			<a class="loader" href = "mycenterprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
 									      		</li>								      			
 								      		</c:forEach>
-								      		<li><a href = "registerCentre.html">Registrar Nou Centre</a></li>			
+								      		<li><a class="loader" href = "registerCentre.html">Registrar Nou Centre</a></li>			
 							      			</ul>			      		
 							      	</li>
 							    	<li class="active">
-							    			<a href="myprofile.html">${loginname}</a>	  
+							    			<a class="loader" href="myprofile.html">${loginname}</a>	  
 							    	</li>
-									    <form:form class="navbar-form navbar-left" id="logoutForm" method="post" action="${userLogout}">
+									    <form:form class="navbar-form navbar-left" id="logout" method="post" action="${userLogout}">
 									      <button type="submit" value="Logout" class="btn btn-default">Tanca Sessió</button>
 									    </form:form>
 							</c:when>
 							<c:otherwise>
 							<!-- Barra en caso de NO Logeado -->
-									<c:url var="userLogin" value="login.html" />
-				 				 	<!-- TRATAR CASO DE LOGIN ERRONEO CON AJAX!!!! -->
-				 				 	<!-- Log In -->
-								    <form:form class="navbar-form navbar-left" id="loginForm" modelAttribute="usuari_registrat" method="post" action="${userLogin}" role="login">
+
+								    <form:form class="navbar-form navbar-left form-inline" id="login" modelAttribute="usuari_registrat" method="post" action="${userLogin}" role="login">
 								      <div class="form-group">
 								        <form:input type="text" class="form-control" path="email" placeholder="Usuari"></form:input>
 								      </div>
@@ -97,9 +104,9 @@
 								      </div>
 								      <button type="submit" value="Login" class="btn btn-default">Iniciar Sessió</button>
 								    </form:form>
-								    
+								 								  
 								    <!-- Registrarse NO ES UN LINK DEFINITIVO, POP-UP??-->
-								    <a href="register.html" class="navbar-btn btn btn-default">Registrar-se</a>
+								    <a href="register.html" class="loader navbar-btn btn btn-default navbar-left">Registrar-se</a>
 								    
 							</c:otherwise>
 						</c:choose>
@@ -112,37 +119,35 @@
 		
 <!-- Contingut Central -->
  
-	<div class = "container">
+	<div id="content" class="container">
 	
 		<div class = "jumbotron text-center">
 			<h2>Centres Destacats</h2>
 			
 			<div class = "container">
-			<c:forEach items="${millorValorats}" var="espai">
-			
 				<div class="row">
-				  <div class="col-sm-6 col-md-4">
-				    <div class="thumbnail">
-				    
-				      <!--  <img data-src="holder.js/300x200" alt="..."> -->
-				      <div class="caption">
-				        <h3><b>${espai.nom}</b></h3>
-				        <p>${espai.carrer}</p>
-				        <p>${espai.poblacio}</p>
-				        <p>${espai.email}</p>
-				        <p>${espai.telefon}</p>
-				        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
-				      </div>
-				      
-				    </div>
-				  </div>
-				</div>
 				
-			</c:forEach>
-			</div>
+					<c:forEach items="${millorValorats}" var="espai">
+						<div class="col-xs-6 col-md-4">
+						
+						  	<div class="thumbnail">
+						      <!--  <img data-src="holder.js/300x200" alt="..."> -->
+						      <div class="caption">
+						        <h3><b>${espai.nom}</b></h3>
+						        <p>${espai.carrer}</p>
+						        <p>${espai.poblacio}</p>
+						        <p>${espai.email}</p>
+						        <p>${espai.telefon}</p>
+						        <p><a href="mycenterprofile.html?centreId=${espai.idcentre}" class="loader btn btn-primary" role="button">Veure més</a>
+						      </div>
+				  		  	</div>
+				  		  	
+				  		</div>		
+					</c:forEach>
 					
-		</div>
-		
+				</div>				  
+			</div>				
+		</div>		
 	</div>
 	
 	
@@ -150,14 +155,14 @@
 	
 	<div class = "navbar navbar-inverse navbar-fixed-bottom">
 		
-		<a href="userList.html" class="navbar-btn btn btn-link pull-left">Llista BD Usuaris</a>
-		<a href="centresList.html" class="navbar-btn btn btn-link pull-left">Llista BD Centres</a>
+		<a href="userList.html" class="loader navbar-btn btn btn-link pull-left">Llista BD Usuaris</a>
+		<a href="centresList.html" class="loader navbar-btn btn btn-link pull-left">Llista BD Centres</a>
 		
 		<div class = "container">
 		
 			<p class = "navbar-text pull-left"><b>Mapa Web:</b></p>
 			
-			<a href="home.html" class = "navbar-btn btn btn-link pull-left">Inici</a>
+			<a href="home.html" class = "loader navbar-btn btn btn-link pull-left">Inici</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Que és Coworking?</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Sobre Nosaltres</a>
 			<a href="#" class = "navbar-btn btn btn-link pull-left">Contacte</a>
@@ -172,13 +177,12 @@
 	</div>
 	
 
-	<!-- Scripts siempre al final para que se cargue primero el contenido -->
+<!-- Scripts siempre al final para que se cargue primero el contenido -->
 
 	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
 	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
-	<script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 	<script src="<c:url value="resources/js/home.js"/>"></script>
 	
 </body>
