@@ -465,43 +465,46 @@ public class HomeController {
 			return new ModelAndView("editcenter", "model", model);
 
 		}
-	@RequestMapping(value="centerprofile", method=RequestMethod.GET)
-	public ModelAndView centerprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
-            HttpServletResponse response) {       
-        
-        System.out.println("Got request param: " + centreId);
+		@RequestMapping(value="centerprofile", method=RequestMethod.GET)
+		public ModelAndView centerprofile(@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
+	            HttpServletResponse response) {       
+	        
+	        System.out.println("Got request param: " + centreId);
 
-		Map<String, Object> model = new HashMap<String, Object>();
-		Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
-		model.put("nom", centre.getNom());
-		model.put("descripcio", centre.getDescripcio());
-		model.put("email", centre.getEmail());
-		model.put("telefon", centre.getTelefon());
-		model.put("web", centre.getWeb());
-		model.put("carrer", centre.getCarrer());
-		model.put("poblacio", centre.getpoblacio());
-		model.put("num_edifici", centre.getnum_edifici());
-		model.put("capacitat", centre.getcapacitat());
-		if(centre.getvaloracio() == 0){
-			model.put("valoracio", "No té cap valoració");
-		}else{
-			model.put("valoracio", centre.getvaloracio());
-		}
-		if(centre.getlink_foto()==null){
-			model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
-		}else{
-			if(centre.getlink_foto().isEmpty()){
+			Map<String, Object> model = new HashMap<String, Object>();
+			Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+			model.put("nom", centre.getNom());
+			model.put("descripcio", centre.getDescripcio());
+			model.put("email", centre.getEmail());
+			model.put("telefon", centre.getTelefon());
+			model.put("web", centre.getWeb());
+			model.put("carrer", centre.getCarrer());
+			model.put("poblacio", centre.getpoblacio());
+			model.put("num_edifici", centre.getnum_edifici());
+			model.put("capacitat", centre.getcapacitat());
+			String concat = centre.getpoblacio().concat(" ").concat(centre.getCarrer());
+			model.put("maps", concat);
+			if(centre.getvaloracio() == 0){
+				model.put("valoracio", "No té cap valoració");
+			}else{
+				model.put("valoracio", centre.getvaloracio());
+			}
+			if(centre.getlink_foto()==null){
 				model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
 			}else{
-				model.put("link", centre.getlink_foto());
+				if(centre.getlink_foto().isEmpty()){
+					model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+				}else{
+					model.put("link", centre.getlink_foto());
+				}
 			}
+			model.put("num_edifici", centre.getnum_edifici());
+			
+					
+			return new ModelAndView("centerprofile", "model", model);
+			
 		}
-		model.put("num_edifici", centre.getnum_edifici());
 		
-				
-		return new ModelAndView("centerprofile", "model", model);
-		
-	}
 	@RequestMapping(value="userprofile", method=RequestMethod.GET)
 	public ModelAndView userprofile(@RequestParam(value="userId", required=true) Integer userId, HttpServletRequest request,  
             HttpServletResponse response) {   
