@@ -114,43 +114,54 @@ body {
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+		   <div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
+	<br>
 		
 		
 <!-- Contingut Central -->
 
-		
-				<br>
-				<div style="margin-left:60px">
-				<div style="color: teal; font-size: 30px">El meu perfil</div>
-		<img src="${model.link}" height="80" width="80">
-		<br>
-		<b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
-		<br>
-		<b>DNI:</b> ${model.dni}
-		<br>
-		<b>Ambit professional:</b> ${model.ambit}
-		<br>
-		<b>Email de contacte:</b> ${model.email}
-		<br>
-		<b>Data de naixament:</b> ${model.data_naix}
-		<br>
-		<b>Telefon:</b> ${model.telefon}
-		<br>
-		<b>Adreça:</b> ${model.adreca}
-		<br>
-		<b>Informació sobre mi:</b> ${model.sobre_mi}
-		<hr>
-		
-		<b>Web:</b> ${model.web}
-		<br>
-		<b>Perfil privat?:</b> ${model.privacitat}
-		<br>
-		<b>Premium?:</b> ${model.premium}
-		<form action="editprofile.html" method="get">
+<div id="content" class="container">
+
+	<div class="jumbotron ">	
+	
+		<div style="margin-left:60px">
+			<div style="color: teal; font-size: 30px">El meu perfil</div>
+			<img src="${model.link}" height="80" width="80">
+			<br>
+			<b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
+			<br>
+			<b>DNI:</b> ${model.dni}
+			<br>
+			<b>Ambit professional:</b> ${model.ambit}
+			<br>
+			<b>Email de contacte:</b> ${model.email}
+			<br>
+			<b>Data de naixament:</b> ${model.data_naix}
+			<br>
+			<b>Telefon:</b> ${model.telefon}
+			<br>
+			<b>Adreça:</b> ${model.adreca}
+			<br>
+			<b>Informació sobre mi:</b> ${model.sobre_mi}
+			<hr>
+			
+			<b>Web:</b> ${model.web}
+			<br>
+			<b>Perfil privat?:</b> ${model.privacitat}
+			<br>
+			<b>Premium?:</b> ${model.premium}
+			<form action="editprofile.html" method="get">
 				<input type="submit" value="Editar perfil">
 			</form>
 		</div>
+	</div>
+</div>
 		
 		
 <!-- Bottom Navbar! -->	

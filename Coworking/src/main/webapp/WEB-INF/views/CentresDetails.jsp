@@ -114,7 +114,15 @@
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+				<div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
+	<br>
+
 		
 
 <div id="content" class="container">

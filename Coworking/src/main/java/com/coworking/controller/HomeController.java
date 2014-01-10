@@ -548,4 +548,27 @@ public class HomeController {
 		return new ModelAndView("userprofile", "model", model);
 
 	}
+	
+	/*@RequestMapping("/cercaAvancada")
+	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+			ModelMap model,
+			BindingResult result) {
+		
+		afegeixDadesTopBar(model);
+		
+		return new ModelAndView("cercaAvancada", "model", model);
+	}
+	
+	@RequestMapping("/cercaAvancadaResultats")
+	public ModelAndView cercaAvancadaResultats(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+			ModelMap model,
+			BindingResult result) {
+		
+		afegeixDadesTopBar(model);
+		
+		return new ModelAndView("cercaAvancada", "model", model);
+	}
+	*/
 }

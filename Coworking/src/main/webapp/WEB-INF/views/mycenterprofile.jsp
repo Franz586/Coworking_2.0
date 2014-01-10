@@ -113,42 +113,52 @@
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+		   <div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
+	<br>
 		
 		
 <!-- Contingut Central -->
 
-	<center>
-				<br>
-				<div style="margin-left:60px">
-				<div style="color: teal; font-size: 30px">Perfil de ${model.nom}</div>
-		<img src="${model.link}" height="80" width="80">
-		<br>
-		<b>Descripció:</b> ${model.descripcio}
-		<br>
-		<b>Serveis del centre:</b>
-		<br> - ${model.serveis}
-		<br>
-		<b>Email de contacte:</b> ${model.email}
-		<br>
-		<b>Telefon:</b> ${model.telefon}
-		<br>
-		<b>Poblacio:</b> ${model.poblacio}
-		<br>
-		<b>Carrer:</b> ${model.carrer} <b>Nº Edifici:</b> ${model.num_edifici} 
-		<br>
-		<b>Nº de localitats:</b> ${model.capacitat}
-		<hr>
-		<b>Web:</b> ${model.web}
-		<br>
-		<b>Premium?:</b> ${model.premium}
-		
-		<form action="editcenter.html" method="get">
-				<input type="submit" value="Editar perfil">
-		</form>
+<div id="content" class="container">
+
+	<div class="jumbotron">
+
+		<div style="margin-left:60px">
+			<div style="color: teal; font-size: 30px">Perfil de ${model.nom}</div>
+			<img src="${model.link}" height="80" width="80">
+			<br>
+			<b>Descripció:</b> ${model.descripcio}
+			<br>
+			<b>Serveis del centre:</b>
+			<br> - ${model.serveis}
+			<br>
+			<b>Email de contacte:</b> ${model.email}
+			<br>
+			<b>Telefon:</b> ${model.telefon}
+			<br>
+			<b>Poblacio:</b> ${model.poblacio}
+			<br>
+			<b>Carrer:</b> ${model.carrer} <b>Nº Edifici:</b> ${model.num_edifici} 
+			<br>
+			<b>Nº de localitats:</b> ${model.capacitat}
+			<hr>
+			<b>Web:</b> ${model.web}
+			<br>
+			<b>Premium?:</b> ${model.premium}
+			
+			<form action="editcenter.html" method="get">
+					<input type="submit" value="Editar perfil">
+			</form>
 		
 		</div>
-	</center>
+	</div>
+</div>
 
 
 <!-- Bottom Navbar! -->	

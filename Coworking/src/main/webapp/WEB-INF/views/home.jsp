@@ -114,8 +114,14 @@
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+				<div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
-		
+	<br>
 		
 <!-- Contingut Central -->
  
@@ -125,27 +131,39 @@
 			<h2>Centres Destacats</h2>
 			
 			<div class = "container">
-				<div class="row">
-				
-					<c:forEach items="${millorValorats}" var="espai">
-						<div class="col-xs-6 col-md-4">
-						
-						  	<div class="thumbnail">
-						      <!--  <img data-src="holder.js/300x200" alt="..."> -->
-						      <div class="caption">
-						        <h3><b>${espai.nom}</b></h3>
-						        <p>${espai.carrer}</p>
-						        <p>${espai.poblacio}</p>
-						        <p>${espai.email}</p>
-						        <p>${espai.telefon}</p>
-						        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
-						      </div>
-				  		  	</div>
-				  		  	
-				  		</div>		
-					</c:forEach>
+
+				<div class="row">  
+  					
+  					<div class="col-md-10">
+ 
+						<div class="row">
+		
+							<c:forEach items="${millorValorats}" var="espai">
+								<div class="col-xs-6 col-md-4">
+								
+								  	<div class="thumbnail">
+								      <!--  <img data-src="holder.js/300x200" alt="..."> -->
+								      <div class="caption">
+								        <h3><b>${espai.nom}</b></h3>
+								        <p>${espai.carrer}</p>
+								        <p>${espai.poblacio}</p>
+								        <p>${espai.email}</p>
+								        <p>${espai.telefon}</p>
+								        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
+								      </div>
+						  		  	</div>
+						  		  	
+						  		</div>		
+							</c:forEach>
+							
+						</div>	
+					</div>
 					
-				</div>				  
+				 	<div class="col-md-2">AQUI VA EL RANKING DE CENTRES VALORATS
+				 	
+				 	</div>
+				 
+				</div>			  
 			</div>				
 		</div>		
 	</div>

@@ -112,76 +112,84 @@
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+		    <div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
+	<br>
 
 
 <!-- Central Content! -->
 
-	<center>
-		<br><br><br><br><br><br>
+<div id="content" class="container">
+
+	<div class="jumbotron text-center">
+
 			<div style="color: teal;font-size: 30px">Formulari registre de centre</div>
-			<br><br>
 			<c:url var="centreRegistration" value="saveCentre.html"/>
-			<form:form id="registerForm" modelAttribute="centre_coworking" method="post" action="${centreRegistration}">
-			<table width="400px" height="150px">
-			<tr>
-			<td><form:label path="nom">Nom centre</form:label></td>
-			<td><form:input  path="nom"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="poblacio">Població</form:label></td>
-			<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
-			</tr>
-			<tr>
-			<td><form:label path="carrer">Carrer</form:label></td>
-			<td><form:input  path="carrer"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="num_edifici">Nº d'edifici</form:label></td>
-			<td><form:input  path="num_edifici"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
-			<td><form:input  path="link_foto" value=""/></td>
-			</tr>
-			<tr>
-			<td><form:label path="descripcio">Descripció</form:label></td>
-			<td><form:input  path="descripcio"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="email">Email</form:label></td>
-			<td><form:input  path="email"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="telefon">Teléfon</form:label></td>
-			<td><form:input  path="telefon"/></td>
-			</tr>
-			<tr>
-			<td><form:label path="capacitat">Nº de localitats</form:label></td>
-			<td><form:input  path="capacitat"/></td>
-			<tr>
-			<td><form:label path="web">Web</form:label></td>
-			<td><form:input  path="web"/></td>
-			</tr>
-			<tr>
-			<td>Serveis</td>
-			<td>
-			<form:checkbox path="banys" label="Banys" value="true"/>
-				<br>
-			  	<form:checkbox path="cafeteria" label="Cafeteria" value="true"/>
-				<br>
-				<form:checkbox path="internet" label="Internet" value="true"/>
-				<br>
-				<form:checkbox path="sala_reunions" label="Sala de reunions" value="true"/>
-			</td>
-			</tr>
-			<tr><td></td><td>
-			<input type="submit" value="Registrar centre" />
-			</td></tr>
-			</table>
-			</form:form>
-			<br>
-	</center>
+			
+				<form:form id="registerForm" modelAttribute="centre_coworking" method="post" action="${centreRegistration}">
+					<table class="table table-hover table-condensed" border="1">
+					<tr>
+						<td><form:label path="nom">Nom centre</form:label></td>
+						<td><form:input  path="nom"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="poblacio">Població</form:label></td>
+						<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
+					</tr>
+					<tr>
+						<td><form:label path="carrer">Carrer</form:label></td>
+						<td><form:input  path="carrer"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="num_edifici">Nº d'edifici</form:label></td>
+						<td><form:input  path="num_edifici"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
+						<td><form:input  path="link_foto" value=""/></td>
+					</tr>
+					<tr>
+						<td><form:label path="descripcio">Descripció</form:label></td>
+						<td><form:input  path="descripcio"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="email">Email</form:label></td>
+						<td><form:input  path="email"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="telefon">Teléfon</form:label></td>
+						<td><form:input  path="telefon"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="capacitat">Nº de localitats</form:label></td>
+						<td><form:input  path="capacitat"/></td>
+					<tr>
+						<td><form:label path="web">Web</form:label></td>
+						<td><form:input  path="web"/></td>
+					</tr>
+					<tr>
+						<td>Serveis</td>
+							<td>
+							<form:checkbox path="banys" label="Banys" value="true"/>
+								<br>
+							  	<form:checkbox path="cafeteria" label="Cafeteria" value="true"/>
+								<br>
+								<form:checkbox path="internet" label="Internet" value="true"/>
+								<br>
+								<form:checkbox path="sala_reunions" label="Sala de reunions" value="true"/>
+							</td>
+					</tr>
+					</table>
+					
+					<input type="submit" value="Registrar centre" />
+				</form:form>
+	</div>
+</div>
 
 <!-- Bottom Navbar! -->	
 	

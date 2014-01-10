@@ -111,81 +111,88 @@
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
+		   <div class="row">
+    				<div class="col-lg-11 col-xs-11">
+						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
+					</div>
+				</div>
+				
 		    </div>
+	<br>
 
 
 <!-- Central Content! -->
 
-	<center>
-		<br><br>
+<div id="content" class="container">
+
+	<div class="jumbotron text-center">
+	
 			<div style="color: teal;font-size: 30px">Formulari de registre</div>
-				<br><br>
-				<c:url var="userRegistration" value="saveUser.html"/>
-					<form:form id="registerForm" modelAttribute="usuari_registrat" method="post" action="${userRegistration}">
-						<table width="400px" height="150px">
-						<tr>
+			<c:url var="userRegistration" value="saveUser.html"/>
+				<form:form id="registerForm" modelAttribute="usuari_registrat" method="post" action="${userRegistration}">
+					<table class="table table-hover table-condensed" border="1">
+					<tr>
 						<td><form:label path="email">Email</form:label></td>
 						<td><form:input  path="email"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="contrasenya">Contrasenya</form:label></td>
 						<td><form:input  path="contrasenya"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="dni">DNI</form:label></td>
 						<td><form:input  path="dni"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="nom">Nom</form:label></td>
 						<td><form:input  path="nom"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="cognom">Cognom</form:label></td>
 						<td><form:input  path="cognom"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="data_naix">Data de naixement</form:label></td>
 						<td><form:input  path="data_naix"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="adreca">Adreça</form:label></td>
 						<td><form:input  path="adreca"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
 						<td><form:input  path="link_foto" value=""/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="telefon">Teléfon</form:label></td>
 						<td><form:input  path="telefon"/></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="privacitat">Perfil privat?</form:label></td>
 						<td><form:select  path="privacitat" items="${model.privacitat}"></form:select></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="premium">Premium?</form:label></td>
 						<td><form:select  path="premium" items="${model.privacitat}"></form:select></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="amb_prof">Àmbit professional</form:label></td>
 						<td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 						<td><form:label path="web">Lloc web</form:label></td>
 						<td><form:input  path="web"/></td>
-						</tr>
+					</tr>
 						<tr>
 						<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
 						<td><form:input  path="sobre_mi"/></td>
-						</tr>
-						<tr><td></td><td>
-						<input type="submit" value="Registrar-se" />
-						</td></tr>
-						</table>
-					</form:form>
-				<br>
-	</center>
+					</tr>
+					</table>
+					
+				<input type="submit" value="Registrar-se" />
+				</form:form>
+	</div>
+</div>
 	
 	
 	<!-- Bottom Navbar! -->	

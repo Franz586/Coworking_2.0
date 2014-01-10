@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Coworking 2.0 - Modificar Centre ${model.nom}</title>
+<title>Coworking 2.0 - Cerca Avançada</title>
 <meta name="description" content="Página de Inicio en Coworking 2.0">
 
 <style>
@@ -124,77 +124,22 @@ body {
 	<br>
 		
 		
-<!-- Contingut Central -->
+<!-- Contingut Central 
  
 <div id="content" class="container">
 
 	<div class="jumbotron text-center">
 	
-			<div style="color: teal;font-size: 30px">Editar perfil del centre</div>
-			<c:url var="centreUpdate" value="updateCentre.html"/>
-				<form:form id="updateForm" modelAttribute="centre_coworking" method="post" action="${centreUpdate}">
-					<table class="table table-hover table-condensed" border="1">
-					<tr>
-						<td><form:label path="nom">Nom centre</form:label></td>
-						<td><form:input  path="nom" value="${model.nom}"/></td>
-					</tr>
-						<form:hidden path="idcentre" value="${model.idcentre}" />
-						<form:hidden path="admin_centre" value="${model.admin_centre}" />
-					<tr>
-						<td><form:label path="poblacio">Població</form:label></td>
-						<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
-					</tr>
-					<tr>
-						<td><form:label path="descripcio">Descripció</form:label></td>
-						<td><form:input  path="descripcio" value="${model.descripcio}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="email">Email</form:label></td>
-						<td><form:input  path="email" value="${model.email}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="telefon">Teléfon</form:label></td>
-						<td><form:input  path="telefon" value="${model.telefon}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="capacitat">Nº de localitats</form:label></td>
-						<td><form:input  path="capacitat" value="${model.capacitat}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="carrer">Carrer</form:label></td>
-						<td><form:input  path="carrer" value="${model.carrer}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="num_edifici">Nº d'edifici</form:label></td>
-						<td><form:input  path="num_edifici" value="${model.num_edifici}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
-						<td><form:input  path="link_foto" value="${model.link}"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="web">Web</form:label></td>
-						<td><form:input  path="web" value="${model.web}"/></td>
-					</tr>
-					<tr>
-						<td>Serveis</td>
-						<td>
-							<form:checkbox path="banys" label="Banys" checked="${model.banys}" value="true"/>
-							<br>
-						  	<form:checkbox path="cafeteria" label="Cafeteria" checked="${model.cafeteria}" value="true"/>
-							<br>
-							<form:checkbox path="internet" label="Internet" checked="${model.internet}" value="true"/>
-							<br>
-							<form:checkbox path="sala_reunions" label="Sala de reunions" checked="${model.sala}" value="true"/>
-						</td>
-					</tr>
-					</table>
-					
-					<input type="submit" value="Finalitzar edició" />
-				</form:form>
+		<form:form class="container" id="cercaAvancadaResultats">
+	      <div class="form-group">
+	        <form:input type="text" class="form-control" path="cerca" placeholder="Introdueix element a Cercar..."></form:input>
+	      </div>
+	      <button type="submit" value="cercaAvancadaResultats" class="btn btn-default">Cercar</button>
+	    </form:form>
+			
 	</div>
 </div>
-	
+	-->
 
 <!-- Bottom Navbar! -->	
 	
@@ -224,7 +169,6 @@ body {
 
 <!-- Scripts siempre al final para que se cargue primero el contenido -->
 
-	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
 	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
