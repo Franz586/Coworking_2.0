@@ -68,7 +68,27 @@ public class HomeController {
 			}
 		}
 		
-		@RequestMapping("/home.html")
+		private void afegeixImatges(List<Centre_coworking> millorValorats) {
+			for (int i = 0; i < millorValorats.size(); ++i) {
+				
+				Centre_coworking iterador = millorValorats.get(i);
+				
+				if(iterador.getlink_foto()==null){
+					iterador.setlink_foto("http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+				}
+				else{
+					if(iterador.getlink_foto().isEmpty()){
+						iterador.setlink_foto("http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+					}
+					else{
+						//En realidad este else (en este caso) es un poco una gilipollez pero lo dejo porque me hace ilusion xd
+						iterador.setlink_foto(iterador.getlink_foto());
+					}
+				}
+			}
+		}
+		
+		@RequestMapping("/home")
 		public ModelAndView getLoginForm(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				ModelMap model,
 				BindingResult result) {
@@ -84,6 +104,7 @@ public class HomeController {
 				
 				//Añadimos los centros para el display del home
 				List<Centre_coworking> millorValorats = Icentre_coworking.getCentres();
+				afegeixImatges(millorValorats);
 				model.put("millorValorats", millorValorats);
 				//añadimos top5 centros
 				List<Centre_coworking> top5 = Icentre_coworking.gettop5centres();

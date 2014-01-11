@@ -33,7 +33,7 @@
 			<!-- Search Form -->
 					<form action="cercarapida" method="get" class="navbar-form navbar-right">  					
 					<div class="form-group">
-						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control">
+						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Cerca Usuari">
 					</div>
 					<button type="submit" class="btn btn-default">Cercar</button>
 				</form>
@@ -122,62 +122,79 @@
 				</div>
 				
 		    </div>
-	<br>
+			<br>
+		
 		
 <!-- Contingut Central -->
  
-	<div id="content" class="container">
-	
-		<div class = "jumbotron text-center">
-			<h2>Centres Destacats</h2>
-			<br>
-			<div class = "container">
-
-				<div class="row">  
-  					
-  					<div class="col-md-10">
- 
-						<div class="row">
-		
-							<c:forEach items="${millorValorats}" var="espai">
-								<div class="col-xs-6 col-md-4">
+	<div id="content" class="container"> 
+				
+				<div class = "jumbotron text-center">
+						
+						<div class = "container">
+						
+							<div class="row">
+						
+								<div class="col-xs-8">
 								
-								  	<div class="thumbnail">
-								      <!--  <img data-src="holder.js/300x200" alt="..."> -->
-								      <div class="caption">
-								        <h3><b>${espai.nom}</b></h3>
-								        <p>${espai.carrer}</p>
-								        <p>${espai.poblacio}</p>
-								        <p>${espai.email}</p>
-								        <p>${espai.telefon}</p>
-								        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
-								      </div>
-						  		  	</div>
-						  		  	
-						  		</div>		
-							</c:forEach>
+								<div class="container">
+									<h2>Centres Destacats</h2>
+									<br>
+								<c:forEach items="${millorValorats}" var="espai">
+									<div class="col-xs-6">
+									
+									  	<div class="thumbnail">
+									      <div class="caption">
+									      	<div id="Photo">
+						        				<img src="${espai.link_foto}"  width="200px" height="200px">
+											</div>
+									        <h3><b>${espai.nom}</b></h3>
+									        <p>${espai.carrer}</p>
+									        <p>${espai.poblacio}</p>
+									        <p>${espai.email}</p>
+									        <p>${espai.telefon}</p>
+									        <p><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a>
+									      </div>
+							  		  	</div>
+							  		  	
+							  		</div>		
+								</c:forEach>
+								</div>
+							</div>	
+										
+							<div class="col-xs-4">
 							
+							 	<h3>Top 5 Centres Valorats</h3>
+							 	<div class="list-group">
+								 	<c:forEach items="${top5}" var="centre">
+									  <li class="list-group-item">
+										    <span class="badge">${centre.getvaloracio()}</span>
+										    <a href="centerprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
+									  </li>
+									</c:forEach>
+								</div>	
+								
+								<br>
+								
+								<h3>Publicitat (Banners)</h3>
+								<a href="#" class="thumbnail">
+							      <img src="resources/images/exempleBanner.png" alt="...">
+							    </a>
+							      <br>
+								<a href="#" class="thumbnail">
+							      <img src="resources/images/exempleBanner.png" alt="...">
+							    </a>									    
+								
+							</div>
+	
 						</div>	
-					</div>
-					
-				 	<div class="col-md-2">
-				 	<h2>Top 5 centres</h2>
-				 	<ul class="list-group">
-				 	<c:forEach items="${top5}" var="centre">
-					  <li class="list-group-item">
-					  <div class="caption">
-					    <span class="badge badge-warning">${centre.getvaloracio()}</span>
-					    <a href="centerprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
-					    </div>
-					  </li>
-					</c:forEach>
-					</ul>
-				 	
-				 	</div>
-				 
-				</div>			  
-			</div>				
-		</div>		
+				 	</div> 
+				</div>
+							  
+			</div>	
+
+							
+		</div>	
 	</div>
 	
 	
