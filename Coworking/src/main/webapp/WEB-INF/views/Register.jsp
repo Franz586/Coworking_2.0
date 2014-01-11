@@ -129,6 +129,7 @@
 	
 			<div style="color: teal;font-size: 30px">Formulari de registre</div>
 			<c:url var="userRegistration" value="saveUser.html"/>
+			
 				<form:form id="registerForm" modelAttribute="usuari_registrat" method="post" action="${userRegistration}">
 					<table class="table table-hover table-condensed" border="1">
 					<tr>

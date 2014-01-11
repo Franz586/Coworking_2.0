@@ -124,7 +124,8 @@
 		
 		
 <!-- Contingut Central -->
-
+<c:choose>
+<c:when test="${model.autoritzat}">
 <div id="content" class="container">
 
 	<div class="jumbotron">
@@ -159,8 +160,13 @@
 		</div>
 	</div>
 </div>
-
-
+</c:when>
+<c:otherwise>
+<center>
+No tens permisos per veure aquesta pàgina. No estas loguejat o no ets administrador del centre.
+</center>
+</c:otherwise>
+</c:choose>
 <!-- Bottom Navbar! -->	
 	
 	<div class = "navbar navbar-inverse navbar-fixed-bottom">

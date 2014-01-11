@@ -251,4 +251,21 @@ public class Centre_coworking {
 	public void setvaloracio(double valoracio) {
 		this.valoracio_mitja = valoracio;
 	}
+	@Override
+	public boolean equals(Object object)
+	{
+	    boolean isEqual= false;
+
+	    if (object != null && object instanceof Centre_coworking)
+	    {
+	        isEqual = (this.idcentre == ((Centre_coworking) object).getIdcentre());
+	    }
+
+	    return isEqual;
+	}
+
+	@Override
+	public int hashCode() {
+	    return this.idcentre;
+	}
 }

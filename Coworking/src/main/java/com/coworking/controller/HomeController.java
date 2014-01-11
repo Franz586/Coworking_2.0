@@ -176,14 +176,33 @@ public class HomeController {
 			usuari_registrat.setadmin_centre(false);
 			usuari_registrat.setactiu(true);
 			usuari_registrat.setdata_caducitat(null);
-			/*Date data_naix = Date.
-			usuari_registrat.setdata_naix(data_naix);*/
+			Boolean correcte = true;
+			//si no funciona en vez del model ponerlo en una global
+			Map<String, Object> model = new HashMap<String, Object>();
+			if(usuari_registrat.getnom().isEmpty()){
+				model.put("error", "El nom no pot estar buit");
+				correcte = false;
+			}else if(usuari_registrat.getcognom().isEmpty()){
+				model.put("error", "El cognom no pot estar buit");
+				correcte = false;
+			}else if(usuari_registrat.getemail().isEmpty()){
+				model.put("error", "L'email no pot estar buit");
+				correcte = false;
+			}else if(usuari_registrat.getcontrasenya().isEmpty()){
+				model.put("error", "La contrasenya no pot estar buida");
+				correcte = false;
+			}else if(usuari_registrat.getdni().isEmpty()){
+				model.put("error", "El dni no pot estar buit");
+				correcte = false;
+			}
 		
 			try {
+				if(correcte == false){
+					return this.getRegisterForm(usuari_registrat, result);
+				}
 				Iusuari_registrat.saveUsuari_registrat(usuari_registrat);
-				//Icentre_coworking.addCentre_coworking(c1);
 				System.out.println("Save usuari_registrat");
-				return new ModelAndView("redirect:/userList.html");
+				return new ModelAndView("redirect:/home.html");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				return this.getRegisterForm(usuari_registrat, result);
@@ -194,8 +213,29 @@ public class HomeController {
 		@RequestMapping("/updateUser")
 		public ModelAndView updateUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				BindingResult result, ModelMap model) {
-		
+			Boolean correcte = true;
+			//si no funciona en vez del model ponerlo en una global
 			try {
+				
+				if(usuari_registrat.getnom().isEmpty()){
+					model.put("error", "El nom no pot estar buit");
+					correcte = false;
+				}else if(usuari_registrat.getcognom().isEmpty()){
+					model.put("error", "El cognom no pot estar buit");
+					correcte = false;
+				}else if(usuari_registrat.getemail().isEmpty()){
+					model.put("error", "L'email no pot estar buit");
+					correcte = false;
+				}else if(usuari_registrat.getcontrasenya().isEmpty()){
+					model.put("error", "La contrasenya no pot estar buida");
+					correcte = false;
+				}else if(usuari_registrat.getdni().isEmpty()){
+					model.put("error", "El dni no pot estar buit");
+					correcte = false;
+				}
+				if(correcte==false){
+					return this.editprofile(usuari_registrat, result, model);
+				}
 				Iusuari_registrat.updateUsuari_registrat(usuari_registrat);
 				System.out.println("Update usuari_registrat");
 				//actualizar el userlogged para reflejar cambios
@@ -212,8 +252,23 @@ public class HomeController {
 		@RequestMapping("/updateCentre")
 		public ModelAndView updateCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
 				BindingResult result, ModelMap model) {
-		
+			Boolean correcte = true;
+			
 			try {
+				if(centre_coworking.getNom().isEmpty()){
+					model.put("error", "El nom no pot estar buit");
+					correcte = false;
+				}else if(centre_coworking.getDescripcio().isEmpty()){
+					model.put("error", "La descripcio no pot estar buida");
+					correcte = false;
+				}else if(centre_coworking.getEmail().isEmpty()){
+					model.put("error", "L'email no pot estar buit");
+					correcte = false;
+				}
+				if(correcte==false){
+					return this.editcenter(userlogged, centre_coworking, result, model);
+				}
+				
 				centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
 				Icentre_coworking.updateCentre(centre_coworking);
 				System.out.println("Update centre");
@@ -246,20 +301,39 @@ public class HomeController {
 		@RequestMapping("/saveCentre")
 		public ModelAndView saveCentreData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-				ModelMap model,
-				BindingResult result) {
+			ModelMap model,
+			BindingResult result) {
+			Boolean correcte = true;
+			ArrayList<String> poblacions = new ArrayList<String>();
+			poblacions.add("Barcelona");
+			poblacions.add("Madrid");
+			poblacions.add("Sevilla");
+			poblacions.add("Galicia");
+			model.put("poblacio", poblacions);
 			try {
+				if(centre_coworking.getNom().isEmpty()){
+					model.put("error", "El nom no pot estar buit");
+					correcte = false;
+				}else if(centre_coworking.getDescripcio().isEmpty()){
+					model.put("error", "La descripcio no pot estar buida");
+					correcte = false;
+				}else if(centre_coworking.getEmail().isEmpty()){
+					model.put("error", "L'email no pot estar buit");
+					correcte = false;
+				}
+				if(correcte==false){
+					return this.editcenter(userlogged, centre_coworking, result, model);
+				}
 				centre_coworking.setAdmin_centre(userlogged);
 				System.out.println("LIIIIIIIIIINK= "+centre_coworking.getlink_foto());
 				Icentre_coworking.saveCentre_coworking(centre_coworking);
 				userlogged.addcentre_administrat(centre_coworking);
 				System.out.println("Save centre_coworking");
-				return new ModelAndView("redirect:/centresList.html");
+				return new ModelAndView("redirect:/home.html");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				return this.getRegisterCentre(null, centre_coworking, model, result);
 			}
-			
 			
 		}
 		
@@ -396,32 +470,40 @@ public class HomeController {
 	        System.out.println("Got request param: " + centreId);
 
 			Centre_coworking centre=Icentre_coworking.getCentre_coworking(centreId);
+			Boolean autoritzat = false;
 			
 			afegeixDadesTopBar(model);
-			
-			model.put("nom", centre.getNom());
-			model.put("descripcio", centre.getDescripcio());
-			model.put("email", centre.getEmail());
-			model.put("telefon", centre.getTelefon());
-			model.put("web", centre.getWeb());
-			model.put("carrer", centre.getCarrer());
-			model.put("poblacio", centre.getpoblacio());
-			model.put("num_edifici", centre.getnum_edifici());
-			model.put("capacitat", centre.getcapacitat());
-			if(centre.getlink_foto()==null){
-				model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
-			}else{
-				if(centre.getlink_foto().isEmpty()){
-					model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
-				}else{
-					model.put("link", centre.getlink_foto());
+			if(loguejat){
+				List<Centre_coworking> llistacentres = userlogged.getcentres_administrats();
+				if(llistacentres.contains(centre)){
+					System.out.println("PERMISOS CORRECTOS");
+					autoritzat = true;
+					model.put("nom", centre.getNom());
+					model.put("descripcio", centre.getDescripcio());
+					model.put("email", centre.getEmail());
+					model.put("telefon", centre.getTelefon());
+					model.put("web", centre.getWeb());
+					model.put("carrer", centre.getCarrer());
+					model.put("poblacio", centre.getpoblacio());
+					model.put("num_edifici", centre.getnum_edifici());
+					model.put("capacitat", centre.getcapacitat());
+					if(centre.getlink_foto()==null){
+						model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+					}else{
+						if(centre.getlink_foto().isEmpty()){
+							model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
+						}else{
+							model.put("link", centre.getlink_foto());
+						}
+					}
+					model.put("num_edifici", centre.getnum_edifici());
+					
+					//para saber que el centro que vas a editar es tuyo
+					//por seguridad, sino se usaria el request param como en el perfil
+					mycentre = centre;
 				}
+				model.put("autoritzat", autoritzat);
 			}
-			model.put("num_edifici", centre.getnum_edifici());
-			
-			//para saber que el centro que vas a editar es tuyo
-			//por seguridad, sino se usaria el request param como en el perfil
-			mycentre = centre;
 					
 			return new ModelAndView("mycenterprofile", "model", model);
 			
