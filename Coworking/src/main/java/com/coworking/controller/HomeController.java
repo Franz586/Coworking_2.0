@@ -586,6 +586,21 @@ public class HomeController {
 			model.put("num_edifici", centre.getnum_edifici());
 			model.put("capacitat", centre.getcapacitat());
 			String concat = centre.getpoblacio().concat(" ").concat(centre.getCarrer());
+			
+			List<String> serveis = new ArrayList<String>();
+			if(centre.getBanys()){
+				serveis.add("Banys");
+			}
+			if(centre.getCafeteria()){
+				serveis.add("Cafetería");
+			}
+			if(centre.getInternet()){
+				serveis.add("Internet");
+			}
+			if(centre.getSala_reunions()){
+				serveis.add("Sala de reunions");
+			}
+			model.put("serveis", serveis);
 			model.put("maps", concat);
 			if(centre.getvaloracio() == 0){
 				model.put("valoracio", "No té cap valoració");

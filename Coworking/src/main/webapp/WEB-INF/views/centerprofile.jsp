@@ -204,7 +204,9 @@
 				        </p>
 				        <p>
 				            <strong>Serveis del centre:</strong>
-				            <span>${model.serveis}</span>
+				            <c:forEach items="${model.serveis}" var="servei">
+				            <span><br>- ${servei}</span>
+				            </c:forEach>
 				        </p>
 				        <p>
 				            <strong>Email de contacte: </strong>
