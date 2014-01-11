@@ -28,4 +28,6 @@ public interface ICentre_coworkingDAO {
 
 	public List<Centre_coworking> getcentre_coworking(String search);
 	
+	public List<Centre_coworking> gettop5centres();
+	
 }

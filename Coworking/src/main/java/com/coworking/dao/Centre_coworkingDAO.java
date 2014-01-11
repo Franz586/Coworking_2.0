@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -122,6 +123,12 @@ public class Centre_coworkingDAO implements ICentre_coworkingDAO {
 	public List<Centre_coworking> getcentre_coworking(String nom) {
 		List<Centre_coworking> centrelist = sessionfactory.getCurrentSession().createCriteria(Centre_coworking.class)
 				.add(Restrictions.eq("nom", nom)).list();
+		return centrelist;
+	}
+	@Override
+	public List<Centre_coworking> gettop5centres() {
+		List<Centre_coworking> centrelist = sessionfactory.getCurrentSession().createCriteria(Centre_coworking.class)
+				.addOrder(Order.desc("valoracio_mitja")).setMaxResults(5).list();
 		return centrelist;
 	}
 
