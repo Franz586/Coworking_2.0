@@ -493,6 +493,20 @@ public class HomeController {
 				if(llistacentres.contains(centre)){
 					System.out.println("PERMISOS CORRECTOS");
 					autoritzat = true;
+					List<String> serveis = new ArrayList<String>();
+					if(centre.getBanys()){
+						serveis.add("Banys");
+					}
+					if(centre.getCafeteria()){
+						serveis.add("Cafetería");
+					}
+					if(centre.getInternet()){
+						serveis.add("Internet");
+					}
+					if(centre.getSala_reunions()){
+						serveis.add("Sala de reunions");
+					}
+					model.put("serveis", serveis);
 					model.put("nom", centre.getNom());
 					model.put("descripcio", centre.getDescripcio());
 					model.put("email", centre.getEmail());

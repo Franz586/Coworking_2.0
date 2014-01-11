@@ -137,7 +137,9 @@
 			<b>Descripció:</b> ${model.descripcio}
 			<br>
 			<b>Serveis del centre:</b>
-			<br> - ${model.serveis}
+			<c:forEach items="${model.serveis}" var="servei">
+			<span><br>- ${servei}</span>
+			</c:forEach>
 			<br>
 			<b>Email de contacte:</b> ${model.email}
 			<br>
