@@ -29,9 +29,9 @@
         		
 			<div class="navbar navbar-default navbar-fixed-top">  <!-- Brand and toggle get grouped for better mobile display -->
 
-		<!-- Search Form -->
-				<form action="cercarapida" method="post" class="navbar-form navbar-right">
-  					<div class="form-group">
+			<!-- Search Form -->
+					<form action="cercarapida" method="get" class="navbar-form navbar-right">  					
+					<div class="form-group">
 						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control">
 					</div>
 					<button type="submit" class="btn btn-default">Cercar</button>

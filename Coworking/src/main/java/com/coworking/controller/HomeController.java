@@ -468,7 +468,7 @@ public class HomeController {
 
 		}
 		
-		@RequestMapping(value="mycenterprofile", method=RequestMethod.GET)
+		@RequestMapping(value="/mycenterprofile", method=RequestMethod.GET)
 		public ModelAndView mycenterprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
 	            HttpServletResponse response, ModelMap model) {       
@@ -514,7 +514,7 @@ public class HomeController {
 			return new ModelAndView("mycenterprofile", "model", model);
 			
 		}
-		@RequestMapping(value="editcenter"/*, method=RequestMethod.GET*/)
+		@RequestMapping(value="/editcenter"/*, method=RequestMethod.GET*/)
 		public ModelAndView editcenter(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
 				BindingResult result, ModelMap model) {       
@@ -556,7 +556,7 @@ public class HomeController {
 			return new ModelAndView("editcenter", "model", model);
 		}
 		
-		@RequestMapping(value="centerprofile", method=RequestMethod.GET)
+		@RequestMapping(value="/centerprofile", method=RequestMethod.GET)
 		public ModelAndView centerprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
 				@RequestParam(value="centreId", required=true) Integer centreId, HttpServletRequest request,  
 	            HttpServletResponse response, ModelMap model) {       
@@ -599,7 +599,7 @@ public class HomeController {
 			
 		}
 		
-	@RequestMapping(value="userprofile", method=RequestMethod.GET)
+	@RequestMapping(value="/userprofile", method=RequestMethod.GET)
 	public ModelAndView userprofile(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 			@RequestParam(value="userId", required=true) Integer userId, HttpServletRequest request,  
             HttpServletResponse response, ModelMap model) {   
@@ -636,10 +636,9 @@ public class HomeController {
 		return new ModelAndView("userprofile", "model", model);
 
 	}
-	@RequestMapping(value="cercarapida", method=RequestMethod.POST)
+	@RequestMapping(value="/cercarapida")
 	public ModelAndView cercarapida(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-			@ModelAttribute("search")String search,
-			HttpServletRequest request, HttpServletResponse response, ModelMap model) {  
+			@ModelAttribute("search")String search, ModelMap model) {  
 		
 		afegeixDadesTopBar(model);
 		
