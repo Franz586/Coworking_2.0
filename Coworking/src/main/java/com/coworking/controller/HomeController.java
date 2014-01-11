@@ -641,7 +641,8 @@ public class HomeController {
 			@ModelAttribute("search")String search,
 			HttpServletRequest request, HttpServletResponse response, ModelMap model) {  
 		
-		afegeixDadesTopBar(model);	
+		afegeixDadesTopBar(model);
+		
 		List<Usuari_registrat> res=Iusuari_registrat.getusuari_registrat(search);
 		List<Centre_coworking> res2=Icentre_coworking.getcentre_coworking(search);
 		model.put("textbox", search);

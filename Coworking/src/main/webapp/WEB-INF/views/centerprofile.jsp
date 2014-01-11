@@ -76,77 +76,7 @@
     </script>
 </head>
 
-<body>
 <body onload="initialize()">
-<style type="text/css">
-#ProfilePage
-{
-    /* Move it off the top of the page, then centre it horizontally */
-    margin: 50px auto;
-    width: 635px;
-
-/* For visibility. Delete me */
-border: 1px solid red;
-}
-
-#LeftCol
-{
-    /* Move it to the left */
-    float: left;
-
-    width: 200px;
-    text-align: center;
-
-    /* Move it away from the content */
-    margin-right: 20px;
-
-/* For visibility. Delete me */
-border: 1px solid brown;
-}
-
-#Photo
-{
-    /* Width and height of photo container */
-    width: 200px;
-    height: 200px;
-
-/* For visibility. Delete me */
-border: 1px solid green;
-}
-
-
-#Info
-{
-    width: 400px;
-    text-align: center;
-
-    /* Move it to the right */
-    float: right;
-
-/* For visibility. Delete me */
-border: 1px solid blue;
-}
-
-#Info strong
-{
-    /* Give it a width */
-    display: inline-block;
-    width: 100px;
-
-/* For visibility. Delete me */
-border: 1px solid orange;
-}
-
-#Info span
-{
-    /* Give it a width */
-    display: inline-block;
-    width: 250px;
-
-/* For visibility. Delete me */
-border: 1px solid purple;
-}
-</style>
 
 <!-- Top Navbar! -->
         		
@@ -250,71 +180,82 @@ border: 1px solid purple;
 <!-- Contingut Central -->
 
 
-			<div id="ProfilePage">
-			    <div id="LeftCol">
-			        <div id="Photo">
-			        <img src="${model.link}"  width="200px" height="200px"></div>
-			        
-			       
-			    </div>
+	<div id="content" class="container">
+	
+		<div class = "jumbotron">
+		
+			<div class="row">
 			
-			    <div id="Info">
-			        <p>
-			            <strong>Nom del centre:</strong>
-			            <span>${model.nom}</span>
-			        </p>
-			        <p>
-			            <strong>Descripció:</strong>
-			            <span>${model.descripcio}</span>
-			        </p>
-			        <p>
-			            <strong>Serveis del centre:</strong>
-			            <span>${model.serveis}</span>
-			        </p>
-			        <p>
-			            <strong>Email de contacte: </strong>
-			            <span>${model.email}</span>
-			        </p>
-			        <p>
-			            <strong>Telefon:</strong>
-			            <span>${model.telefon}</span>
-			        </p>
-					<p>
-			            <strong>Poblacio:</strong>
-			            <span>${model.poblacio}</span>
-			        </p>
-					<p>
-			            <strong>Carrer:</strong>
-			            <span>${model.carrer}</span>
-			        </p>
-					<p>
-			            <strong>Nº Edifici:</strong>
-			            <span>${model.num_edifici}</span>
-			        </p>
-					<p>
-			            <strong>Nº de localitats:</strong>
-			            <span>${model.capacitat}</span>
-			        </p>
-					<p>
-			            <strong>Web:</strong>
-			            <span>${model.web}</span>
-			        </p>
-					<p>
-			            <strong>Valoracio mitjana:</strong>
-			            <span>${model.valoracio}</span>
-			        </p>
-			    </div>
-			
-			    <!-- Needed because other elements inside ProfilePage have floats -->
-			    <div style="clear:both"></div>
+				<div class="col-md-6">
+				
+					<div style="margin-left:60px">
+						<div id="Photo">
+						        <img src="${model.link}"  width="200px" height="200px">
+						</div>
+    
+				  	 <div style="color: teal; font-size: 30px"></div>
+				        <p>
+				            <strong>Nom del centre:</strong>
+				            <span>${model.nom}</span>
+				        </p>
+				        <p>
+				            <strong>Descripció:</strong>
+				            <span>${model.descripcio}</span>
+				        </p>
+				        <p>
+				            <strong>Serveis del centre:</strong>
+				            <span>${model.serveis}</span>
+				        </p>
+				        <p>
+				            <strong>Email de contacte: </strong>
+				            <span>${model.email}</span>
+				        </p>
+				        <p>
+				            <strong>Telefon:</strong>
+				            <span>${model.telefon}</span>
+				        </p>
+						<p>
+				            <strong>Poblacio:</strong>
+				            <span>${model.poblacio}</span>
+				        </p>
+						<p>
+				            <strong>Carrer:</strong>
+				            <span>${model.carrer}</span>
+				        </p>
+						<p>
+				            <strong>Nº Edifici:</strong>
+				            <span>${model.num_edifici}</span>
+				        </p>
+						<p>
+				            <strong>Nº de localitats:</strong>
+				            <span>${model.capacitat}</span>
+				        </p>
+						<p>
+				            <strong>Web:</strong>
+				            <span>${model.web}</span>
+				        </p>
+						<p>
+				            <strong>Valoracio mitjana:</strong>
+				            <span>${model.valoracio}</span>
+				        </p>
+				    </div>
+				
+				    <!-- Needed because other elements inside ProfilePage have floats -->
+				    <div style="clear:both"></div>
+				    
+				</div>
+				
+				<!-- Mapa a la dreta -->
+				<div class="col-md-6">
+					<div style="color:#FFFFF">
+				  		<h3>Localització del centre: </h3>
+						<div id="map_canvas"></div>
+					</div>
+				</div>
+				
 			</div>
-			<center>
-			
-			<div style="color:#FFFFF">
-			  <h3>Localització del centre: </h3>
-				<div id="map_canvas"></div>
-			</div>
-			</center>
+		</div>
+	</div>
 
 
 <!-- Bottom Navbar! -->	

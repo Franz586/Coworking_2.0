@@ -129,7 +129,7 @@ body {
 
 <div id="content" class="container">
 
-	<div class="jumbotron text-center">
+	<div class="jumbotron">
 	
 		<div style="margin-left:60px">
 			<div style="color: teal; font-size: 30px">Perfil d'usuari</div>
