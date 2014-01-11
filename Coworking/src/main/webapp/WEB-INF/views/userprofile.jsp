@@ -88,7 +88,7 @@ body {
 							    	<li class="active">
 							    			<a href="myprofile.html">${loginname}</a>	  
 							    	</li>
-									    <form:form class="navbar-form navbar-left" id="logout" method="post" action="${userLogout}">
+									    <form:form class="navbar-form navbar-left" id="logout" method="post" role="logout" action="logout">
 									      <button type="submit" value="Logout" class="btn btn-default">Tanca Sessió</button>
 									    </form:form>
 							</c:when>
@@ -183,6 +183,14 @@ body {
 		
 		</div>
 	</div>
+	
+<!-- Scripts siempre al final para que se cargue primero el contenido -->
+
+	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
+	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
+	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
+	<script src="<c:url value="resources/js/home.js"/>"></script>
 
 
 </body>

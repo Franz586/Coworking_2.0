@@ -33,20 +33,13 @@ $(function() {
                 //dataType: 'json',
                 success: function(retorn) {
                 	console.log(retorn);
-                	var result = JSON.parse(retorn).result;
-                    if (result.loguejat) {
-                    	//Actualitza un div concret (navbar right)
-                    	
-                    	//$("#userInfo").load("resources/menuPrivat.jsp");
-                    	
-                    	$(document.body).load("home.html", function(){
-                    		$('.dropdown-toggle').dropdown();
-                    	});
-                    
-                        //location.href="postLogin";
-                    } else {
-                    	
-                    }
+                	//var result = JSON.parse(retorn).result; // Parsea el resultado a variable legible
+                	//Actualitza un div concret (navbar right)
+                	//$("#userInfo").load("resources/menuPrivat.jsp");
+                	                    	
+                	$(document.body).load("home.html", function(){
+                		$('.dropdown-toggle').dropdown();
+                	});
                 },
                 error: function() {
                 	console.log("error");
@@ -62,30 +55,6 @@ $(function() {
             return false;
         });
         
-      //Funció pel Logout
-        $("#logout").submit(function() {
-        	console.log("AJAX Logout");
-            var data = $(this).serializeObject();
-            $.ajax({
-            	type: 'POST',
-                url: "logout",
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                //dataType: 'json',
-                
-                success: function(retorn) {
-                	$(document.body).load("home.html", function(){
-                		$('.dropdown-toggle').dropdown();
-                	});
-                },
-                error: function() {
-                	console.log("error");
-                	
-                }
-            });
- 
-            return false;
-        });
     });
 
 

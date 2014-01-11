@@ -74,11 +74,12 @@ public class HomeController {
 				BindingResult result) {
 				System.out.println("loguejat = "+loguejat);
 
+				
+				afegeixDadesTopBar(model);
 				//Si está logueado pasamos datos para la top navbar
 				if (loguejat) {
 					//actualizamos userlogged porque se ve que si haces un registro de un centro va a null pointer
 					userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
-					afegeixDadesTopBar(model);
 				}
 				
 				//Añadimos los centros para el display del home
@@ -142,16 +143,21 @@ public class HomeController {
 			return userlogged.getcentres_administrats();
 		}
 		
-		@RequestMapping(value = "/logout")
-		public ModelAndView logout() {
+		@RequestMapping(value = "/logout", method=RequestMethod.POST)
+		public ModelAndView logout(/*@RequestBody Usuari_registrat usuari_registrat, */ModelMap model) {
 			
 				logger.info("Logging out user with username = "+ userlogged);
-			
+				System.out.println("Logging out user with username = "+ userlogged);
+				
 				userlogged = null;
+				//usuari_registrat = userlogged;
 				loguejat = false;
 				loginname = null;
 				mycentre = null;
-				return new ModelAndView("redirect:/");
+				
+				afegeixDadesTopBar(model);
+				
+				return new ModelAndView("redirect:/home.html", "model", model);
 		}
 		
 		@RequestMapping("/register")
