@@ -322,7 +322,7 @@ public class HomeController {
 					correcte = false;
 				}
 				if(correcte==false){
-					return this.editcenter(userlogged, centre_coworking, result, model);
+					return this.getRegisterCentre(null, centre_coworking, model, result);
 				}
 				centre_coworking.setAdmin_centre(userlogged);
 				System.out.println("LIIIIIIIIIINK= "+centre_coworking.getlink_foto());
