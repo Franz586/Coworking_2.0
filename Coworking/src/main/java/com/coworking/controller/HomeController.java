@@ -68,7 +68,7 @@ public class HomeController {
 			}
 		}
 		
-		@RequestMapping("/home")
+		@RequestMapping("/home.html")
 		public ModelAndView getLoginForm(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
 				ModelMap model,
 				BindingResult result) {
