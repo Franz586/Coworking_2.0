@@ -84,7 +84,10 @@ public class HomeController {
 				//Añadimos los centros para el display del home
 				List<Centre_coworking> millorValorats = Icentre_coworking.getCentres();
 				model.put("millorValorats", millorValorats);
-				
+				//añadimos top5 centros
+				List<Centre_coworking> top5 = Icentre_coworking.gettop5centres();
+				System.out.println("TOP5 SIZEEE = "+top5.size());
+				model.put("top5", top5);
 				return new ModelAndView("home", "model", model);
 		}
 		

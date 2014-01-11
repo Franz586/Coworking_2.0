@@ -160,7 +160,18 @@
 						</div>	
 					</div>
 					
-				 	<div class="col-md-2">AQUI VA EL RANKING DE CENTRES VALORATS
+				 	<div class="col-md-2">
+				 	<h2>Top 5 centres</h2>
+				 	<ul class="list-group">
+				 	<c:forEach items="${top5}" var="centre">
+					  <li class="list-group-item">
+					  <div class="caption">
+					    <span class="badge badge-warning">${centre.getvaloracio()}</span>
+					    <a href="centerprofile.html?centreId=${centre.idcentre}">${centre.nom}</a>
+					    </div>
+					  </li>
+					</c:forEach>
+					</ul>
 				 	
 				 	</div>
 				 
