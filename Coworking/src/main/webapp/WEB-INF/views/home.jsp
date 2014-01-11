@@ -89,7 +89,7 @@
 							    	<li class="active">
 							    			<a href="myprofile.html">${loginname}</a>	  
 							    	</li>
-									    <form:form class="navbar-form navbar-left" id="logout" method="post" action="${userLogout}">
+									    <form:form class="navbar-form navbar-left" id="logout" method="post" role="logout" action="logout">
 									      <button type="submit" value="Logout" class="btn btn-default">Tanca Sessió</button>
 									    </form:form>
 							</c:when>
@@ -130,7 +130,7 @@
 	
 		<div class = "jumbotron text-center">
 			<h2>Centres Destacats</h2>
-			
+			<br>
 			<div class = "container">
 
 				<div class="row">  
