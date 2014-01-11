@@ -31,9 +31,9 @@ body {
 			<div class="navbar navbar-default navbar-fixed-top">  <!-- Brand and toggle get grouped for better mobile display -->
 
 			<!-- Search Form -->
-				<form class="navbar-form navbar-right">
+				<form action="cercarapida" method="post" class="navbar-form navbar-right">
   					<div class="form-group">
-						<input type="text" class="form-control">
+						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control">
 					</div>
 					<button type="submit" class="btn btn-default">Cercar</button>
 				</form>
@@ -136,6 +136,7 @@ body {
 			<form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
 				<table class="table table-hover table-condensed" border="1">
 				<tr>
+					<form:hidden path="idusuari" value="${model.idusuari}" />
 					<td><form:label path="nom">Nom</form:label></td>
 					<td><form:input  path="nom" value="${model.nom}"/></td>
 				</tr>

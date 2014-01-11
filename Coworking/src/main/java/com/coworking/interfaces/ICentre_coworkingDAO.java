@@ -24,5 +24,8 @@ public interface ICentre_coworkingDAO {
 
 
 	List<Centre_coworking> getCentresNom(String nom);
+
+
+	public List<Centre_coworking> getcentre_coworking(String search);
 	
 }

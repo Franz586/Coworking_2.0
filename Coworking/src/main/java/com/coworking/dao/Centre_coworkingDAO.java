@@ -6,11 +6,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coworking.domain.Centre_coworking;
+import com.coworking.domain.Usuari_registrat;
 import com.coworking.interfaces.ICentre_coworkingDAO;
 
 
@@ -114,6 +116,13 @@ public class Centre_coworkingDAO implements ICentre_coworkingDAO {
 		session.flush();
 		
 		
+	}
+
+	@Override
+	public List<Centre_coworking> getcentre_coworking(String nom) {
+		List<Centre_coworking> centrelist = sessionfactory.getCurrentSession().createCriteria(Centre_coworking.class)
+				.add(Restrictions.eq("nom", nom)).list();
+		return centrelist;
 	}
 
 }

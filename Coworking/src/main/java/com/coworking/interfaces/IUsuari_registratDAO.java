@@ -14,4 +14,5 @@ public interface IUsuari_registratDAO {
 	public Usuari_registrat getUsuari_registrat(String email, String contrasenya);
 	public List<Centre_coworking> getAdmin_centres(Usuari_registrat usuari);
 	public Usuari_registrat getusuari_registrat(Integer userId);
+	public List<Usuari_registrat> getusuari_registrat(String nom);
 }

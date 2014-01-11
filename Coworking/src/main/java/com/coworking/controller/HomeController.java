@@ -64,6 +64,7 @@ public class HomeController {
 			if (loguejat){
 				model.put("loginname", loginname);
 				model.put("centresAdministrats", userlogged.getcentres_administrats());	
+				System.out.println("CENTES SIZE = "+userlogged.getcentres_administrats().size());
 			}
 		}
 		
@@ -234,12 +235,16 @@ public class HomeController {
 					correcte = false;
 				}
 				if(correcte==false){
+					
 					return this.editprofile(usuari_registrat, result, model);
+					
 				}
+				usuari_registrat.setcentres_administrats(userlogged.getcentres_administrats());
 				Iusuari_registrat.updateUsuari_registrat(usuari_registrat);
 				System.out.println("Update usuari_registrat");
 				//actualizar el userlogged para reflejar cambios
 				userlogged = Iusuari_registrat.getUsuari_registrat(userlogged.getemail(), userlogged.getcontrasenya());
+				afegeixDadesTopBar(model);
 				return new ModelAndView("redirect:/myprofile.html");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -272,6 +277,7 @@ public class HomeController {
 				centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
 				Icentre_coworking.updateCentre(centre_coworking);
 				System.out.println("Update centre");
+				
 				return new ModelAndView("redirect:/mycenterprofile.html?centreId="+centre_coworking.getIdcentre());
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -424,7 +430,7 @@ public class HomeController {
 			ArrayList<String> boxprem = new ArrayList<String>();
 
 			afegeixDadesTopBar(model);
-			
+			model.put("idusuari", usuari_registrat.getidusuari());
 			model.put("email", usuari_registrat.getemail());
 			model.put("nom", usuari_registrat.getnom());
 			model.put("cognom", usuari_registrat.getcognom());
@@ -630,6 +636,32 @@ public class HomeController {
 		return new ModelAndView("userprofile", "model", model);
 
 	}
+	@RequestMapping(value="cercarapida", method=RequestMethod.POST)
+	public ModelAndView cercarapida(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+			@ModelAttribute("search")String search,
+			HttpServletRequest request, HttpServletResponse response, ModelMap model) {  
+		
+		afegeixDadesTopBar(model);	
+		List<Usuari_registrat> res=Iusuari_registrat.getusuari_registrat(search);
+		List<Centre_coworking> res2=Icentre_coworking.getcentre_coworking(search);
+		model.put("textbox", search);
+		if(res.isEmpty()){
+			if(res2.isEmpty()){
+				BindingResult result = null;
+				//sacar mensaje de no resultados?
+				return this.getLoginForm(usuari_registrat, model, result);
+			}else{
+				Centre_coworking centre = res2.get(0);
+				System.out.println("CENTRE= "+centre.getNom());
+				return new ModelAndView("redirect:/centerprofile.html?centreId="+centre.getIdcentre(), "model", model);
+			}
+		}else{
+			Usuari_registrat usuari = res.get(0);
+			System.out.println("USUARI= "+usuari.getnom());
+			return new ModelAndView("redirect:/userprofile.html?userId="+usuari.getidusuari(), "model", model);
+		}
+	}
+	
 	
 	/*@RequestMapping("/cercaAvancada")
 	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 

@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,7 +80,7 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 	
 			Session session = sessionfactory.getCurrentSession();
 			session.update(usuari_registrat);	
-		
+			session.flush();
 	}
 
 	@Override
@@ -88,6 +89,13 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 		Usuari_registrat usuari = (Usuari_registrat) sessionfactory.getCurrentSession().get(Usuari_registrat.class, userId);
 		
 		return usuari;
+	}
+
+	@Override
+	public List<Usuari_registrat> getusuari_registrat(String nom) {
+		List<Usuari_registrat> userlist = sessionfactory.getCurrentSession().createCriteria(Usuari_registrat.class)
+				.add(Restrictions.eq("nom", nom)).list();
+		return userlist;
 	}
 	
 
