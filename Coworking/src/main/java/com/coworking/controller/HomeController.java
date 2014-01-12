@@ -724,24 +724,46 @@ public class HomeController {
 	
 	@RequestMapping("/cercaAvancada")
 	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
-			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-			ModelMap model,
-			BindingResult result) {
-		
+			ModelMap model, BindingResult result) {
 		afegeixDadesTopBar(model);
-		
+	
 		return new ModelAndView("cercaAvancada", "model", model);
 	}
 	
-	/*@RequestMapping("/cercaAvancadaResultats")
+	@RequestMapping("/cercaAvancadaResultats")
 	public ModelAndView cercaAvancadaResultats(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
-			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-			ModelMap model,
-			BindingResult result) {
-		
+			@ModelAttribute("search")String search,	@ModelAttribute("banys")String banys,
+			@ModelAttribute("cafe")String cafe,@ModelAttribute("internet")String internet,
+			@ModelAttribute("sala")String sala, @ModelAttribute("poblacio")String poblacio,
+			ModelMap model,BindingResult result) {
 		afegeixDadesTopBar(model);
-		
+		boolean b_banys = false;
+		boolean b_internet = false;
+		boolean b_cafe = false;
+		boolean b_sala = false;
+		System.out.println("poblacio = "+poblacio);
+		///ifs encadenados para mantener los valores correctos en los campos de busqueda
+		if(banys.equalsIgnoreCase("Si")){
+			b_banys = true;
+			model.put("banyscheck", "checked");
+		}
+		if(cafe.equalsIgnoreCase("Si")){
+			b_cafe = true;
+			model.put("cafecheck", "checked");
+		}
+		if(internet.equalsIgnoreCase("Si")){
+			b_internet = true;
+			model.put("internetcheck", "checked");
+		}
+		if(sala.equalsIgnoreCase("Si")){
+			b_sala = true;
+			model.put("salacheck", "checked");
+		}
+		model.put("textbox", search);
+		List<Centre_coworking> resultats=Icentre_coworking.cercaAvancada(search, b_banys, b_cafe, b_internet, b_sala, poblacio);
+		afegeixImatges(resultats);
+		model.put("centres", resultats);
 		return new ModelAndView("cercaAvancada", "model", model);
-	}*/
+	}
 	
 }

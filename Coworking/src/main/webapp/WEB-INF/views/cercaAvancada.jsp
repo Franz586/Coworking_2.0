@@ -27,7 +27,7 @@ body {
 <body>
 
 <!-- Top Navbar! -->
-        		
+        		<body onload="myFunction()">
 			<div class="navbar navbar-default navbar-fixed-top">  <!-- Brand and toggle get grouped for better mobile display -->
 
 			<!-- Search Form -->
@@ -135,7 +135,7 @@ body {
 		<form class="form-horizontal" action="cercaAvancadaResultats" method="get" role="form">  
 							
 				<div class="form-group">
-					<input name="search" id="search" value="${model.X}" type="text" class="form-control" placeholder="Introdueix Nom de centre a cercar">
+					<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Introdueix Nom de centre a cercar">
 					
 				</div>
 				
@@ -143,7 +143,7 @@ body {
 					<label class="col-sm-2 control-label"> Població:</label>
 				
 					<div class="form-inline pull-left">		
-						<select class="form-control">
+						<select class="form-control" name="poblacio">
 						  	<option>Barcelona</option>
 						  	<option>Madrid</option>
 						  	<option>Sevilla</option>
@@ -156,21 +156,36 @@ body {
 					<label class="col-sm-2 control-label"> Serveis:</label>
 				
 					<label class="checkbox-inline">
-					  	<input type="checkbox" id="banys" value="banys"> Banys
+					  	<input name="banys" type="checkbox" id="banys"  value="si"> Banys
 					</label>
 					<label class="checkbox-inline">
-					  	<input type="checkbox" id="cafeteria" value="cafeteria"> Cafeteria
+					  	<input name="cafe" type="checkbox" id="cafe"  value="si"> Cafeteria
 					</label>
 					<label class="checkbox-inline">
-					  	<input type="checkbox" id="internet" value="internet"> Internet
+					  	<input name="internet" type="checkbox" id="internet"  value="si"> Internet
 					</label>
 					<label class="checkbox-inline">
-					  	<input type="checkbox" id="salaReunions" value="salaReunions"> Sala de Reunions
+					  	<input name="sala" type="checkbox" id="sala"  value="si"> Sala de Reunions
 					</label>
 				</div>
 				<button type="submit" class="btn btn-default">Cercar</button>
 		</form>	
-		
+		<!-- -----Script -->
+		<script>
+		function myFunction()
+		{
+			var a = "${model.banyscheck}";
+			var b = "${model.cafecheck}";
+			var c = "${model.internetcheck}";
+			var d = "${model.salacheck}";
+			
+			document.getElementById("banys").checked = (a == "checked");
+			document.getElementById("cafe").checked = (b == "checked");
+			document.getElementById("internet").checked = (c == "checked");
+			document.getElementById("sala").checked = (d == "checked");
+			
+		}
+		</script>
 		<br>
 	<!-- Tabla de Resultados -->	
 		
@@ -179,7 +194,7 @@ body {
 		
 		  		<table class="table">
 		  		
-		  			<c:forEach items="${ELQUESEA}" var="espai">
+		  			<c:forEach items="${model.centres}" var="espai">
 		  		
 					<tr>
 						<td><img src="${espai.link_foto}"  width="200px" height="200px"></td>	
