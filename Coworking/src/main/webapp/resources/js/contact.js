@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	
 	$('#saveContact').submit(function(e) {
-		console.log("HOLA");
 		$.post('/ajaxsample/contact/save', $(this).serialize(), function (contact) {
 			$('#contactTableResponse').last().append(
 					'<tr>' +
@@ -14,7 +13,6 @@ $(document).ready(function() {
 		});
 		
 		clearInputs();
-		console.log("after clearinputs");
 		e.preventDefault();
 	});
 	

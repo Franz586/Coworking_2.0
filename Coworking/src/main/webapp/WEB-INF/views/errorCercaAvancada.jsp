@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Coworking 2.0 - Modificar Perfil ${model.nom}</title>
+<title>Coworking 2.0 - Cerca Avançada</title>
 <meta name="description" content="Página de Inicio en Coworking 2.0">
 
 <style>
@@ -27,7 +27,7 @@ body {
 <body>
 
 <!-- Top Navbar! -->
-        		
+        		<body onload="myFunction()">
 			<div class="navbar navbar-default navbar-fixed-top">  <!-- Brand and toggle get grouped for better mobile display -->
 
 			<!-- Search Form -->
@@ -128,99 +128,96 @@ body {
  
 <div id="content" class="container">
 
-	<div class="jumbotron text-center">
-	
-		<div style="color: teal;font-size: 30px">Editar perfil</div>
-		
-			<!--<c:url var="userUpdate" value="updateUser.html"/>-->
-			<form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
-				<table class="table table-hover table-condensed" border="1">
-				<tr>
-					<form:hidden path="idusuari" value="${model.idusuari}" />
-					<td><form:label path="nom">Nom</form:label></td>
-					<td><form:input data-msg-nom="Ha de ser una cadena amb 3-10 caràcters"
-									data-msg-required="Aquest camp és obligatori"
-									data-rule-required="true"
-						 			path="nom" value="${model.nom}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="cognom">Cognom</form:label></td>
-					<td><form:input data-msg-cognom="Ha de ser una cadena amb 3-10 caràcters"
-									data-msg-required="Aquest camp és obligatori"
-									data-rule-required="true"
-						 			path="cognom" value="${model.cognom}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="dni">DNI</form:label></td>
-					<td><form:input data-msg-dni="Ha de ser un DNI correcte"
-									data-msg-required="Aquest camp és obligatori"
-									data-rule-required="true"
-									path="dni" value="${model.dni}"/></td>
-				</tr>
-				<tr>
-				<!-- campos hidden necesarios para el update -->
-					<form:hidden path="email" value="${model.email}" />
-					<form:hidden path="actiu" value="${model.actiu}" />
-					<form:hidden path="admin_centre" value="${model.admin}" />
-					<form:hidden path="data_caducitat" value="${model.data_cad}" />
-				</tr>
-				<tr>
-					<td><form:label path="contrasenya">Contrasenya</form:label></td>
-					<td><form:input data-msg-contrasenya="Ha de ser una cadena amb 3-10 caràcters"
-									data-msg-required="Aquest camp és obligatori"
-									data-rule-required="true" 
-									path="contrasenya" value="${model.contrasenya}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="adreca">Adreça</form:label></td>
-					<td><form:input  path="adreca" value="${model.adreca}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="link_foto">Imatge de perfil (URL)</form:label></td>
-					<td><form:input  path="link_foto" value="${model.link}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="data_naix">Data de naixement</form:label></td>
-					<td><form:input  path="data_naix" value="${model.data_naix}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="telefon">Teléfon</form:label></td>
-					<td><form:input  path="telefon" value="${model.telefon}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="privacitat">Perfil privat?</form:label></td>
-					<td><form:select  path="privacitat">
-							<form:option value="${model.privacitat}" label="${model.privacitat}"/>
-							<form:options items="${model.boxpriv}" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td><form:label path="premium">Premium?</form:label></td>
-					<td><form:select  path="premium">
-							<form:option value="${model.premium}" label="${model.premium}"/>
-							<form:options items="${model.boxprem}" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td><form:label path="amb_prof">Ambit Professional</form:label></td>
-					<td><form:select path="amb_prof" items="${model.ambit}"></form:select></td>
-				</tr>
-				<tr>
-					<td><form:label path="web">Lloc web</form:label></td>
-					<td><form:input  path="web" value="${model.web}"/></td>
-				</tr>
-				<tr>
-					<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
-					<td><form:input  path="sobre_mi" value="${model.sobre_mi}"/></td>
-				</tr>
-				</table>
+	<div class="jumbotron">
 			
-				<input type="submit" value="Finalitzar edició" />	
-			</form:form>
+	<!-- Formulario de Búsqueda -->		
+
+		<form class="form-horizontal" action="cercaAvancadaResultats" method="get" role="form">  
+							
+				<div class="form-group">
+					<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Introdueix Nom de centre a cercar">
+					
+				</div>
+				
+				<div class="form-inline">
+					<label class="col-sm-2 control-label"> Població:</label>
+				
+					<div class="form-inline pull-left">		
+						<select class="form-control" name="poblacio">
+						  	<option>Barcelona</option>
+						  	<option>Madrid</option>
+						  	<option>Sevilla</option>
+						  	<option>Toledo</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-inline">
+					<label class="col-sm-2 control-label"> Serveis:</label>
+				
+					<label class="checkbox-inline">
+					  	<input name="banys" type="checkbox" id="banys"  value="si"> Banys
+					</label>
+					<label class="checkbox-inline">
+					  	<input name="cafe" type="checkbox" id="cafe"  value="si"> Cafeteria
+					</label>
+					<label class="checkbox-inline">
+					  	<input name="internet" type="checkbox" id="internet"  value="si"> Internet
+					</label>
+					<label class="checkbox-inline">
+					  	<input name="sala" type="checkbox" id="sala"  value="si"> Sala de Reunions
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default btn-lg pull-right">Cercar</button>
+		</form>	
+		<!-- -----Script -->
+		<script>
+		function myFunction()
+		{
+			var a = "${model.banyscheck}";
+			var b = "${model.cafecheck}";
+			var c = "${model.internetcheck}";
+			var d = "${model.salacheck}";
+			
+			document.getElementById("banys").checked = (a == "checked");
+			document.getElementById("cafe").checked = (b == "checked");
+			document.getElementById("internet").checked = (c == "checked");
+			document.getElementById("sala").checked = (d == "checked");
+			
+		}
+		</script>
+		<br><br>
+	<!-- Tabla de Resultados -->	
+		
+		<div class="panel panel-default">
+		  	<div class="panel-heading">Resultats de la Cerca:</div>
+				<div class="panel-body">
+ 					<table class="table">
+	 					<tr>
+	 						<td><p>Nom:</p></td>
+			  				<td><p>Població:</p></td>
+			  				<td><p>Direcció:</p></td>
+			  				<td><p>Correu:</p></td>
+			  				<td><p>Telèfon:</p></td>
+	  					</tr>
+  					</table>
+  				</div>
+
+		  		<div id="content" class="container"> 
+				
+					<div class = "jumbotron text-center">
+									
+						<h3>No s'han trobat coincidències</h3>
+																
+					</div>	
+				</div>
+		</div>
+		
+				
 	</div>
 </div>
 	
-	
+
 <!-- Bottom Navbar! -->	
 	
 	<div class = "navbar navbar-inverse navbar-fixed-bottom">
@@ -249,73 +246,11 @@ body {
 
 <!-- Scripts siempre al final para que se cargue primero el contenido -->
 
-	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
+	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
-	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
 	<script src="<c:url value="resources/js/home.js"/>"></script>
-	<script type="text/javascript">
-		$("#updateForm").validate({
-			showErrors: function(errorMap, errorList) {
-			 
-				// Clean up any tooltips for valid elements
-				$.each(this.validElements(), function (index, element) {
-					var $element = $(element);
-					 
-					$element.data("title", "") // Clear the title - there is no error associated anymore
-					.removeClass("error")
-					.tooltip("destroy");
-				});
-				 
-				// Create new tooltips for invalid elements
-				$.each(errorList, function (index, error) {
-					var $element = $(error.element);
-					 
-					$element.tooltip("destroy") // Destroy any pre-existing tooltip so we can repopulate with new tooltip content
-					.data("title", error.message)
-					.addClass("error")
-					.tooltip(); // Create a new tooltip based on the error messsage we just set in the title
-				});
-			},
-			 
-			submitHandler: function(form) {
-	            var data = $("#updateForm").serializeObject();
-	            $.ajax({
-	            	type: 'POST',
-	                url: "updateUser",
-	                contentType: 'application/json',
-	                data: JSON.stringify(data),
-	                //dataType: 'json',
-	                success: function(retorn) {
-	                	//var result = JSON.parse(retorn).result; // Parsea el resultado a variable legible
-	                	//Actualitza un div concret (navbar right)
-	                	//$("#userInfo").load("resources/menuPrivat.jsp");
-	                	                    	
-	                	$(document.body).load("myprofile.html", function(){
-	                		$('.dropdown-toggle').dropdown();
-	                	});
-	                }
-				});
-	            return false;
-			}
-		});
-		
-		 $.fn.serializeObject = function() {
-		        var o = {};
-		        var a = this.serializeArray();
-		        $.each(a, function() {
-		            if (o[this.name]) {
-		                if (!o[this.name].push) {
-		                    o[this.name] = [o[this.name]];
-		                }
-		                o[this.name].push(this.value || '');
-		            } else {
-		                o[this.name] = this.value || '';
-		            }
-		        });
-		        return o;
-		    };
-	</script>
+
 
 </body>
 </html>

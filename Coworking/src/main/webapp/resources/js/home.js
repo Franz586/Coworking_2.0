@@ -6,7 +6,6 @@ $(function() {
 	
 	//Link Management
 	$(document).on('click', '.loader', function(){
-		 console.log($(this));
 		 $('#content').load($(this).attr('href'));
 		 /* Per recarregar diverses zones que no necessariament son content (div central) (exemple: pestanyes)
 		  * $(this).attr("data-destination");
@@ -28,7 +27,6 @@ $(function() {
 	
 	//Funció pel Login
         $("#login").submit(function() {
-        	console.log("AJAX Login");
             var data = $(this).serializeObject();
             $.ajax({
             	type: 'POST',
@@ -37,7 +35,6 @@ $(function() {
                 data: JSON.stringify(data),
                 //dataType: 'json',
                 success: function(retorn) {
-                	console.log(retorn);
                 	//var result = JSON.parse(retorn).result; // Parsea el resultado a variable legible
                 	//Actualitza un div concret (navbar right)
                 	//$("#userInfo").load("resources/menuPrivat.jsp");
@@ -49,7 +46,6 @@ $(function() {
                 error: function(e) {
                 	if (popoverVisible == false) {
 	                	
-	                	console.log("error");
 	                	$("#login").popover({
 	                		placement : 'bottom',
 	                		title : 'Error',

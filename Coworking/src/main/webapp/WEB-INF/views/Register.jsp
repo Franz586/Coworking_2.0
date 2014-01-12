@@ -277,7 +277,6 @@
 			},
 			 
 			submitHandler: function(form) {
-				console.log("AJAX Register");
 	            var data = $("#registerForm").serializeObject();
 	            $.ajax({
 	            	type: 'POST',
@@ -286,7 +285,6 @@
 	                data: JSON.stringify(data),
 	                //dataType: 'json',
 	                success: function(retorn) {
-	                	console.log(retorn);
 
 	                	//LOGUEA AL REGISTRARSE
 	                	$.ajax({
@@ -308,7 +306,6 @@
 	                        error: function(e) {
 	                        	if (popoverVisible == false) {
 	        	                	
-	        	                	console.log("error");
 	        	                	$("#login").popover({
 	        	                		placement : 'bottom',
 	        	                		title : 'Error',
@@ -331,22 +328,7 @@
 	            return false;
 			}
 		});
-		
-		 $.fn.serializeObject = function() {
-		        var o = {};
-		        var a = this.serializeArray();
-		        $.each(a, function() {
-		            if (o[this.name]) {
-		                if (!o[this.name].push) {
-		                    o[this.name] = [o[this.name]];
-		                }
-		                o[this.name].push(this.value || '');
-		            } else {
-		                o[this.name] = this.value || '';
-		            }
-		        });
-		        return o;
-		    };
+
 	</script>
 	
 </body>

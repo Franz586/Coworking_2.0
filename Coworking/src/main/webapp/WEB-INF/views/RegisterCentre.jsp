@@ -261,7 +261,6 @@
 			},
 			 
 			submitHandler: function(form) {
-				console.log("AJAX Register");
 	            //var data = $("#registerForm").serializeObject();
 	         	var data = {
 	        			banys: document.getElementById('banys').checked,
@@ -288,7 +287,6 @@
 	                data: JSON.stringify(data),
 	                //dataType: 'json',
 	                success: function(retorn) {
-	                	console.log(retorn);
 	                	                    	
 	                	$(document.body).load("home.html", function(){
 	                		$('.dropdown-toggle').dropdown();
@@ -299,21 +297,6 @@
 			}
 		});
 		
-		 $.fn.serializeObject = function() {
-		        var o = {};
-		        var a = this.serializeArray();
-		        $.each(a, function() {
-		            if (o[this.name]) {
-		                if (!o[this.name].push) {
-		                    o[this.name] = [o[this.name]];
-		                }
-		                o[this.name].push(this.value || '');
-		            } else {
-		                o[this.name] = this.value || '';
-		            }
-		        });
-		        return o;
-		    };
 	</script>
 
 </body>

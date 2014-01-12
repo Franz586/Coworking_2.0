@@ -193,13 +193,13 @@ body {
 					<tr>
 						<td>Serveis</td>
 						<td>
-							<form:checkbox path="banys" label="Banys" checked="${model.banys}" value="true"/>
+							<form:checkbox id="banys" path="banys" label="Banys" checked="${model.banys}" value="true"/>
 							<br>
-						  	<form:checkbox path="cafeteria" label="Cafeteria" checked="${model.cafeteria}" value="true"/>
+						  	<form:checkbox id="cafeteria" path="cafeteria" label="Cafeteria" checked="${model.cafeteria}" value="true"/>
 							<br>
-							<form:checkbox path="internet" label="Internet" checked="${model.internet}" value="true"/>
+							<form:checkbox id="internet" path="internet" label="Internet" checked="${model.internet}" value="true"/>
 							<br>
-							<form:checkbox path="sala_reunions" label="Sala de reunions" checked="${model.sala}" value="true"/>
+							<form:checkbox id="sala" path="sala_reunions" label="Sala de reunions" checked="${model.sala}" value="true"/>
 						</td>
 						
 					</tr>
@@ -240,7 +240,6 @@ body {
 <!-- Scripts siempre al final para que se cargue primero el contenido -->
 
 	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
-	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
@@ -270,7 +269,6 @@ body {
 			},
 			 
 			submitHandler: function(form) {
-				console.log("AJAX Update");
 	            //var data = $("#updateForm").serializeObject();
 	         	var data = {
 	        			banys: document.getElementById('banys').checked,
@@ -286,8 +284,9 @@ body {
 	        			num_edifici: $("#num_edifici").val(),
 	        			poblacio: $("#poblacio").val(),
 	        			telefon: $("#telefon").val(),
-	        			web: $("#web").val()
-	
+	        			web: $("#web").val(),
+	        			idcentre: $("#idcentre").val(),
+	        			//admin_centre : $("#admin_centre").val()
 	            };
 	            $.ajax({
 	            	type: 'POST',
@@ -296,9 +295,9 @@ body {
 	                data: JSON.stringify(data),
 	                //dataType: 'json',
 	                success: function(retorn) {
-	                	console.log(retorn);
-	                	var result = JSON.parse(retorn).result;                    	
+	                	var result = JSON.parse(retorn);                    	
 	                	$(document.body).load("mycenterprofile.html?centreId=" + result, function(){
+	                	//$(document.body).load("home.html", function(){	
 	                		$('.dropdown-toggle').dropdown();
 	                	});
 	                }

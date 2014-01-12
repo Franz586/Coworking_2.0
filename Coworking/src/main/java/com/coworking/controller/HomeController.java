@@ -293,6 +293,13 @@ public class HomeController {
 				BindingResult result, ModelMap model) {
 			Boolean correcte = true;
 			
+			System.out.println("Update centre ANTES DEL TRY");
+			System.out.println(centre_coworking.getDescripcio());
+			System.out.println("ID del centre ANTIGA: " + centre_coworking.getIdcentre());
+
+			System.out.println("Descripció del centre ANTIGA: " + mycentre.getDescripcio());
+
+			
 			try {
 				if(centre_coworking.getNom().isEmpty()){
 					model.put("error", "El nom no pot estar buit");
@@ -312,7 +319,7 @@ public class HomeController {
 				centre_coworking.setvaloracio(mycentre.getvaloracio());
 				Icentre_coworking.updateCentre(centre_coworking);
 				System.out.println("Update centre");
-				
+				afegeixDadesTopBar(model);
 				
 				//return new ModelAndView("redirect:/mycenterprofile.html?centreId="+);
 			}catch(Exception e){
@@ -741,6 +748,15 @@ public class HomeController {
 		return new ModelAndView("errorCerca", "model", model);
 	}
 	
+	@RequestMapping("/errorCercaAvancada")
+	public ModelAndView errorCercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+			ModelMap model, BindingResult result) {
+		
+		afegeixDadesTopBar(model);
+	
+		return new ModelAndView("errorCercaAvancada", "model", model);
+	}
+	
 	@RequestMapping("/cercaAvancada")
 	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
 			ModelMap model, BindingResult result) {
@@ -787,7 +803,7 @@ public class HomeController {
 		afegeixImatges(resultats);
 		model.put("centres", resultats);
 		if(resultats.isEmpty()){
-			return new ModelAndView("errorCerca", "model", model);
+			return new ModelAndView("errorCercaAvancada", "model", model);
 		}
 		else{
 			return new ModelAndView("cercaAvancada", "model", model);
