@@ -94,7 +94,7 @@ public class Usuari_registratDAO implements IUsuari_registratDAO {
 	@Override
 	public List<Usuari_registrat> getusuari_registrat(String nom) {
 		List<Usuari_registrat> userlist = sessionfactory.getCurrentSession().createCriteria(Usuari_registrat.class)
-				.add(Restrictions.eq("nom", nom)).list();
+				.add(Restrictions.eq("nom", nom).ignoreCase()).list();
 		return userlist;
 	}
 	

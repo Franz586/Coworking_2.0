@@ -133,8 +133,8 @@ body {
 	
 		<div style="margin-left:60px">
 			<div style="color: teal; font-size: 30px">Perfil d'usuari</div>
-				<img src="${model.link}" height="80" width="80">
-				<br>
+				<img src="${model.link}" height="200" width="200" style="float:right; margin:0 10px 0 0;" border="5"/>
+				
 				<b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
 				<br>
 				<b>Ambit professional:</b> ${model.ambit}
@@ -147,13 +147,13 @@ body {
 				<b>Telefon:</b> ${model.telefon}
 				<br>
 				<b>Informació sobre mi:</b> ${model.sobre_mi}
-				<hr>
+				<br>
 				</c:if>
 				<b>Web:</b> ${model.web}
 				<br>
 				<br>
 				<c:if test="${model.privacitat=='NO'}">
-				Perfil public
+				Perfil públic
 				</c:if>
 		</div>
 	</div>
