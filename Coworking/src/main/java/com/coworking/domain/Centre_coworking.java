@@ -60,7 +60,7 @@ public class Centre_coworking {
 	private String telefon;
 	
 	@Column(name = "valoracio_mitja")
-	private double valoracio_mitja;
+	private float valoracio_mitja;
 	
 	@Column(name = "premium")
 	private String premium;
@@ -244,11 +244,11 @@ public class Centre_coworking {
 	public void setcapacitat(int capacitat) {
 		this.capacitat = capacitat;
 	}
-	public double getvaloracio() {
+	public float getvaloracio() {
 		return this.valoracio_mitja;
 	}
 
-	public void setvaloracio(double valoracio) {
+	public void setvaloracio(float valoracio) {
 		this.valoracio_mitja = valoracio;
 	}
 	@Override

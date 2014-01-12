@@ -34,8 +34,10 @@ body {
 					<form action="cercarapida" method="get" class="navbar-form navbar-right">  					
 					<div class="form-group">
 						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Nom d'usuari o centre">
+					</div>
 					<button type="submit" class="btn btn-default">Cercar</button>
 				</form>
+					
 			
 			<!-- Titulo Izquierdo -->
 				<div class = "container">
@@ -113,14 +115,14 @@ body {
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
 				</div>
-		   <div class="row">
+				<div class="row">
     				<div class="col-lg-11 col-xs-11">
 						<a class="pull-right" href="cercaAvancada.html">Cerca Avançada</a>
 					</div>
 				</div>
 				
 		    </div>
-	<br>
+			<br>
 		
 		
 <!-- Contingut Central -->

@@ -186,10 +186,12 @@ public class HomeController {
 				BindingResult result) {
 			usuari_registrat = new Usuari_registrat();
 			ArrayList<String> ambit = new ArrayList<String>();
-			ambit.add("Arquitecte");
-			ambit.add("Enginyer de software");
-			ambit.add("Matemàtic");
-			ambit.add("Enginyer electronic");
+			ambit.add("ARQUITECTE");
+			ambit.add("ENGINYER DE SOFTWARE");
+			ambit.add("MATEMATIC");
+			ambit.add("ENGINYER ELECTRONIC");
+			ambit.add("WEB DEVELOPER");
+			ambit.add("DISSENYADOR GRAFIC");
 			ArrayList<String> privacitat = new ArrayList<String>();
 			privacitat.add("SI");
 			privacitat.add("NO");
@@ -305,6 +307,7 @@ public class HomeController {
 				}
 				
 				centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
+				centre_coworking.setvaloracio(mycentre.getvaloracio());
 				Icentre_coworking.updateCentre(centre_coworking);
 				System.out.println("Update centre");
 				
@@ -323,10 +326,10 @@ public class HomeController {
 				ModelMap model,
 				BindingResult result) {
 			ArrayList<String> poblacions = new ArrayList<String>();
-			poblacions.add("Barcelona");
-			poblacions.add("Madrid");
-			poblacions.add("Sevilla");
-			poblacions.add("Toledo");
+			poblacions.add("BARCELONA");
+    		poblacions.add("MADRID");
+    		poblacions.add("SEVILLA");
+    		poblacions.add("TOLEDO");
 			
 			afegeixDadesTopBar(model);
 			model.put("poblacio", poblacions);
@@ -341,10 +344,10 @@ public class HomeController {
 			BindingResult result) {
 			Boolean correcte = true;
 			ArrayList<String> poblacions = new ArrayList<String>();
-			poblacions.add("Barcelona");
-			poblacions.add("Madrid");
-			poblacions.add("Sevilla");
-			poblacions.add("Toledo");
+			poblacions.add("BARCELONA");
+    		poblacions.add("MADRID");
+    		poblacions.add("SEVILLA");
+    		poblacions.add("TOLEDO");
 			model.put("poblacio", poblacions);
 			try {
 				if(centre_coworking.getNom().isEmpty()){
@@ -450,10 +453,12 @@ public class HomeController {
 				BindingResult result, ModelMap model) {
 			usuari_registrat = userlogged;
 			ArrayList<String> ambit = new ArrayList<String>();
-			ambit.add("Arquitecte");
-			ambit.add("Enginyer de software");
-			ambit.add("Matematic");
-			ambit.add("Enginyer electronic");
+			ambit.add("ARQUITECTE");
+			ambit.add("ENGINYER DE SOFTWARE");
+			ambit.add("MATEMATIC");
+			ambit.add("ENGINYER ELECTRONIC");
+			ambit.add("WEB DEVELOPER");
+			ambit.add("DISSENYADOR GRAFIC");
 			
 			//select boxes para privacitat y premium
 			ArrayList<String> boxpriv = new ArrayList<String>();
@@ -567,10 +572,10 @@ public class HomeController {
 			
 	        if(mycentre!=null){
 	        	ArrayList<String> poblacions = new ArrayList<String>();
-	    		poblacions.add("Barcelona");
-	    		poblacions.add("Madrid");
-	    		poblacions.add("Sevilla");
-	    		poblacions.add("Toledo");
+	    		poblacions.add("BARCELONA");
+	    		poblacions.add("MADRID");
+	    		poblacions.add("SEVILLA");
+	    		poblacions.add("TOLEDO");
 	    		model.put("poblacio", poblacions);
 				model.put("nom", mycentre.getNom());
 				model.put("descripcio", mycentre.getDescripcio());
@@ -583,6 +588,7 @@ public class HomeController {
 				model.put("link", mycentre.getlink_foto());
 				model.put("capacitat", mycentre.getcapacitat());
 				model.put("num_edifici", mycentre.getnum_edifici());
+				model.put("valoracio", mycentre.getvaloracio());
 				if(mycentre.getBanys()){
 					model.put("banys", "checked");
 				}

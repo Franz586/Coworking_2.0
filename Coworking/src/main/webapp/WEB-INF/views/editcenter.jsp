@@ -140,6 +140,8 @@ body {
 					</tr>
 						<form:hidden path="idcentre" value="${model.idcentre}" />
 						<form:hidden path="admin_centre" value="${model.admin_centre}" />
+						
+						
 					<tr>
 						<td><form:label path="poblacio">Població</form:label></td>
 						<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
@@ -187,6 +189,7 @@ body {
 							<br>
 							<form:checkbox path="sala_reunions" label="Sala de reunions" checked="${model.sala}" value="true"/>
 						</td>
+						
 					</tr>
 					</table>
 					
