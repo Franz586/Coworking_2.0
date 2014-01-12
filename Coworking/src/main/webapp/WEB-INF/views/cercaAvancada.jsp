@@ -124,22 +124,84 @@ body {
 	<br>
 		
 		
-<!-- Contingut Central 
+<!-- Contingut Central -->
  
 <div id="content" class="container">
 
-	<div class="jumbotron text-center">
-	
-		<form:form class="container" id="cercaAvancadaResultats">
-	      <div class="form-group">
-	        <form:input type="text" class="form-control" path="cerca" placeholder="Introdueix element a Cercar..."></form:input>
-	      </div>
-	      <button type="submit" value="cercaAvancadaResultats" class="btn btn-default">Cercar</button>
-	    </form:form>
+	<div class="jumbotron">
 			
+	<!-- Formulario de Búsqueda -->		
+
+		<form class="form-horizontal" action="cercaAvancadaResultats" method="get" role="form">  
+							
+				<div class="form-group">
+					<input name="search" id="search" value="${model.X}" type="text" class="form-control" placeholder="Introdueix Nom de centre a cercar">
+					
+				</div>
+				
+				<div class="form-inline">
+					<label class="col-sm-2 control-label"> Població:</label>
+				
+					<div class="form-inline pull-left">		
+						<select class="form-control">
+						  	<option>Barcelona</option>
+						  	<option>Madrid</option>
+						  	<option>Sevilla</option>
+						  	<option>Toledo</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-inline">
+					<label class="col-sm-2 control-label"> Serveis:</label>
+				
+					<label class="checkbox-inline">
+					  	<input type="checkbox" id="banys" value="banys"> Banys
+					</label>
+					<label class="checkbox-inline">
+					  	<input type="checkbox" id="cafeteria" value="cafeteria"> Cafeteria
+					</label>
+					<label class="checkbox-inline">
+					  	<input type="checkbox" id="internet" value="internet"> Internet
+					</label>
+					<label class="checkbox-inline">
+					  	<input type="checkbox" id="salaReunions" value="salaReunions"> Sala de Reunions
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default">Cercar</button>
+		</form>	
+		
+		<br>
+	<!-- Tabla de Resultados -->	
+		
+		<div class="panel panel-default">
+		  	<div class="panel-heading">Resultats de la Cerca:</div>
+		
+		  		<table class="table">
+		  		
+		  			<c:forEach items="${ELQUESEA}" var="espai">
+		  		
+					<tr>
+						<td><img src="${espai.link_foto}"  width="200px" height="200px"></td>	
+						<td><h3><b>${espai.nom}</b></h3></td>
+						<td><p>${espai.poblacio}</p></td>
+						<td><p>${espai.carrer}</p></td>
+					</tr>
+					<tr>
+						<td><p>${espai.email}</p></td>
+						<td><p>${espai.telefon}</p></td>
+						<td><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a></td>
+					</tr>
+						  		  		
+					</c:forEach>
+		  		
+		  		</table>
+		</div>
+		
+				
 	</div>
 </div>
-	-->
+	
 
 <!-- Bottom Navbar! -->	
 	

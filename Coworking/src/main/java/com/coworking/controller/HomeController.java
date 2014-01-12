@@ -326,7 +326,7 @@ public class HomeController {
 			poblacions.add("Barcelona");
 			poblacions.add("Madrid");
 			poblacions.add("Sevilla");
-			poblacions.add("Galicia");
+			poblacions.add("Toledo");
 			
 			afegeixDadesTopBar(model);
 			model.put("poblacio", poblacions);
@@ -344,7 +344,7 @@ public class HomeController {
 			poblacions.add("Barcelona");
 			poblacions.add("Madrid");
 			poblacions.add("Sevilla");
-			poblacions.add("Galicia");
+			poblacions.add("Toledo");
 			model.put("poblacio", poblacions);
 			try {
 				if(centre_coworking.getNom().isEmpty()){
@@ -570,7 +570,7 @@ public class HomeController {
 	    		poblacions.add("Barcelona");
 	    		poblacions.add("Madrid");
 	    		poblacions.add("Sevilla");
-	    		poblacions.add("Galicia");
+	    		poblacions.add("Toledo");
 	    		model.put("poblacio", poblacions);
 				model.put("nom", mycentre.getNom());
 				model.put("descripcio", mycentre.getDescripcio());
@@ -722,7 +722,7 @@ public class HomeController {
 	}
 	
 	
-	/*@RequestMapping("/cercaAvancada")
+	@RequestMapping("/cercaAvancada")
 	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
 			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
 			ModelMap model,
@@ -733,7 +733,7 @@ public class HomeController {
 		return new ModelAndView("cercaAvancada", "model", model);
 	}
 	
-	@RequestMapping("/cercaAvancadaResultats")
+	/*@RequestMapping("/cercaAvancadaResultats")
 	public ModelAndView cercaAvancadaResultats(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
 			@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
 			ModelMap model,
@@ -742,6 +742,6 @@ public class HomeController {
 		afegeixDadesTopBar(model);
 		
 		return new ModelAndView("cercaAvancada", "model", model);
-	}
-	*/
+	}*/
+	
 }
