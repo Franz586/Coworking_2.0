@@ -204,14 +204,16 @@ public class HomeController {
 		}
 
 		@RequestMapping("/saveUser")
-		public ModelAndView saveUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				BindingResult result) {
+		public @ResponseBody ModelAndView saveUserData(@RequestBody Usuari_registrat usuari_registrat,
+				BindingResult result,
+				ModelMap model) {
 			usuari_registrat.setadmin_centre(false);
 			usuari_registrat.setactiu(true);
 			usuari_registrat.setdata_caducitat(null);
 			Boolean correcte = true;
+			
+			System.out.println(usuari_registrat.getnom());
 			//si no funciona en vez del model ponerlo en una global
-			Map<String, Object> model = new HashMap<String, Object>();
 			if(usuari_registrat.getnom().isEmpty()){
 				model.put("error", "El nom no pot estar buit");
 				correcte = false;
