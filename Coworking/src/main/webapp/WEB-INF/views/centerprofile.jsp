@@ -25,12 +25,19 @@
       #map_canvas {
         height:350px;
         width:350px;
-        vertical-align: middle;
+        
+        vertical-align: right;
+        float: right
         }
         #perfil {
-        margin-left:60px;
+        margin-left:150px;
         float:left;
         witdh:500px
+        }
+        
+        #titol{
+        float: right
+        
         }
         
 </style>
@@ -189,17 +196,17 @@
 				<div class="col-md-6">
 				
 					<div style="margin-left:60px">
-						<div id="Photo">
-						        <img src="${model.link}"  width="200px" height="200px">
+						<div id="id5" >
+						        <img src="${model.link}" id= "photo" height="200" width="200" style="float:right; margin:0 10px 0 0;" border="5"/>
 						</div>
     
 				  	 <div style="color: teal; font-size: 30px"></div>
 				        <p>
-				            <strong>Nom del centre:</strong>
+				            <strong>Nom del centre:</strong><br>
 				            <span>${model.nom}</span>
 				        </p>
 				        <p>
-				            <strong>Descripció:</strong>
+				            <strong>Descripció:</strong><br>
 				            <span>${model.descripcio}</span>
 				        </p>
 				        <p>
@@ -249,7 +256,7 @@
 				
 				<!-- Mapa a la dreta -->
 				<div class="col-md-6">
-					<div style="color:#FFFFF">
+					<div style="color:#FFFFF" id="titol">
 				  		<h3>Localització del centre: </h3>
 						<div id="map_canvas"></div>
 					</div>

@@ -544,6 +544,7 @@ public class HomeController {
 					model.put("poblacio", centre.getpoblacio());
 					model.put("num_edifici", centre.getnum_edifici());
 					model.put("capacitat", centre.getcapacitat());
+					model.put("premium", centre.isPremium());
 					if(centre.getlink_foto()==null){
 						model.put("link", "http://4vector.com/i/free-vector-buildings-icon_101963_Buildings_icon.png");
 					}else{

@@ -133,7 +133,7 @@ body {
 	
 		<div style="margin-left:60px">
 			<div style="color: teal; font-size: 30px">El meu perfil</div>
-			<img src="${model.link}" height="80" width="80">
+			<img src="${model.link}" height="200" width="200" style="float:right; margin:0 10px 0 0;" border="5"/>
 			<br>
 			<b>Nom y Cognoms:</b> ${model.nom}&nbsp;${model.cognom}
 			<br>

@@ -132,7 +132,7 @@
 
 		<div style="margin-left:60px">
 			<div style="color: teal; font-size: 30px">Perfil de ${model.nom}</div>
-			<img src="${model.link}" height="80" width="80">
+			<img src="${model.link}" id= "photo" height="200" width="200" style="float:right; margin:0 10px 0 0;" border="5"/>
 			<br>
 			<b>Descripció:</b> ${model.descripcio}
 			<br>
@@ -150,7 +150,7 @@
 			<b>Carrer:</b> ${model.carrer} <b>Nº Edifici:</b> ${model.num_edifici} 
 			<br>
 			<b>Nº de localitats:</b> ${model.capacitat}
-			<hr>
+			<br>
 			<b>Web:</b> ${model.web}
 			<br>
 			<b>Premium?:</b> ${model.premium}
