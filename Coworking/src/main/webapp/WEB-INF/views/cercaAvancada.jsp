@@ -168,7 +168,7 @@ body {
 					  	<input name="sala" type="checkbox" id="sala"  value="si"> Sala de Reunions
 					</label>
 				</div>
-				<button type="submit" class="btn btn-default">Cercar</button>
+				<button type="submit" class="btn btn-default btn-lg pull-right">Cercar</button>
 		</form>	
 		<!-- -----Script -->
 		<script>
@@ -186,12 +186,23 @@ body {
 			
 		}
 		</script>
-		<br>
+		<br><br>
 	<!-- Tabla de Resultados -->	
 		
 		<div class="panel panel-default">
 		  	<div class="panel-heading">Resultats de la Cerca:</div>
-		
+				<div class="panel-body">
+ 					<table class="table">
+	 					<tr>
+	 						<td><p>Nom:</p></td>
+			  				<td><p>Població:</p></td>
+			  				<td><p>Direcció:</p></td>
+			  				<td><p>Correu:</p></td>
+			  				<td><p>Telèfon:</p></td>
+	  					</tr>
+  					</table>
+  				</div>
+
 		  		<table class="table">
 		  		
 		  			<c:forEach items="${model.centres}" var="espai">
@@ -201,8 +212,6 @@ body {
 						<td><h3><b>${espai.nom}</b></h3></td>
 						<td><p>${espai.poblacio}</p></td>
 						<td><p>${espai.carrer}</p></td>
-					</tr>
-					<tr>
 						<td><p>${espai.email}</p></td>
 						<td><p>${espai.telefon}</p></td>
 						<td><a href="centerprofile.html?centreId=${espai.idcentre}" class="btn btn-primary" role="button">Veure més</a></td>
