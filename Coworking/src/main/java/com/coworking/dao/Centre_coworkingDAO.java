@@ -2,6 +2,7 @@ package com.coworking.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -67,35 +68,27 @@ public class Centre_coworkingDAO implements ICentre_coworkingDAO {
 	
 	
 	@Override
-	public List<Centre_coworking> getCentresCerca(String nom, boolean banys, boolean cafe, boolean internet, boolean salaReunions, int capacitat) {
+	public List<Centre_coworking> cercaAvancada(String nom, boolean banys, boolean cafe, boolean internet, boolean salaReunions, String poblacio) {
 		Session session = sessionfactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		String queryExe = "Select * From Centre_coworking c";
-		if(nom != null){
-			queryExe = queryExe + "Where c.nom LIKE '%"+nom+"%'";
-			if(banys)queryExe = queryExe + "AND c.banys = 1";
-			if(cafe)queryExe = queryExe + "AND c.cafeteria = 1";
-			if(internet)queryExe = queryExe + "AND c.internet = 1";
-			if(salaReunions)queryExe = queryExe + "AND c.sala_reunions = 1";
-			
-			if(capacitat != 0) queryExe = queryExe + "AND c.capacitat >= "+Integer.toString(capacitat);
-			
-			queryExe = queryExe + ";";
+		Criteria criteria = session.createCriteria(Centre_coworking.class);
+		List<Centre_coworking> centrelist;
+		if(nom!=null){
+			if(!nom.isEmpty()){
+				criteria = criteria.add(Restrictions.like("nom", nom+"%"));
+			}
 		}
-		else{
-			queryExe = queryExe + "Where c.nom LIKE '%'";
-			if(banys)queryExe = queryExe + "AND c.banys = 1";
-			if(cafe)queryExe = queryExe + "AND c.cafeteria = 1";
-			if(internet)queryExe = queryExe + "AND c.internet = 1";
-			if(salaReunions)queryExe = queryExe + "AND c.sala_reunions = 1";
-			
-			if(capacitat != 0) queryExe = queryExe + "AND c.capacitat >= "+Integer.toString(capacitat);
-			
-			queryExe = queryExe + ";";
-		}
-		Query query = session.createQuery(queryExe);
-		List<Centre_coworking> centrelist = query.list();
-		tx.commit();
+		if(cafe)
+			criteria = criteria.add(Restrictions.eq("cafeteria", cafe));
+		if(internet)
+			criteria = criteria.add(Restrictions.eq("internet", internet));
+		if(salaReunions)
+			criteria = criteria.add(Restrictions.eq("sala_reunions", salaReunions));
+		if(banys)
+			criteria = criteria.add(Restrictions.eq("banys", banys));
+		
+		criteria = criteria.add(Restrictions.eq("poblacio", poblacio));
+		centrelist= criteria.list();
+	
 		return centrelist;
 	}
 
