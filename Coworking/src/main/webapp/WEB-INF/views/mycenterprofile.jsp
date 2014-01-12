@@ -153,8 +153,6 @@
 			<br>
 			<b>Web:</b> ${model.web}
 			<br>
-			<b>Premium?:</b> ${model.premium}
-			
 			<form action="editcenter.html" method="get">
 					<input type="submit" value="Editar perfil">
 			</form>
