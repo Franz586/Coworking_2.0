@@ -136,47 +136,8 @@
 			<div style="color: teal;font-size: 30px">Formulari de registre</div>
 			<!--<c:url var="userRegistration" value="saveUser.html"/>-->
 			
-			
-			
-			
-			
-			
-			
-				<form:form id="saveUser" modelAttribute="usuari_registrat" method="post" action="${userRegistration}" role="saveUser">
-				
-				<div class="form-group"> 
-					<form:input class="form-control" data-msg-email="Ha de ser una direcció de correu vàlida"
-										data-msg-required="Aquest camp és obligatori"
-										data-rule-required="true"  
-										path="email"/>
-				</div>
-				<div class="form-group"> 
-					<form:input class="form-control" data-msg-contrasenya="Ha de ser una cadena amb 3-10 caràcters"
-										data-msg-required="Aquest camp és obligatori"
-										data-rule-required="true" 
-										path="contrasenya"/>
-				</div>
-				<div class="form-group"> 
-					<form:input class="form-control" data-msg-dni="Ha de ser un DNI correcte"
-										data-msg-required="Aquest camp és obligatori"
-										data-rule-required="true"
-										path="dni"/>
-				</div>
-				<div class="form-group"> 
-					<form:input class="form-control" data-msg-nom="Ha de ser una cadena amb 3-10 caràcters"
-										data-msg-required="Aquest camp és obligatori"
-										data-rule-required="true"
-						 				path="nom"/>
-				</div>
-				<div class="form-group"> 
-					<form:input class="form-control" data-msg-cognom="Ha de ser una cadena amb 3-10 caràcters"
-										data-msg-required="Aquest camp és obligatori"
-										data-rule-required="true"
-						 				path="cognom"/>
-				</div>
-				
-				
-					<!--  <table class="table table-hover table-condensed" border="1">
+				<form:form id="registerForm" modelAttribute="usuari_registrat" method="post" action="${userRegistration}">
+					<table class="table table-hover table-condensed" border="1">
 					<tr>
 						<td><form:label path="email">Email</form:label></td>
 						<td><form:input data-msg-email="Ha de ser una direcció de correu vàlida"
@@ -248,9 +209,9 @@
 						<td><form:label path="sobre_mi">Informació sobre mi</form:label></td>
 						<td><form:input  path="sobre_mi"/></td>
 					</tr>
-					</table>-->
+					</table>
 					
-					<button type="submit" value="Registar-se" class="btn btn-default">Registrar-se</button>
+				<input type="submit" value="Registrar-se" />
 				</form:form>
 				
 	</div>
@@ -291,8 +252,86 @@
 	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
 	<script src="<c:url value="resources/js/home.js"/>"></script>
-	<script src="<c:url value="resources/js/home.js"/>"></script>
-	<script src="<c:url value="resources/js/controlErrors.js"/>"></script>
+	<script type="text/javascript">
+		$("#registerForm").validate({
+			showErrors: function(errorMap, errorList) {
+			 
+				// Clean up any tooltips for valid elements
+				$.each(this.validElements(), function (index, element) {
+					var $element = $(element);
+					 
+					$element.data("title", "") // Clear the title - there is no error associated anymore
+					.removeClass("error")
+					.tooltip("destroy");
+				});
+				 
+				// Create new tooltips for invalid elements
+				$.each(errorList, function (index, error) {
+					var $element = $(error.element);
+					 
+					$element.tooltip("destroy") // Destroy any pre-existing tooltip so we can repopulate with new tooltip content
+					.data("title", error.message)
+					.addClass("error")
+					.tooltip(); // Create a new tooltip based on the error messsage we just set in the title
+				});
+			},
+			 
+			submitHandler: function(form) {
+				console.log("AJAX Register");
+	            var data = $("#registerForm").serializeObject();
+	            $.ajax({
+	            	type: 'POST',
+	                url: "saveUser",
+	                contentType: 'application/json',
+	                data: JSON.stringify(data),
+	                //dataType: 'json',
+	                success: function(retorn) {
+	                	console.log(retorn);
+
+	                	//LOGUEA AL REGISTRARSE
+	                	$.ajax({
+	                    	type: 'POST',
+	                        url: "login",
+	                        contentType: 'application/json',
+	                        data: JSON.stringify(data),
+	                        //dataType: 'json',
+	                        success: function(retorn) {
+	                        	console.log(retorn);
+	                        	//var result = JSON.parse(retorn).result; // Parsea el resultado a variable legible
+	                        	//Actualitza un div concret (navbar right)
+	                        	//$("#userInfo").load("resources/menuPrivat.jsp");
+	                        	                    	
+	                        	$(document.body).load("home.html", function(){
+	                        		$('.dropdown-toggle').dropdown();
+	                        	});
+	                        },
+	                        error: function(e) {
+	                        	if (popoverVisible == false) {
+	        	                	
+	        	                	console.log("error");
+	        	                	$("#login").popover({
+	        	                		placement : 'bottom',
+	        	                		title : 'Error',
+	        	                	    content : 'Usuari o Contrasenya Incorrecte',
+	        	                	    trigger : 'manual'
+	        	                	});
+	        	                    $("#login").popover('show');
+	        	                    popoverVisible = true;
+	        	                    e.stopPropagation();
+	        	                    
+	                        	}
+	                        }
+	                    });  	
+	                	                    	
+	                	/*$(document.body).load("home.html", function(){
+	                		$('.dropdown-toggle').dropdown();
+	                	});*/
+	                }
+				});
+	            return false;
+			}
+		});
+	</script>
 	
 </body>
 </html>

@@ -246,7 +246,7 @@ public class HomeController {
 			
 		}
 		@RequestMapping("/updateUser")
-		public ModelAndView updateUserData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
+		public @ResponseBody ModelAndView updateUserData(@RequestBody Usuari_registrat usuari_registrat,
 				BindingResult result, ModelMap model) {
 			Boolean correcte = true;
 			//si no funciona en vez del model ponerlo en una global

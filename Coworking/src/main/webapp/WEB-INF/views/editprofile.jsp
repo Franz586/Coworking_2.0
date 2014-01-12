@@ -132,21 +132,30 @@ body {
 	
 		<div style="color: teal;font-size: 30px">Editar perfil</div>
 		
-			<c:url var="userUpdate" value="updateUser.html"/>
+			<!--<c:url var="userUpdate" value="updateUser.html"/>-->
 			<form:form id="updateForm" modelAttribute="usuari_registrat" method="post" action="${userUpdate}">
 				<table class="table table-hover table-condensed" border="1">
 				<tr>
 					<form:hidden path="idusuari" value="${model.idusuari}" />
 					<td><form:label path="nom">Nom</form:label></td>
-					<td><form:input  path="nom" value="${model.nom}"/></td>
+					<td><form:input data-msg-nom="Ha de ser una cadena amb 3-10 caràcters"
+									data-msg-required="Aquest camp és obligatori"
+									data-rule-required="true"
+						 			path="nom" value="${model.nom}"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="cognom">Cognom</form:label></td>
-					<td><form:input  path="cognom" value="${model.cognom}"/></td>
+					<td><form:input data-msg-cognom="Ha de ser una cadena amb 3-10 caràcters"
+									data-msg-required="Aquest camp és obligatori"
+									data-rule-required="true"
+						 			path="cognom" value="${model.cognom}"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="dni">DNI</form:label></td>
-					<td><form:input  path="dni" value="${model.dni}"/></td>
+					<td><form:input data-msg-dni="Ha de ser un DNI correcte"
+									data-msg-required="Aquest camp és obligatori"
+									data-rule-required="true"
+									path="dni" value="${model.dni}"/></td>
 				</tr>
 				<tr>
 				<!-- campos hidden necesarios para el update -->
@@ -157,7 +166,10 @@ body {
 				</tr>
 				<tr>
 					<td><form:label path="contrasenya">Contrasenya</form:label></td>
-					<td><form:input  path="contrasenya" value="${model.contrasenya}"/></td>
+					<td><form:input data-msg-contrasenya="Ha de ser una cadena amb 3-10 caràcters"
+									data-msg-required="Aquest camp és obligatori"
+									data-rule-required="true" 
+									path="contrasenya" value="${model.contrasenya}"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="adreca">Adreça</form:label></td>
@@ -240,8 +252,57 @@ body {
 	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
 	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
 	<script src="<c:url value="resources/js/home.js"/>"></script>
+	<script type="text/javascript">
+		$("#updateForm").validate({
+			showErrors: function(errorMap, errorList) {
+			 
+				// Clean up any tooltips for valid elements
+				$.each(this.validElements(), function (index, element) {
+					var $element = $(element);
+					 
+					$element.data("title", "") // Clear the title - there is no error associated anymore
+					.removeClass("error")
+					.tooltip("destroy");
+				});
+				 
+				// Create new tooltips for invalid elements
+				$.each(errorList, function (index, error) {
+					var $element = $(error.element);
+					 
+					$element.tooltip("destroy") // Destroy any pre-existing tooltip so we can repopulate with new tooltip content
+					.data("title", error.message)
+					.addClass("error")
+					.tooltip(); // Create a new tooltip based on the error messsage we just set in the title
+				});
+			},
+			 
+			submitHandler: function(form) {
+				console.log("AJAX Register");
+	            var data = $("updateForm").serializeObject();
+	            $.ajax({
+	            	type: 'POST',
+	                url: "updateUser",
+	                contentType: 'application/json',
+	                data: JSON.stringify(data),
+	                //dataType: 'json',
+	                success: function(retorn) {
+	                	console.log(retorn);
+	                	//var result = JSON.parse(retorn).result; // Parsea el resultado a variable legible
+	                	//Actualitza un div concret (navbar right)
+	                	//$("#userInfo").load("resources/menuPrivat.jsp");
+	                	                    	
+	                	$(document.body).load("myprofile.html", function(){
+	                		$('.dropdown-toggle').dropdown();
+	                	});
+	                }
+				});
+	            return false;
+			}
+		});
+	</script>
 
 </body>
 </html>
