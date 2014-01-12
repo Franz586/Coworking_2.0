@@ -708,7 +708,8 @@ public class HomeController {
 			if(res2.isEmpty()){
 				BindingResult result = null;
 				//sacar mensaje de no resultados?
-				return this.getLoginForm(usuari_registrat, model, result);
+				//return this.getLoginForm(usuari_registrat, model, result);
+				return new ModelAndView("errorCerca", "model", model);
 			}else{
 				Centre_coworking centre = res2.get(0);
 				System.out.println("CENTRE= "+centre.getNom());
@@ -720,11 +721,20 @@ public class HomeController {
 			return new ModelAndView("redirect:/userprofile.html?userId="+usuari.getidusuari(), "model", model);
 		}
 	}
+		
+	@RequestMapping("/errorCerca")
+	public ModelAndView errorCerca(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
+			ModelMap model, BindingResult result) {
+		
+		afegeixDadesTopBar(model);
 	
+		return new ModelAndView("errorCerca", "model", model);
+	}
 	
 	@RequestMapping("/cercaAvancada")
 	public ModelAndView cercaAvancada(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat, 
 			ModelMap model, BindingResult result) {
+		
 		afegeixDadesTopBar(model);
 	
 		return new ModelAndView("cercaAvancada", "model", model);
@@ -736,34 +746,42 @@ public class HomeController {
 			@ModelAttribute("cafe")String cafe,@ModelAttribute("internet")String internet,
 			@ModelAttribute("sala")String sala, @ModelAttribute("poblacio")String poblacio,
 			ModelMap model,BindingResult result) {
+		
 		afegeixDadesTopBar(model);
+		
 		boolean b_banys = false;
 		boolean b_internet = false;
 		boolean b_cafe = false;
 		boolean b_sala = false;
 		System.out.println("poblacio = "+poblacio);
 		///ifs encadenados para mantener los valores correctos en los campos de busqueda
-		if(banys.equalsIgnoreCase("Si")){
-			b_banys = true;
-			model.put("banyscheck", "checked");
-		}
-		if(cafe.equalsIgnoreCase("Si")){
-			b_cafe = true;
-			model.put("cafecheck", "checked");
-		}
-		if(internet.equalsIgnoreCase("Si")){
-			b_internet = true;
-			model.put("internetcheck", "checked");
-		}
-		if(sala.equalsIgnoreCase("Si")){
-			b_sala = true;
-			model.put("salacheck", "checked");
-		}
+			if(banys.equalsIgnoreCase("Si")){
+				b_banys = true;
+				model.put("banyscheck", "checked");
+			}
+			if(cafe.equalsIgnoreCase("Si")){
+				b_cafe = true;
+				model.put("cafecheck", "checked");
+			}
+			if(internet.equalsIgnoreCase("Si")){
+				b_internet = true;
+				model.put("internetcheck", "checked");
+			}
+			if(sala.equalsIgnoreCase("Si")){
+				b_sala = true;
+				model.put("salacheck", "checked");
+			}
+			
 		model.put("textbox", search);
 		List<Centre_coworking> resultats=Icentre_coworking.cercaAvancada(search, b_banys, b_cafe, b_internet, b_sala, poblacio);
 		afegeixImatges(resultats);
 		model.put("centres", resultats);
-		return new ModelAndView("cercaAvancada", "model", model);
+		if(resultats.isEmpty()){
+			return new ModelAndView("errorCerca", "model", model);
+		}
+		else{
+			return new ModelAndView("cercaAvancada", "model", model);
+		}
 	}
 	
 }
