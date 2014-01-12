@@ -33,8 +33,7 @@ body {
 			<!-- Search Form -->
 					<form action="cercarapida" method="get" class="navbar-form navbar-right">  					
 					<div class="form-group">
-						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Cerca Usuari">
-					</div>
+						<input name="search" id="search" value="${model.textbox}" type="text" class="form-control" placeholder="Nom d'usuari o centre">
 					<button type="submit" class="btn btn-default">Cercar</button>
 				</form>
 			
