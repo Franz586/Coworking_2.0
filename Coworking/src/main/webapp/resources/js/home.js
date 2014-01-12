@@ -16,14 +16,15 @@ $(function() {
 	
 		
 	//Amaga el popover quan fem click a qualsevol lloc
-	/*	$("#login").click(function(e) {
+		$("#login").click(function(e) {
 			if (popoverVisible == true) {
 				$("#login").popover('hide');
+				//$("#login").popover('destroy');
 				popoverVisible = false;
 				e.stopPropagation();
 			}
 	        
-		});*/
+		});
 	
 	//Funció pel Login
         $("#login").submit(function() {
@@ -47,15 +48,18 @@ $(function() {
                 },
                 error: function(e) {
                 	if (popoverVisible == false) {
-	                	popoverVisible = true;
+	                	
 	                	console.log("error");
 	                	$("#login").popover({
 	                		placement : 'bottom',
 	                		title : 'Error',
 	                	    content : 'Usuari o Contrasenya Incorrecte',
+	                	    trigger : 'manual'
 	                	});
 	                    $("#login").popover('show');
+	                    popoverVisible = true;
 	                    e.stopPropagation();
+	                    
                 	}
                 }
             });
