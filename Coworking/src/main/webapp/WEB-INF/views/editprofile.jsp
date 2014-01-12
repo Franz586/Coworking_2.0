@@ -250,7 +250,6 @@ body {
 <!-- Scripts siempre al final para que se cargue primero el contenido -->
 
 	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
-	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
@@ -280,8 +279,8 @@ body {
 			},
 			 
 			submitHandler: function(form) {
-				console.log("AJAX Register");
-	            var data = $("updateForm").serializeObject();
+				console.log("AJAX EditProf");
+	            var data = $("#updateForm").serializeObject();
 	            $.ajax({
 	            	type: 'POST',
 	                url: "updateUser",
@@ -302,6 +301,22 @@ body {
 	            return false;
 			}
 		});
+		
+		 $.fn.serializeObject = function() {
+		        var o = {};
+		        var a = this.serializeArray();
+		        $.each(a, function() {
+		            if (o[this.name]) {
+		                if (!o[this.name].push) {
+		                    o[this.name] = [o[this.name]];
+		                }
+		                o[this.name].push(this.value || '');
+		            } else {
+		                o[this.name] = this.value || '';
+		            }
+		        });
+		        return o;
+		    };
 	</script>
 
 </body>

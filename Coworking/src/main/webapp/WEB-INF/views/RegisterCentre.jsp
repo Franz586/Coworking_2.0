@@ -129,21 +129,27 @@
 	<div class="jumbotron text-center">
 
 			<div style="color: teal;font-size: 30px">Formulari registre de centre</div>
-			<c:url var="centreRegistration" value="saveCentre.html"/>
+			<!--<c:url var="centreRegistration" value="saveCentre.html"/>-->
 			
 				<form:form id="registerForm" modelAttribute="centre_coworking" method="post" action="${centreRegistration}">
 					<table class="table table-hover table-condensed" border="1">
 					<tr>
 						<td><form:label path="nom">Nom centre</form:label></td>
-						<td><form:input  path="nom"/></td>
+						<td><form:input data-msg-nom="Ha de ser un nom entre 3-10 caràcters"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="nom"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="poblacio">Població</form:label></td>
-						<td><form:select  path="poblacio" items="${model.poblacio}"></form:select></td>
+						<td><form:select data-msg-poblacio="Ha de ser una població de les possibles"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="poblacio" items="${model.poblacio}"></form:select></td>
 					</tr>
 					<tr>
 						<td><form:label path="carrer">Carrer</form:label></td>
-						<td><form:input  path="carrer"/></td>
+						<td><form:input data-msg-carrer="Ha de ser un carrer existent"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="carrer"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="num_edifici">Nº d'edifici</form:label></td>
@@ -155,15 +161,21 @@
 					</tr>
 					<tr>
 						<td><form:label path="descripcio">Descripció</form:label></td>
-						<td><form:input  path="descripcio"/></td>
+						<td><form:input data-msg-descripcio="Ha d'incloure una petita descripció"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="descripcio"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="email">Email</form:label></td>
-						<td><form:input  path="email"/></td>
+						<td><form:input data-msg-email="Ha de ser una direcció de correu vàlida"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="email"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="telefon">Teléfon</form:label></td>
-						<td><form:input  path="telefon"/></td>
+						<td><form:input data-msg-telefon="Ha de ser un telèfon vàlid"
+										data-msg-required="Aquest camp és obligatori"
+										data-rule-required="true" path="telefon"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="capacitat">Nº de localitats</form:label></td>
@@ -175,13 +187,13 @@
 					<tr>
 						<td>Serveis</td>
 							<td>
-							<form:checkbox path="banys" label="Banys" value="true"/>
+							<form:checkbox id="banys" path="banys" label="Banys" value="true"/>
 								<br>
-							  	<form:checkbox path="cafeteria" label="Cafeteria" value="true"/>
+							  	<form:checkbox id="cafeteria" path="cafeteria" label="Cafeteria" value="true"/>
 								<br>
-								<form:checkbox path="internet" label="Internet" value="true"/>
+								<form:checkbox id="internet" path="internet" label="Internet" value="true"/>
 								<br>
-								<form:checkbox path="sala_reunions" label="Sala de reunions" value="true"/>
+								<form:checkbox id="sala" path="sala_reunions" label="Sala de reunions" value="true"/>
 							</td>
 					</tr>
 					</table>
@@ -220,10 +232,89 @@
 <!-- Scripts siempre al final para que se cargue primero el contenido -->
 
 	<!-- <script src="resources/js/bootstrap.min.js"></script>  -->
-	<script src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery-1.10.2.js"/>"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/jQuery.validate/1.11.1/jquery.validate.js" type="text/javascript"></script>
 	<script src="<c:url value="resources/js/bootstrap.js"/>"></script>
 	<script src="<c:url value="resources/js/home.js"/>"></script>
+	<script type="text/javascript">
+		$("#registerForm").validate({
+			showErrors: function(errorMap, errorList) {
+			 
+				// Clean up any tooltips for valid elements
+				$.each(this.validElements(), function (index, element) {
+					var $element = $(element);
+					 
+					$element.data("title", "") // Clear the title - there is no error associated anymore
+					.removeClass("error")
+					.tooltip("destroy");
+				});
+				 
+				// Create new tooltips for invalid elements
+				$.each(errorList, function (index, error) {
+					var $element = $(error.element);
+					 
+					$element.tooltip("destroy") // Destroy any pre-existing tooltip so we can repopulate with new tooltip content
+					.data("title", error.message)
+					.addClass("error")
+					.tooltip(); // Create a new tooltip based on the error messsage we just set in the title
+				});
+			},
+			 
+			submitHandler: function(form) {
+				console.log("AJAX Register");
+	            //var data = $("#registerForm").serializeObject();
+	         	var data = {
+	        			banys: document.getElementById('banys').checked,
+	        		 	cafeteria: document.getElementById('cafeteria').checked,
+	        			internet: document.getElementById('internet').checked,
+	        			sala_reunions : document.getElementById('sala').checked,
+	        			capacitat: $("#capacitat").val(),
+	        			carrer: $("#carrer").val(),
+	        			descripcio: $("#descripcio").val(),
+	        			email: $("#email").val(),
+	        			link_foto: $("#link_foto").val(),
+	        			nom: $("#nom").val(),
+	        			num_edifici: $("#num_edifici").val(),
+	        			poblacio: $("#poblacio").val(),
+	        			telefon: $("#telefon").val(),
+	        			web: $("#web").val()
+	
+	            };
+
+	            $.ajax({
+	            	type: 'POST',
+	                url: "saveCentre",
+	                contentType: 'application/json',
+	                data: JSON.stringify(data),
+	                //dataType: 'json',
+	                success: function(retorn) {
+	                	console.log(retorn);
+	                	                    	
+	                	$(document.body).load("home.html", function(){
+	                		$('.dropdown-toggle').dropdown();
+	                	});
+	                }
+				});
+	            return false;
+			}
+		});
+		
+		 $.fn.serializeObject = function() {
+		        var o = {};
+		        var a = this.serializeArray();
+		        $.each(a, function() {
+		            if (o[this.name]) {
+		                if (!o[this.name].push) {
+		                    o[this.name] = [o[this.name]];
+		                }
+		                o[this.name].push(this.value || '');
+		            } else {
+		                o[this.name] = this.value || '';
+		            }
+		        });
+		        return o;
+		    };
+	</script>
 
 </body>
 </html>

@@ -289,7 +289,7 @@ public class HomeController {
 		}
 		
 		@RequestMapping("/updateCentre")
-		public ModelAndView updateCentre(@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
+		public @ResponseBody int updateCentre(@RequestBody Centre_coworking centre_coworking,
 				BindingResult result, ModelMap model) {
 			Boolean correcte = true;
 			
@@ -305,7 +305,7 @@ public class HomeController {
 					correcte = false;
 				}
 				if(correcte==false){
-					return this.editcenter(userlogged, centre_coworking, result, model);
+					//return this.editcenter(userlogged, centre_coworking, result, model);
 				}
 				
 				centre_coworking.setAdmin_centre(mycentre.getAdmin_centre());
@@ -313,11 +313,13 @@ public class HomeController {
 				Icentre_coworking.updateCentre(centre_coworking);
 				System.out.println("Update centre");
 				
-				return new ModelAndView("redirect:/mycenterprofile.html?centreId="+centre_coworking.getIdcentre());
+				
+				//return new ModelAndView("redirect:/mycenterprofile.html?centreId="+);
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				return this.editcenter(userlogged, centre_coworking, result, model);
+				//return this.editcenter(userlogged, centre_coworking, result, model);
 			}
+			return centre_coworking.getIdcentre();
 			
 			
 		}
@@ -340,10 +342,9 @@ public class HomeController {
 		}
 
 		@RequestMapping("/saveCentre")
-		public ModelAndView saveCentreData(@ModelAttribute("usuari_registrat") Usuari_registrat usuari_registrat,
-				@ModelAttribute("centre_coworking") Centre_coworking centre_coworking,
-			ModelMap model,
-			BindingResult result) {
+		public @ResponseBody ModelAndView saveCentreData(@RequestBody Centre_coworking centre_coworking,
+				ModelMap model,
+				BindingResult result) {
 			Boolean correcte = true;
 			ArrayList<String> poblacions = new ArrayList<String>();
 			poblacions.add("BARCELONA");
